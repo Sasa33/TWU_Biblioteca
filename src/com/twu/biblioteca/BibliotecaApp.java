@@ -1,10 +1,17 @@
 package com.twu.biblioteca;
 
+import java.io.PrintStream;
+
 public class BibliotecaApp {
     private Console console;
 
+    public BibliotecaApp(Console console) {
+        this.console = console;
+    }
+
     public static void main(String[] args) {
-        BibliotecaApp app = new BibliotecaApp();
+        Console console = new Console(new PrintStream(System.out));
+        BibliotecaApp app = new BibliotecaApp(console);
 
         app.start();
     }
