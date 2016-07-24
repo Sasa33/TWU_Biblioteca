@@ -10,7 +10,7 @@ import java.io.PrintStream;
 import static org.junit.Assert.*;
 
 public class BibliotecaAppTest {
-    private BibliotecaApp bibliotecaApp;
+    private BibliotecaApp app;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -29,7 +29,9 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_print_welcome_message_when_the_application_starts() {
-        bibliotecaApp.start();
+        app = new BibliotecaApp();
+
+        app.start();
 
         String expected = "Welcome to the Bangalore Public Library!\n";
 
