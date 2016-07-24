@@ -20,7 +20,7 @@ public class BibliotecaApp {
         console.println("Welcome to the Bangalore Public Library!");
 
         console.println("Book List:");
-        console.println("\t1. Head First Java");
-        console.println("\t2. Refactoring");
+        console.println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        console.println("\t2. Refactoring | Martin Fowler | 1999");
     }
 }

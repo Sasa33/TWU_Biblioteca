@@ -35,14 +35,14 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_print_a_list_of_all_library_books_after_the_welcome_message() {
+    public void should_print_a_list_of_all_library_books_with_book_detail_information_after_welcome_message() {
         app = new BibliotecaApp(console);
 
         app.start();
 
         inOrder.verify(console, times(1)).println("Welcome to the Bangalore Public Library!");
         inOrder.verify(console, times(1)).println("Book List:");
-        inOrder.verify(console, times(1)).println("\t1. Head First Java");
-        inOrder.verify(console, times(1)).println("\t2. Refactoring");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
     }
 }
