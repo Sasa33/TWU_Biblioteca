@@ -37,4 +37,18 @@ public class BibliotecaAppTest {
 
         assertEquals(expected, outContent.toString());
     }
+
+//    @Test
+//    public void should_print_a_list_of_all_library_books_after_the_welcome_message() {
+//        app = new BibliotecaApp();
+//
+//        app.start();
+//
+//        String expected = "Welcome to the Bangalore Public Library!\n" +
+//                          "Book List:\n" +
+//                          "\t1. Head First Java\n" +
+//                          "\t2. Refactoring\n";
+//
+//        assertEquals(expected, outContent.toString());
+//    }
 }
