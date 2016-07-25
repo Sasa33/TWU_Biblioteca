@@ -15,4 +15,16 @@ public class OptionTest {
 
         assertEquals(optionName, option.getName());
     }
+
+    @Test
+    public void should_generate_an_id_for_an_option_automatically() {
+        String optionName = "List Books";
+        String optionName2 = "Quit";
+
+        option = new Option(optionName);
+        Option option2 = new Option(optionName2);
+
+        assertEquals(1, option.getId());
+        assertEquals(2, option2.getId());
+    }
 }
