@@ -1,6 +1,9 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class BibliotecaApp {
     private Console console;
@@ -19,8 +22,24 @@ public class BibliotecaApp {
     public void start() {
         console.println("Welcome to the Bangalore Public Library!");
 
+        listAvailableBooks();
+    }
+
+    private void listAvailableBooks() {
         console.println("Book List:");
-        console.println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
-        console.println("\t2. Refactoring | Martin Fowler | 1999");
+
+        Book book1 = new Book("Head First Java", "Kathy Sierra & Bert Bates", "2003");
+        Book book2 = new Book("Refactoring", "Martin Fowler", "1999");
+
+        BookRepository repository = new BookRepository(asList(book1, book2));
+
+        BookList bookList = new BookList(repository.getAllBooks());
+
+        List<Book> availableBooks = bookList.listAllBooks();
+
+        for (int i = 0; i < availableBooks.size(); i++) {
+            String listItem = "\t" + ( i + 1 ) + ". " + availableBooks.get(i).getDetails();
+            console.println(listItem);
+        }
     }
 }
