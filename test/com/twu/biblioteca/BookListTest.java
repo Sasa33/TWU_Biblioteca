@@ -17,8 +17,8 @@ public class BookListTest {
 
     @Before
     public void setUp() {
-        Book book1 = new Book("Head First Java", "Kathy Sierra & Bert Bates", "2003");
-        Book book2 = new Book("Refactoring", "Martin Fowler", "1999");
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
 
         books = asList(book1, book2);
 
