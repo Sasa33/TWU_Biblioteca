@@ -7,9 +7,17 @@ import static java.util.Arrays.asList;
 
 public class BibliotecaApp {
     private Console console;
+    private BookList bookList;
 
     public BibliotecaApp(Console console) {
         this.console = console;
+
+        Book book1 = new Book("Head First Java", "Kathy Sierra & Bert Bates", "2003");
+        Book book2 = new Book("Refactoring", "Martin Fowler", "1999");
+
+        BookRepository repository = new BookRepository(asList(book1, book2));
+
+        this.bookList = new BookList(repository.getAllBooks());
     }
 
     public static void main(String[] args) {
@@ -27,13 +35,6 @@ public class BibliotecaApp {
 
     private void listAvailableBooks() {
         console.println("Book List:");
-
-        Book book1 = new Book("Head First Java", "Kathy Sierra & Bert Bates", "2003");
-        Book book2 = new Book("Refactoring", "Martin Fowler", "1999");
-
-        BookRepository repository = new BookRepository(asList(book1, book2));
-
-        BookList bookList = new BookList(repository.getAllBooks());
 
         List<Book> availableBooks = bookList.listAllBooks();
 
