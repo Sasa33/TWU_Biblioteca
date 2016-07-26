@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 public class OptionTest {
     private Option option;
@@ -30,7 +29,7 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).listAvailableBooks();
+        verify(app, times(1)).displayBookListInfo();
     }
 
     @Test

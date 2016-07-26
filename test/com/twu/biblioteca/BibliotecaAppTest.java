@@ -1,16 +1,12 @@
 package com.twu.biblioteca;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class BibliotecaAppTest {
@@ -72,7 +68,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_show_a_list_of_books_when_listAvailableBooks_method_is_called() {
-        app.listAvailableBooks();
+        app.displayBookListInfo();
 
         inOrder.verify(console, times(1)).println("Book List:");
         inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
@@ -80,9 +76,18 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_quit_the_library_when_exit_method_is_called() {
+    public void should_show_quit_message_when_exit_method_is_called() {
         app.exit();
 
         inOrder.verify(console, times(1)).println("Thank you for coming to the Bangalore Public Library! See you next time.");
+    }
+
+    @Test
+    public void should_show_checkout_message_and_list_of_available_books_when_checkoutBook_method_is_called() {
+        app.checkoutBook();
+
+        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
     }
 }

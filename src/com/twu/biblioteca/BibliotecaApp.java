@@ -57,7 +57,7 @@ public class BibliotecaApp {
     public void start() {
         console.println("Welcome to the Bangalore Public Library!");
 
-        listAvailableBooks();
+        displayBookListInfo();
     }
 
     public void startWithMenu() {
@@ -99,9 +99,13 @@ public class BibliotecaApp {
         console.println("===========================================================");
     }
 
-    public void listAvailableBooks() {
+    public void displayBookListInfo() {
         console.println("Book List:");
 
+        listAvailableBooks();
+    }
+
+    private void listAvailableBooks() {
         List<Book> availableBooks = bookList.listAllBooks();
 
         for (int i = 0; i < availableBooks.size(); i++) {
@@ -117,6 +121,7 @@ public class BibliotecaApp {
     }
 
     public void checkoutBook() {
-
+        console.println("Which book do you want to checkout:");
+        listAvailableBooks();
     }
 }

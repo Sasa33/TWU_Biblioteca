@@ -19,7 +19,7 @@ public class Option {
 
     public void execute(BibliotecaApp app) {
         if(this.name.equals("List Books")) {
-            app.listAvailableBooks();
+            app.displayBookListInfo();
         } else if(this.name.equals("Quit")) {
             app.exit();
         } else if(this.name.equals("Checkout Book")) {
