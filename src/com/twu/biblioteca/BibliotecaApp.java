@@ -21,7 +21,7 @@ public class BibliotecaApp {
         this.bookList = new BookList(repository.getAllBooks());
 
 
-        Option option1 = new Option("List Books");
+        Option option1 = new Option(1, "List Books");
         this.menu = new Menu(asList(option1));
     }
 

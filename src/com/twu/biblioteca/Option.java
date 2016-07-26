@@ -4,8 +4,6 @@ public class Option {
     private int id;
     private String name;
 
-    private static int num = 0;
-
     public String getName() {
         return name;
     }
@@ -14,8 +12,8 @@ public class Option {
         return id;
     }
 
-    public Option(String optionName) {
-        this.id = ++num;
+    public Option(int id, String optionName) {
+        this.id = id;
         this.name = optionName;
     }
 }
