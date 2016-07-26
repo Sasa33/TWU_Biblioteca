@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookList {
@@ -12,5 +13,17 @@ public class BookList {
 
     public List<Book> listAllBooks() {
         return this.books;
+    }
+
+    public void checkoutBook(int chosen) {
+        List<Book> remainingBooks = new ArrayList<Book>();
+
+        for(int i = 0; i < books.size(); i++) {
+            if(i != chosen - 1) {
+                remainingBooks.add(books.get(i));
+            }
+        }
+
+        this.books = remainingBooks;
     }
 }
