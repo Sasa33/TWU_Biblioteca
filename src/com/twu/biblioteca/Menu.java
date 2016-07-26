@@ -12,4 +12,13 @@ public class Menu {
     public Menu(List<Option> options) {
         this.options = options;
     }
+
+    public Option getChosenOption(int input) {
+        for(Option option : this.options) {
+            if(option.getId() == input) {
+                return option;
+            }
+        }
+        return null;
+    }
 }

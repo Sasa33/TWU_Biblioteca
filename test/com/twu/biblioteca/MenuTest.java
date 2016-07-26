@@ -28,4 +28,24 @@ public class MenuTest {
         assertEquals(menu.getOptions().get(0).getName(), "List Books");
         assertEquals(menu.getOptions().get(1).getName(), "Quit");
     }
+
+    @Test
+    public void should_filter_the_chosen_option_when_input_an_option() {
+        Option option1 = mock(Option.class);
+        Option option2 = mock(Option.class);
+
+        List<Option> options = asList(option1, option2);
+
+        when(option1.getName()).thenReturn("List Books");
+        when(option1.getId()).thenReturn(1);
+        when(option2.getName()).thenReturn("Quit");
+        when(option2.getId()).thenReturn(2);
+
+        menu = new Menu(options);
+
+        int input = 1;
+        Option chosenOption = menu.getChosenOption(input);
+
+        assertEquals(option1, chosenOption);
+    }
 }
