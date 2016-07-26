@@ -48,4 +48,23 @@ public class MenuTest {
 
         assertEquals(option1, chosenOption);
     }
+
+    @Test
+    public void should_check_if_the_chosen_option_is_valid() {
+        Option option1 = mock(Option.class);
+        Option option2 = mock(Option.class);
+
+        List<Option> options = asList(option1, option2);
+
+        when(option1.getName()).thenReturn("List Books");
+        when(option1.getId()).thenReturn(1);
+        when(option2.getName()).thenReturn("Quit");
+        when(option2.getId()).thenReturn(2);
+
+        menu = new Menu(options);
+
+        int input = 3;
+
+        assertEquals(0, menu.validateOption(input));
+    }
 }

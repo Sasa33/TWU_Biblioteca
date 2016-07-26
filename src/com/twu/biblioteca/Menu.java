@@ -21,4 +21,13 @@ public class Menu {
         }
         return null;
     }
+
+    public int validateOption(int input) {
+        for(Option option : this.options) {
+            if(option.getId() == input) {
+                return input;
+            }
+        }
+        return 0;
+    }
 }
