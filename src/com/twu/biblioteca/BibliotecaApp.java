@@ -79,7 +79,7 @@ public class BibliotecaApp {
         console.println(menus);
     }
 
-    private void listAvailableBooks() {
+    public void listAvailableBooks() {
         console.println("Book List:");
 
         List<Book> availableBooks = bookList.listAllBooks();

@@ -16,4 +16,10 @@ public class Option {
         this.id = id;
         this.name = optionName;
     }
+
+    public void execute(BibliotecaApp app) {
+        if(this.name.equals("List Books")) {
+            app.listAvailableBooks();
+        }
+    }
 }

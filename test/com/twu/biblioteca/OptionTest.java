@@ -3,12 +3,14 @@ package com.twu.biblioteca;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 public class OptionTest {
     private Option option;
 
     @Test
-    public void should_initialize_an_option_with_a_name_successfully() {
+    public void should_initialize_an_option_with_id_and_name_successfully() {
         String optionName = "List Books";
         int optionId = 1;
 
@@ -19,16 +21,15 @@ public class OptionTest {
     }
 
     @Test
-    public void should_generate_an_id_for_an_option_automatically() {
-        int optionId1 = 1;
+    public void should_call_listAvailableBooks_method_when_List_Books_option_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 1;
         String optionName = "List Books";
-        int optionId2 = 2;
-        String optionName2 = "Quit";
+        option = new Option(optionId, optionName);
 
-        option = new Option(optionId1, optionName);
-        Option option2 = new Option(optionId2, optionName2);
+        option.execute(app);
 
-        assertEquals(1, option.getId());
-        assertEquals(2, option2.getId());
+        verify(app, times(1)).listAvailableBooks();
     }
 }
