@@ -84,10 +84,28 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_show_checkout_message_and_list_of_available_books_when_checkoutBook_method_is_called() {
+        app.displayCheckoutBookMessage();
+
+        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+    }
+
+    @Test
+    public void should_show_checkout_successful_message_after_checkouting_a_book_successfully() {
+        when(console.getNextInt()).thenReturn(1);
+
         app.checkoutBook();
 
         inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
         inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
         inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+
+        inOrder.verify(console, times(1)).println("Thank you! Enjoy the book!");
+
+        app.displayBookListInfo();
+
+        inOrder.verify(console, times(1)).println("Book List:");
+        inOrder.verify(console, times(1)).println("\t1. Refactoring | Martin Fowler | 1999");
     }
 }

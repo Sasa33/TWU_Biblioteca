@@ -15,15 +15,25 @@ public class BookList {
         return this.books;
     }
 
-    public void checkoutBook(int chosen) {
-        List<Book> remainingBooks = new ArrayList<Book>();
+    public boolean checkoutBook(int chosen) {
+        if(checkIfBookExits(chosen)) {
+            List<Book> remainingBooks = new ArrayList<Book>();
 
-        for(int i = 0; i < books.size(); i++) {
-            if(i != chosen - 1) {
-                remainingBooks.add(books.get(i));
+            for (int i = 0; i < books.size(); i++) {
+                if (i != chosen - 1) {
+                    remainingBooks.add(books.get(i));
+                }
             }
-        }
 
-        this.books = remainingBooks;
+            this.books = remainingBooks;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkIfBookExits(int chosen) {
+        return chosen >= 0 && chosen < this.books.size();
     }
 }

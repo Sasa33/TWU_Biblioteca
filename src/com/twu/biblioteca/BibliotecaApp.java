@@ -47,8 +47,9 @@ public class BibliotecaApp {
 //        app.start();
 
         Option option1 = new Option(1, "List Books");
-        Option option2 = new Option(2, "Quit");
-        Menu menu = new Menu(asList(option1, option2));
+        Option option2 = new Option(2, "Checkout Book");
+        Option option3 = new Option(2, "Quit");
+        Menu menu = new Menu(asList(option1, option2, option3));
 
         BibliotecaApp app = new BibliotecaApp(console, menu);
         app.startWithMenu();
@@ -121,6 +122,16 @@ public class BibliotecaApp {
     }
 
     public void checkoutBook() {
+        displayCheckoutBookMessage();
+
+        int input = console.getNextInt();
+
+        if(this.bookList.checkoutBook(input)) {
+            console.println("Thank you! Enjoy the book!");
+        }
+    }
+
+    public void displayCheckoutBookMessage() {
         console.println("Which book do you want to checkout:");
         listAvailableBooks();
     }
