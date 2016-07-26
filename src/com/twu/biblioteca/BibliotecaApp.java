@@ -115,4 +115,8 @@ public class BibliotecaApp {
 
         this.quit = true;
     }
+
+    public void checkoutBook() {
+
+    }
 }

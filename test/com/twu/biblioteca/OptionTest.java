@@ -45,4 +45,17 @@ public class OptionTest {
 
         verify(app, times(1)).exit();
     }
+
+    @Test
+    public void should_call_checkout_book_method_when_checkout_option_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 2;
+        String optionName = "Checkout Book";
+        option = new Option(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).checkoutBook();
+    }
 }

@@ -22,6 +22,8 @@ public class Option {
             app.listAvailableBooks();
         } else if(this.name.equals("Quit")) {
             app.exit();
+        } else if(this.name.equals("Checkout Book")) {
+            app.checkoutBook();
         }
     }
 }
