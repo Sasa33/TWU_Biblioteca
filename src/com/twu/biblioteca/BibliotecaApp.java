@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class BibliotecaApp {
     }
 
     public static void main(String[] args) {
-        Console console = new Console(new PrintStream(System.out));
+        Console console = new Console(new PrintStream(System.out), new BufferedReader(new InputStreamReader(System.in)));
 //        BibliotecaApp app = new BibliotecaApp(console);
 //        app.start();
 

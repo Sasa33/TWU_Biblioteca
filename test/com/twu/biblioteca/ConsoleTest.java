@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.Assert.assertEquals;
@@ -12,12 +14,14 @@ import static org.mockito.Mockito.*;
 public class ConsoleTest {
     private Console console;
     private PrintStream printStream;
+    private BufferedReader reader;
     private InOrder inOrder;
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
-        console = new Console(printStream);
+        reader = mock(BufferedReader.class);
+        console = new Console(printStream, reader);
         inOrder = inOrder(printStream);
     }
 
@@ -37,5 +41,12 @@ public class ConsoleTest {
 
         inOrder.verify(printStream, times(1)).println("1234");
         inOrder.verify(printStream, times(1)).println("5678");
+    }
+
+    @Test
+    public void should_get_the_user_input_correctly() throws IOException {
+        when(reader.readLine()).thenReturn("1");
+
+        assertEquals(1, console.getNextInt());
     }
 }
