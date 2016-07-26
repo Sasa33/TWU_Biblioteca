@@ -14,10 +14,8 @@ public class Menu {
     }
 
     public Option getChosenOption(int input) {
-        for(Option option : this.options) {
-            if(option.getId() == input) {
-                return option;
-            }
+        if(validateOption(input) != 0) {
+            return this.options.get(input - 1);
         }
         return null;
     }

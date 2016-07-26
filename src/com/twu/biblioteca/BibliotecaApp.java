@@ -67,8 +67,16 @@ public class BibliotecaApp {
             displayMenu();
             int input = console.getNextInt();
             Option chosenOption = menu.getChosenOption(input);
-            chosenOption.execute(this);
+            if(chosenOption != null) {
+                chosenOption.execute(this);
+            } else {
+                displayInvalidOptionMessage();
+            }
         }
+    }
+
+    private void displayInvalidOptionMessage() {
+        console.println("Select a valid option!");
     }
 
     private void displayMenu() {
