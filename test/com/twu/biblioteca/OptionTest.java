@@ -32,4 +32,17 @@ public class OptionTest {
 
         verify(app, times(1)).listAvailableBooks();
     }
+
+    @Test
+    public void should_call_exit_method_when_quit_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 2;
+        String optionName = "Quit";
+        option = new Option(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).exit();
+    }
 }

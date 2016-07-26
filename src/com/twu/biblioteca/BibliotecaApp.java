@@ -11,6 +11,7 @@ public class BibliotecaApp {
     private Console console;
     private BookList bookList;
     private Menu menu;
+    private boolean quit = Boolean.FALSE;
 
     public BibliotecaApp(Console console) {
         this.console = console;
@@ -45,7 +46,11 @@ public class BibliotecaApp {
 //        BibliotecaApp app = new BibliotecaApp(console);
 //        app.start();
 
-        BibliotecaApp app = new BibliotecaApp(console);
+        Option option1 = new Option(1, "List Books");
+        Option option2 = new Option(2, "Quit");
+        Menu menu = new Menu(asList(option1, option2));
+
+        BibliotecaApp app = new BibliotecaApp(console, menu);
         app.startWithMenu();
     }
 
@@ -58,10 +63,16 @@ public class BibliotecaApp {
     public void startWithMenu() {
         console.println("Welcome to the Bangalore Public Library!");
 
-        displayMenu();
+        while (!quit) {
+            displayMenu();
+            int input = console.getNextInt();
+            Option chosenOption = menu.getChosenOption(input);
+            chosenOption.execute(this);
+        }
     }
 
     private void displayMenu() {
+        console.println("===========================================================");
         console.println("Please select an option from menu below.");
 
         List<Option> options = this.menu.getOptions();
@@ -77,6 +88,7 @@ public class BibliotecaApp {
         }
 
         console.println(menus);
+        console.println("===========================================================");
     }
 
     public void listAvailableBooks() {
@@ -88,5 +100,11 @@ public class BibliotecaApp {
             String listItem = "\t" + ( i + 1 ) + ". " + availableBooks.get(i).getDetails();
             console.println(listItem);
         }
+    }
+
+    public void exit() {
+        console.println("Thank you for coming to the Bangalore Public Library! See you next time.");
+
+        this.quit = true;
     }
 }
