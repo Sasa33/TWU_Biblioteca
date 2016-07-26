@@ -15,7 +15,7 @@ public class Option {
     }
 
     public Option(String optionName) {
-        this.id = num++;
+        this.id = ++num;
         this.name = optionName;
     }
 }
