@@ -79,7 +79,7 @@ public class BibliotecaApp {
         console.println("Select a valid option!");
     }
 
-    private void displayMenu() {
+    public void displayMenu() {
         console.println("===========================================================");
         console.println("Please select an option from menu below.");
 
