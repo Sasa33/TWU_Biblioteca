@@ -128,6 +128,8 @@ public class BibliotecaApp {
 
         if(this.bookList.checkoutBook(input)) {
             console.println("Thank you! Enjoy the book!");
+        } else {
+            console.println("That book is not available.");
         }
     }
 
