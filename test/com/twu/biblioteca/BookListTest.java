@@ -84,4 +84,34 @@ public class BookListTest {
         assertEquals(checkedOutBooks.size(), 1);
         assertEquals(checkedOutBooks.get(0), books.get(0));
     }
+
+    @Test
+    public void should_put_a_book_back_to_availableBooks_after_a_book_is_returned() {
+        when(repository.getAllBooks()).thenReturn(books);
+
+        bookList = new BookList(repository.getAllBooks());
+
+        int chosen = 1;
+        bookList.checkoutBook(chosen);
+
+        List<Book> checkedOutBooks = bookList.getCheckedOutBooks();
+
+        int index = 1;
+        bookList.returnBook(index);
+
+        List<Book> availableBooks2 = bookList.getAvailableBooks();
+        List<Book> checkedOutBooks2 = bookList.getCheckedOutBooks();
+
+
+        // after check out the first book
+        assertEquals(checkedOutBooks.size(), 1);
+        assertEquals(checkedOutBooks.get(0), books.get(0));
+
+        //after return the checked out book
+        assertEquals(availableBooks2.size(), 2);
+        assertEquals(availableBooks2.get(0), books.get(1));
+        assertEquals(availableBooks2.get(1), books.get(0));
+
+        assertEquals(checkedOutBooks2.isEmpty(), true);
+    }
 }

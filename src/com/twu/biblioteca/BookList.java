@@ -18,13 +18,17 @@ public class BookList {
     }
 
     public boolean checkoutBook(int chosen) {
+//        this.checkedOutBooks.add(this.availableBooks.get(chosen - 1));
+//        this.availableBooks.remove(chosen - 1);
+
+
         List<Book> remainingBooks = new ArrayList<Book>();
 
-        for (int i = 0; i < availableBooks.size(); i++) {
+        for (int i = 0; i < this.availableBooks.size(); i++) {
             if (i != chosen - 1) {
-                remainingBooks.add(availableBooks.get(i));
+                remainingBooks.add(this.availableBooks.get(i));
             } else {
-                this.checkedOutBooks.add(availableBooks.get(i));
+                this.checkedOutBooks.add(this.availableBooks.get(i));
             }
         }
 
@@ -38,5 +42,24 @@ public class BookList {
 
     public List<Book> getCheckedOutBooks() {
         return this.checkedOutBooks;
+    }
+
+    public void returnBook(int index) {
+//        this.availableBooks.add(this.checkedOutBooks.get(index - 1));
+//
+//        this.checkedOutBooks.remove(index - 1);
+
+
+        List<Book> remainingCheckedOutBooks = new ArrayList<Book>();
+
+        for (int i = 0; i < this.checkedOutBooks.size(); i++) {
+            if (i != index - 1) {
+                remainingCheckedOutBooks.add(this.checkedOutBooks.get(i));
+            } else {
+                this.availableBooks.add(this.checkedOutBooks.get(i));
+            }
+        }
+
+        this.checkedOutBooks = remainingCheckedOutBooks;
     }
 }
