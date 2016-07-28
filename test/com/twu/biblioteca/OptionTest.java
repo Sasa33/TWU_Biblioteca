@@ -57,4 +57,17 @@ public class OptionTest {
 
         verify(app, times(1)).checkoutBook();
     }
+
+    @Test
+    public void should_call_returnBook_method_when_return_book_option_is_called() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 3;
+        String optionName = "Return Book";
+        option = new Option(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).returnBook();
+    }
 }

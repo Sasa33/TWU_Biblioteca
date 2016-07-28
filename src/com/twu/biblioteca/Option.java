@@ -24,6 +24,8 @@ public class Option {
             app.exit();
         } else if(this.name.equals("Checkout Book")) {
             app.checkoutBook();
+        } else if(this.name.equals("Return Book")) {
+            app.returnBook();
         }
     }
 }
