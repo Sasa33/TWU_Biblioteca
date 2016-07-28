@@ -16,21 +16,16 @@ public class BookList {
     }
 
     public boolean checkoutBook(int chosen) {
-        if(checkIfBookExits(chosen)) {
-            List<Book> remainingBooks = new ArrayList<Book>();
+        List<Book> remainingBooks = new ArrayList<Book>();
 
-            for (int i = 0; i < books.size(); i++) {
-                if (i != chosen - 1) {
-                    remainingBooks.add(books.get(i));
-                }
+        for (int i = 0; i < books.size(); i++) {
+            if (i != chosen - 1) {
+                remainingBooks.add(books.get(i));
             }
-
-            this.books = remainingBooks;
-
-            return true;
-        } else {
-            return false;
         }
+
+        this.books = remainingBooks;
+        return true;
     }
 
     public boolean checkIfBookExits(int chosen) {
