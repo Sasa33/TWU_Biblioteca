@@ -37,7 +37,7 @@ public class BookList {
     }
 
     public boolean checkIfBookExits(int chosen) {
-        return chosen >= 0 && chosen < this.availableBooks.size();
+        return chosen > 0 && chosen <= this.availableBooks.size();
     }
 
     public List<Book> getCheckedOutBooks() {
@@ -64,6 +64,6 @@ public class BookList {
     }
 
     public boolean checkIfBookCanBeReturned(int chosen) {
-        return chosen >= 0 && chosen < this.checkedOutBooks.size();
+        return chosen > 0 && chosen <= this.checkedOutBooks.size();
     }
 }
