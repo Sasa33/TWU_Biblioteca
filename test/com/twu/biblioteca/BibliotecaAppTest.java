@@ -131,6 +131,13 @@ public class BibliotecaAppTest {
 
         inOrder.verify(console, times(1)).println("Book List:");
         inOrder.verify(console, times(1)).println("\t1. Refactoring | Martin Fowler | 1999");
+    }
 
+    @Test
+    public void should_show_return_book_message_and_a_list_of_books_that_can_be_returned() {
+        app.whichBookToRetrun();
+
+        inOrder.verify(console, times(1)).println("Which book do you want to return:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
     }
 }

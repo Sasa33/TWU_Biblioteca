@@ -48,8 +48,9 @@ public class BibliotecaApp {
 
         Option option1 = new Option(1, "List Books");
         Option option2 = new Option(2, "Checkout Book");
-        Option option3 = new Option(2, "Quit");
-        Menu menu = new Menu(asList(option1, option2, option3));
+        Option option3 = new Option(3, "Return Book");
+        Option option4 = new Option(4, "Quit");
+        Menu menu = new Menu(asList(option1, option2, option3, option4));
 
         BibliotecaApp app = new BibliotecaApp(console, menu);
         app.startWithMenu();
@@ -144,5 +145,10 @@ public class BibliotecaApp {
 
     public void returnBook() {
 
+    }
+
+    public void whichBookToRetrun() {
+        console.println("Which book do you want to return:");
+        console.println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
     }
 }
