@@ -173,4 +173,32 @@ public class BibliotecaAppTest {
 
         inOrder.verify(console, times(1)).println("Thank you for returning the book!");
     }
+
+    @Test
+    public void should_show_return_failed_message_after_returning_an_invalid_book() {
+        Book book1 = new Book("book1", "author1", "2003");
+        Book book2 = new Book("book2", "author2", "1999");
+        BookRepository repository = new BookRepository(asList(book1, book2));
+
+        BookList bookList = mock(BookList.class);
+        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
+        when(console.getNextInt()).thenReturn(3, 1);
+        when(bookList.checkIfBookCanBeReturned(1)).thenReturn(false, true);
+
+        app = new BibliotecaApp(console, menu, bookList);
+
+        app.returnBook();
+
+        inOrder.verify(console, times(1)).println("Which book do you want to return:");
+        inOrder.verify(console, times(1)).println("\t1. book1 | author1 | 2003");
+        inOrder.verify(console, times(1)).println("\t2. book2 | author2 | 1999");
+
+        inOrder.verify(console, times(1)).println("That is not a valid book to return. Please choose again!");
+
+        inOrder.verify(console, times(1)).println("Which book do you want to return:");
+        inOrder.verify(console, times(1)).println("\t1. book1 | author1 | 2003");
+        inOrder.verify(console, times(1)).println("\t2. book2 | author2 | 1999");
+
+        inOrder.verify(console, times(1)).println("Thank you for returning the book!");
+    }
 }

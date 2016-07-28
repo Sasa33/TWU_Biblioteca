@@ -152,11 +152,16 @@ public class BibliotecaApp {
     }
 
     public void returnBook() {
-        int selection = whichBookToRetrun();
+        while (true) {
+            int selection = whichBookToRetrun();
 
-        if (this.bookList.checkIfBookCanBeReturned(selection)) {
-            this.bookList.returnBook(selection);
-            console.println("Thank you for returning the book!");
+            if (this.bookList.checkIfBookCanBeReturned(selection)) {
+                this.bookList.returnBook(selection);
+                console.println("Thank you for returning the book!");
+                break;
+            } else {
+                console.println("That is not a valid book to return. Please choose again!");
+            }
         }
     }
 
