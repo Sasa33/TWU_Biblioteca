@@ -62,4 +62,8 @@ public class BookList {
 
         this.checkedOutBooks = remainingCheckedOutBooks;
     }
+
+    public boolean checkIfBookCanBeReturned(int chosen) {
+        return chosen >= 0 && chosen < this.checkedOutBooks.size();
+    }
 }
