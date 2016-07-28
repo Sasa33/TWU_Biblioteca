@@ -33,7 +33,7 @@ public class BookList {
         }
     }
 
-    private boolean checkIfBookExits(int chosen) {
+    public boolean checkIfBookExits(int chosen) {
         return chosen >= 0 && chosen < this.books.size();
     }
 }

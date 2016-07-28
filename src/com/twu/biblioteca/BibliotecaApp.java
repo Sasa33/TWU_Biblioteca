@@ -122,19 +122,23 @@ public class BibliotecaApp {
     }
 
     public void checkoutBook() {
-        displayCheckoutBookMessage();
+        while(true) {
+            int selection = whichBookToCheckout();
 
-        int input = console.getNextInt();
-
-        if(this.bookList.checkoutBook(input)) {
-            console.println("Thank you! Enjoy the book!");
-        } else {
-            console.println("That book is not available.");
+            if(this.bookList.checkIfBookExits(selection)) {
+                this.bookList.checkoutBook(selection);
+                console.println("Thank you! Enjoy the book!");
+                break;
+            } else {
+                console.println("That book is not available. Please choose again!");
+            }
         }
     }
 
-    public void displayCheckoutBookMessage() {
+    public int whichBookToCheckout() {
         console.println("Which book do you want to checkout:");
         listAvailableBooks();
+
+        return console.getNextInt();
     }
 }

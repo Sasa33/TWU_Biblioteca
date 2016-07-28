@@ -84,7 +84,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_show_checkout_message_and_list_of_available_books_when_checkoutBook_method_is_called() {
-        app.displayCheckoutBookMessage();
+        app.whichBookToCheckout();
 
         inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
         inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
@@ -111,7 +111,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_show_checkout_failed_message_after_checkouting_an_invalid_book() {
-        when(console.getNextInt()).thenReturn(3);
+        when(console.getNextInt()).thenReturn(3, 1);
 
         app.checkoutBook();
 
@@ -119,12 +119,18 @@ public class BibliotecaAppTest {
         inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
         inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
 
-        inOrder.verify(console, times(1)).println("That book is not available.");
+        inOrder.verify(console, times(1)).println("That book is not available. Please choose again!");
+
+        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+
+        inOrder.verify(console, times(1)).println("Thank you! Enjoy the book!");
 
         app.displayBookListInfo();
 
         inOrder.verify(console, times(1)).println("Book List:");
-        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
-        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+        inOrder.verify(console, times(1)).println("\t1. Refactoring | Martin Fowler | 1999");
+
     }
 }
