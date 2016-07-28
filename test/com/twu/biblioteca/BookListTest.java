@@ -3,7 +3,6 @@ package com.twu.biblioteca;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -34,7 +33,7 @@ public class BookListTest {
 
         bookList = new BookList(repository.getAllBooks());
 
-        List<Book> availableBooks = bookList.listAllBooks();
+        List<Book> availableBooks = bookList.getAvailableBooks();
 
         assertEquals(availableBooks.size(), 2);
         assertEquals(availableBooks.get(0), books.get(0));
@@ -47,12 +46,12 @@ public class BookListTest {
 
         bookList = new BookList(repository.getAllBooks());
 
-        List<Book> availableBooks = bookList.listAllBooks();
+        List<Book> availableBooks = bookList.getAvailableBooks();
 
         int chosen = 1;
         bookList.checkoutBook(chosen);
 
-        List<Book> availableBooks2 = bookList.listAllBooks();
+        List<Book> availableBooks2 = bookList.getAvailableBooks();
 
         assertEquals(availableBooks.size(), 2);
         assertEquals(availableBooks.get(0), books.get(0));
@@ -60,5 +59,29 @@ public class BookListTest {
 
         assertEquals(availableBooks2.size(), 1);
         assertEquals(availableBooks2.get(0), books.get(1));
+    }
+
+    @Test
+    public void should_put_a_book_into_the_checkedOutBooks_list_when_a_book_is_checked_out() {
+        when(repository.getAllBooks()).thenReturn(books);
+
+        bookList = new BookList(repository.getAllBooks());
+        List<Book> availableBooks = bookList.getAvailableBooks();
+
+        int chosen = 1;
+        bookList.checkoutBook(chosen);
+
+        List<Book> availableBooks2 = bookList.getAvailableBooks();
+        List<Book> checkedOutBooks = bookList.getCheckedOutBooks();
+
+        assertEquals(availableBooks.size(), 2);
+        assertEquals(availableBooks.get(0), books.get(0));
+        assertEquals(availableBooks.get(1), books.get(1));
+
+        assertEquals(availableBooks2.size(), 1);
+        assertEquals(availableBooks2.get(0), books.get(1));
+
+        assertEquals(checkedOutBooks.size(), 1);
+        assertEquals(checkedOutBooks.get(0), books.get(0));
     }
 }

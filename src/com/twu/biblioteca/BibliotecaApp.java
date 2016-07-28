@@ -108,7 +108,7 @@ public class BibliotecaApp {
     }
 
     private void listAvailableBooks() {
-        List<Book> availableBooks = bookList.listAllBooks();
+        List<Book> availableBooks = bookList.getAvailableBooks();
 
         for (int i = 0; i < availableBooks.size(); i++) {
             String listItem = "\t" + ( i + 1 ) + ". " + availableBooks.get(i).getDetails();

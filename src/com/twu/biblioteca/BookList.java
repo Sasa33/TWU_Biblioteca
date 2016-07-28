@@ -4,31 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookList {
-    private List<Book> books;
+    private List<Book> availableBooks;
+    private List<Book> checkedOutBooks;
 
     public BookList(List<Book> books) {
-        this.books = books;
+        this.availableBooks = books;
+        this.checkedOutBooks = new ArrayList<Book>();
     }
 
 
-    public List<Book> listAllBooks() {
-        return this.books;
+    public List<Book> getAvailableBooks() {
+        return this.availableBooks;
     }
 
     public boolean checkoutBook(int chosen) {
         List<Book> remainingBooks = new ArrayList<Book>();
 
-        for (int i = 0; i < books.size(); i++) {
+        for (int i = 0; i < availableBooks.size(); i++) {
             if (i != chosen - 1) {
-                remainingBooks.add(books.get(i));
+                remainingBooks.add(availableBooks.get(i));
+            } else {
+                this.checkedOutBooks.add(availableBooks.get(i));
             }
         }
 
-        this.books = remainingBooks;
+        this.availableBooks = remainingBooks;
         return true;
     }
 
     public boolean checkIfBookExits(int chosen) {
-        return chosen >= 0 && chosen < this.books.size();
+        return chosen >= 0 && chosen < this.availableBooks.size();
+    }
+
+    public List<Book> getCheckedOutBooks() {
+        return this.checkedOutBooks;
     }
 }
