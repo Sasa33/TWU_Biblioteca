@@ -13,6 +13,7 @@ public class BibliotecaAppTest {
     private BibliotecaApp app;
     private Console console;
     private InOrder inOrder;
+    private Menu menu;
 
 
     @Before
@@ -29,7 +30,7 @@ public class BibliotecaAppTest {
         when(option2.getName()).thenReturn("Quit");
         when(option2.getId()).thenReturn(2);
 
-        Menu menu = mock(Menu.class);
+        menu = mock(Menu.class);
         when(menu.getOptions()).thenReturn(options);
 
         app = new BibliotecaApp(console, menu);
@@ -135,9 +136,19 @@ public class BibliotecaAppTest {
 
     @Test
     public void should_show_return_book_message_and_a_list_of_books_that_can_be_returned() {
+        Book book1 = new Book("book1", "author1", "2003");
+        Book book2 = new Book("book2", "author2", "1999");
+        BookRepository repository = new BookRepository(asList(book1, book2));
+
+        BookList bookList = mock(BookList.class);
+        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
+
+        app = new BibliotecaApp(console, menu, bookList);
+
         app.whichBookToRetrun();
 
         inOrder.verify(console, times(1)).println("Which book do you want to return:");
-        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t1. book1 | author1 | 2003");
+        inOrder.verify(console, times(1)).println("\t2. book2 | author2 | 1999");
     }
 }

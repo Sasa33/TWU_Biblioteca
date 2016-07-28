@@ -41,6 +41,14 @@ public class BibliotecaApp {
         this.menu = menu;
     }
 
+    public BibliotecaApp(Console console, Menu menu, BookList bookList) {
+        this.console = console;
+
+        this.menu = menu;
+
+        this.bookList = bookList;
+    }
+
     public static void main(String[] args) {
         Console console = new Console(new PrintStream(System.out), new BufferedReader(new InputStreamReader(System.in)));
 //        BibliotecaApp app = new BibliotecaApp(console);
@@ -149,6 +157,16 @@ public class BibliotecaApp {
 
     public void whichBookToRetrun() {
         console.println("Which book do you want to return:");
-        console.println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+
+        listCheckedOutBooks();
+    }
+
+    public void listCheckedOutBooks() {
+        List<Book> checkedOutBooks = bookList.getCheckedOutBooks();
+
+        for (int i = 0; i < checkedOutBooks.size(); i++) {
+            String listItem = "\t" + ( i + 1 ) + ". " + checkedOutBooks.get(i).getDetails();
+            console.println(listItem);
+        }
     }
 }
