@@ -4,10 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-
 import static java.util.Arrays.asList;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
@@ -16,8 +12,6 @@ public class IntegrationTest {
     private BibliotecaApp app;
     private Console console;
     private InOrder inOrder;
-    private Menu menu;
-
 
     @Before
     public void setUpStreams() {
@@ -40,19 +34,19 @@ public class IntegrationTest {
         app.startWithMenu();
 
         inOrder.verify(console, times(1)).println("Welcome to the Bangalore Public Library!");
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. Quit");
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
 
         // show book list:
         inOrder.verify(console, times(1)).println("Book List:");
         inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
         inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. Quit");
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
 
 
         // check out an book
@@ -63,10 +57,10 @@ public class IntegrationTest {
         // checkout successfully
         inOrder.verify(console, times(1)).println("Thank you! Enjoy the book!");
 
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. Quit");
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
 
 
         // return a book
@@ -81,10 +75,10 @@ public class IntegrationTest {
         // return a valid book
         inOrder.verify(console, times(1)).println("Thank you for returning the book!");
 
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. Quit");
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
 
 
         // show book list again

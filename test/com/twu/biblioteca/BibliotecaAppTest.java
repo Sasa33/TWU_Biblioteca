@@ -61,10 +61,10 @@ public class BibliotecaAppTest {
     public void should_print_a_menu_with_a_list_of_options_when_call_displayMenu_method() {
         app.displayMenu();
 
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Quit");
-        inOrder.verify(console, times(1)).println("===========================================================");
+        inOrder.verify(console, times(1)).println("=====================================================================");
     }
 
     @Test

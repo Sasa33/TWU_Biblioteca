@@ -90,7 +90,7 @@ public class BibliotecaApp {
     }
 
     public void displayMenu() {
-        console.println("===========================================================");
+        console.println("=====================================================================");
         console.println("Please select an option from menu below.");
 
         List<Option> options = this.menu.getOptions();
@@ -106,7 +106,7 @@ public class BibliotecaApp {
         }
 
         console.println(menus);
-        console.println("===========================================================");
+        console.println("=====================================================================");
     }
 
     public void displayBookListInfo() {
