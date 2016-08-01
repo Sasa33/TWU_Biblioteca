@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
-import org.junit.Before;
+import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.repository.BookRepository;
 import org.junit.Test;
 
 import java.util.List;

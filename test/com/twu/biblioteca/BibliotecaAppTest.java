@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.repository.BookRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
