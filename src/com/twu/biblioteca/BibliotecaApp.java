@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 
 public class BibliotecaApp {
     private Console console;
-    private BookList bookList;
+    private ItemList itemList;
     private Menu menu;
     private boolean quit = Boolean.FALSE;
 
@@ -25,7 +25,7 @@ public class BibliotecaApp {
 
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        this.bookList = new BookList(repository.getAllBooks());
+        this.itemList = new ItemList(repository.getAllBooks());
 
 
         Option option1 = new ListBooksOption(1, "List Books");
@@ -40,17 +40,17 @@ public class BibliotecaApp {
 
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        this.bookList = new BookList(repository.getAllBooks());
+        this.itemList = new ItemList(repository.getAllBooks());
 
         this.menu = menu;
     }
 
-    public BibliotecaApp(Console console, Menu menu, BookList bookList) {
+    public BibliotecaApp(Console console, Menu menu, ItemList itemList) {
         this.console = console;
 
         this.menu = menu;
 
-        this.bookList = bookList;
+        this.itemList = itemList;
     }
 
     public static void main(String[] args) {
@@ -120,7 +120,7 @@ public class BibliotecaApp {
     }
 
     private void listAvailableBooks() {
-        List<Book> availableBooks = bookList.getAvailableBooks();
+        List<Book> availableBooks = itemList.getAvailableItems();
 
         for (int i = 0; i < availableBooks.size(); i++) {
             String listItem = "\t" + ( i + 1 ) + ". " + availableBooks.get(i).getDetails();
@@ -138,8 +138,8 @@ public class BibliotecaApp {
         while(true) {
             int selection = whichBookToCheckout();
 
-            if(this.bookList.checkIfBookExits(selection)) {
-                this.bookList.checkoutBook(selection);
+            if(this.itemList.checkIfBookExits(selection)) {
+                this.itemList.checkoutBook(selection);
                 console.println("Thank you! Enjoy the book!");
                 break;
             } else {
@@ -159,8 +159,8 @@ public class BibliotecaApp {
         while (true) {
             int selection = whichBookToRetrun();
 
-            if (this.bookList.checkIfBookCanBeReturned(selection)) {
-                this.bookList.returnBook(selection);
+            if (this.itemList.checkIfBookCanBeReturned(selection)) {
+                this.itemList.returnBook(selection);
                 console.println("Thank you for returning the book!");
                 break;
             } else {
@@ -177,7 +177,7 @@ public class BibliotecaApp {
     }
 
     public void listCheckedOutBooks() {
-        List<Book> checkedOutBooks = bookList.getCheckedOutBooks();
+        List<Book> checkedOutBooks = itemList.getCheckedOutItems();
 
         for (int i = 0; i < checkedOutBooks.size(); i++) {
             String listItem = "\t" + ( i + 1 ) + ". " + checkedOutBooks.get(i).getDetails();

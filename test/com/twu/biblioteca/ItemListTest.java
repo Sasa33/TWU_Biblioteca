@@ -12,8 +12,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class BookListTest {
-    private BookList bookList;
+public class ItemListTest {
+    private ItemList itemList;
     private BookRepository repository;
     private List<Book> books;
 
@@ -33,9 +33,9 @@ public class BookListTest {
     public void should_get_all_the_books_when_book_list_option_is_chosen() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new BookList(repository.getAllBooks());
+        itemList = new ItemList(repository.getAllBooks());
 
-        List<Book> availableBooks = bookList.getAvailableBooks();
+        List<Book> availableBooks = itemList.getAvailableItems();
 
         assertEquals(availableBooks.size(), 2);
         assertEquals(availableBooks.get(0), books.get(0));
@@ -46,14 +46,14 @@ public class BookListTest {
     public void should_checkout_a_book_successfully_when_checkoutBook_method_is_called() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new BookList(repository.getAllBooks());
+        itemList = new ItemList(repository.getAllBooks());
 
-        List<Book> availableBooks = bookList.getAvailableBooks();
+        List<Book> availableBooks = itemList.getAvailableItems();
 
         int chosen = 1;
-        bookList.checkoutBook(chosen);
+        itemList.checkoutBook(chosen);
 
-        List<Book> availableBooks2 = bookList.getAvailableBooks();
+        List<Book> availableBooks2 = itemList.getAvailableItems();
 
         assertEquals(availableBooks.size(), 2);
         assertEquals(availableBooks.get(0), books.get(0));
@@ -67,14 +67,14 @@ public class BookListTest {
     public void should_put_a_book_into_the_checkedOutBooks_list_when_a_book_is_checked_out() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new BookList(repository.getAllBooks());
-        List<Book> availableBooks = bookList.getAvailableBooks();
+        itemList = new ItemList(repository.getAllBooks());
+        List<Book> availableBooks = itemList.getAvailableItems();
 
         int chosen = 1;
-        bookList.checkoutBook(chosen);
+        itemList.checkoutBook(chosen);
 
-        List<Book> availableBooks2 = bookList.getAvailableBooks();
-        List<Book> checkedOutBooks = bookList.getCheckedOutBooks();
+        List<Book> availableBooks2 = itemList.getAvailableItems();
+        List<Book> checkedOutBooks = itemList.getCheckedOutItems();
 
         assertEquals(availableBooks.size(), 2);
         assertEquals(availableBooks.get(0), books.get(0));
@@ -91,18 +91,18 @@ public class BookListTest {
     public void should_put_a_book_back_to_availableBooks_after_a_book_is_returned() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new BookList(repository.getAllBooks());
+        itemList = new ItemList(repository.getAllBooks());
 
         int chosen = 1;
-        bookList.checkoutBook(chosen);
+        itemList.checkoutBook(chosen);
 
-        List<Book> checkedOutBooks = bookList.getCheckedOutBooks();
+        List<Book> checkedOutBooks = itemList.getCheckedOutItems();
 
         int index = 1;
-        bookList.returnBook(index);
+        itemList.returnBook(index);
 
-        List<Book> availableBooks2 = bookList.getAvailableBooks();
-        List<Book> checkedOutBooks2 = bookList.getCheckedOutBooks();
+        List<Book> availableBooks2 = itemList.getAvailableItems();
+        List<Book> checkedOutBooks2 = itemList.getCheckedOutItems();
 
 
         // after check out the first book

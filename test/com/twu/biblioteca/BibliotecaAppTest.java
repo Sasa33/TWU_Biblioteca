@@ -141,8 +141,8 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        BookList bookList = mock(BookList.class);
-        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
+        ItemList bookList = mock(ItemList.class);
+        when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
 
         app = new BibliotecaApp(console, menu, bookList);
 
@@ -159,8 +159,8 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        BookList bookList = mock(BookList.class);
-        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
+        ItemList bookList = mock(ItemList.class);
+        when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(1);
         when(bookList.checkIfBookCanBeReturned(1)).thenReturn(true);
 
@@ -181,8 +181,8 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        BookList bookList = mock(BookList.class);
-        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
+        ItemList bookList = mock(ItemList.class);
+        when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(3, 1);
         when(bookList.checkIfBookCanBeReturned(1)).thenReturn(false, true);
 
