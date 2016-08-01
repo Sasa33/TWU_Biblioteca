@@ -242,6 +242,32 @@ public class BibliotecaApp {
     }
 
     public void returnMovie() {
+        while (true) {
+            int selection = whichMovieToRetrun();
 
+            if (this.movieList.checkIfBookCanBeReturned(selection)) {
+                this.movieList.returnItem(selection);
+                console.println("Thank you for returning the movie!");
+                break;
+            } else {
+                console.println("That is not a valid movie to return. Please choose again!");
+            }
+        }
+    }
+
+    private int whichMovieToRetrun() {
+        console.println("Which movie do you want to return:");
+        listCheckedOutMovies();
+
+        return console.getNextInt();
+    }
+
+    private void listCheckedOutMovies() {
+        List<Movie> checkedOutMovies = movieList.getCheckedOutItems();
+
+        for (int i = 0; i < checkedOutMovies.size(); i++) {
+            String listItem = "\t" + ( i + 1 ) + ". " + checkedOutMovies.get(i).getDetails();
+            console.println(listItem);
+        }
     }
 }
