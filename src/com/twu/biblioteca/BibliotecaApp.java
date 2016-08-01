@@ -1,8 +1,10 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.option.*;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.MovieRepository;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,6 +18,7 @@ public class BibliotecaApp {
     private ItemList<Book> bookList;
     private Menu menu;
     private boolean quit = Boolean.FALSE;
+    private ItemList<Movie> movieList;
 
     public BibliotecaApp(Console console) {
         this.console = console;
@@ -42,6 +45,12 @@ public class BibliotecaApp {
 
         this.bookList = new ItemList<Book>(repository.getAllBooks());
 
+        Movie movie1 = new Movie("Zootopia", "2016", "Byron Howard & Rich Moore", "9.2");
+        Movie movie2 = new Movie("The Jungle Book", "2016", "Jon Favreau", "7.9");
+        MovieRepository movieRepository = new MovieRepository(asList(movie1, movie2));
+
+        this.movieList = new ItemList<Movie>(movieRepository.getAllMovies());
+
         this.menu = menu;
     }
 
@@ -61,8 +70,10 @@ public class BibliotecaApp {
         Option option1 = new ListBooksOption(1, "List Books");
         Option option2 = new CheckoutBookOption(2, "Checkout Book");
         Option option3 = new ReturnBookOption(3, "Return Book");
-        Option option4 = new QuitOption(4, "Quit");
-        Menu menu = new Menu(asList(option1, option2, option3, option4));
+        Option option4 = new ReturnBookOption(4, "Checkout Movie");
+        Option option5 = new ReturnBookOption(5, "Return Movie");
+        Option option6 = new QuitOption(4, "Quit");
+        Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6));
 
         BibliotecaApp app = new BibliotecaApp(console, menu);
         app.startWithMenu();
@@ -192,7 +203,11 @@ public class BibliotecaApp {
     }
 
     private void listAvailableMovies() {
-        console.println("\t1. Zootopia | 2016 | Byron Howard & Rich Moore | 9.2");
-        console.println("\t2. The Jungle Book | 2016 | Jon Favreau | 7.9");
+        List<Movie> availableMovies = movieList.getAvailableItems();
+
+        for (int i = 0; i < availableMovies.size(); i++) {
+            String listItem = "\t" + ( i + 1 ) + ". " + availableMovies.get(i).getDetails();
+            console.println(listItem);
+        }
     }
 }
