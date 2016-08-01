@@ -62,6 +62,15 @@ public class BibliotecaApp {
         this.bookList = itemList;
     }
 
+    public BibliotecaApp(Console console, Menu menu, ItemList<Book> itemList, ItemList<Movie> movieList) {
+        this.console = console;
+
+        this.menu = menu;
+
+        this.bookList = itemList;
+        this.movieList = movieList;
+    }
+
     public static void main(String[] args) {
         Console console = new Console(new PrintStream(System.out), new BufferedReader(new InputStreamReader(System.in)));
 //        BibliotecaApp app = new BibliotecaApp(console);
