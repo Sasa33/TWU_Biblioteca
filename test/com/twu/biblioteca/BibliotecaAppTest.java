@@ -268,4 +268,13 @@ public class BibliotecaAppTest {
 
         inOrder.verify(console, times(1)).println("Thank you for returning the movie!");
     }
+
+    @Test
+    public void should_show_user_information_when_showUserInfo_method_is_called() {
+        app.showUserInfo();
+
+        inOrder.verify(console, times(1)).println("Name: user1");
+        inOrder.verify(console, times(1)).println("Email Address: user1@thoughtworks.com");
+        inOrder.verify(console, times(1)).println("Phone: 13000000000");
+    }
 }

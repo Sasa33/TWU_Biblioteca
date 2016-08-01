@@ -273,6 +273,8 @@ public class BibliotecaApp {
     }
 
     public void showUserInfo() {
-
+        console.println("Name: user1");
+        console.println("Email Address: user1@thoughtworks.com");
+        console.println("Phone: 13000000000");
     }
 }
