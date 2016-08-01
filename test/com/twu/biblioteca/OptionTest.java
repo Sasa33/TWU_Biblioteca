@@ -97,4 +97,17 @@ public class OptionTest {
 
         verify(app, times(1)).checkoutMovie();
     }
+
+    @Test
+    public void should_call_returnMovie_method_when_return_movie_option_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 5;
+        String optionName = "Return Movie";
+        option = new ReturnMovieOption(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).returnMovie();
+    }
 }

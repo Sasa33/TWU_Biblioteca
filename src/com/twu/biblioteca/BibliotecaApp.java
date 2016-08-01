@@ -240,4 +240,8 @@ public class BibliotecaApp {
 
         return console.getNextInt();
     }
+
+    public void returnMovie() {
+
+    }
 }
