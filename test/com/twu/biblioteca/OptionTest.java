@@ -84,4 +84,17 @@ public class OptionTest {
 
         verify(app, times(1)).displayMovieListInfo();
     }
+
+    @Test
+    public void should_call_checkoutMovie_method_when_checkout_movie_option_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 4;
+        String optionName = "Checkout Movie";
+        option = new CheckoutMovieption(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).checkoutMovie();
+    }
 }
