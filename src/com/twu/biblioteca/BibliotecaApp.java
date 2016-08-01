@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.entity.Book;
-import com.twu.biblioteca.option.Option;
+import com.twu.biblioteca.option.*;
 import com.twu.biblioteca.repository.BookRepository;
 
 import java.io.BufferedReader;
@@ -28,7 +28,7 @@ public class BibliotecaApp {
         this.bookList = new BookList(repository.getAllBooks());
 
 
-        Option option1 = new Option(1, "List Books");
+        Option option1 = new ListBooksOption(1, "List Books");
         this.menu = new Menu(asList(option1));
     }
 
@@ -58,10 +58,10 @@ public class BibliotecaApp {
 //        BibliotecaApp app = new BibliotecaApp(console);
 //        app.start();
 
-        Option option1 = new Option(1, "List Books");
-        Option option2 = new Option(2, "Checkout Book");
-        Option option3 = new Option(3, "Return Book");
-        Option option4 = new Option(4, "Quit");
+        Option option1 = new ListBooksOption(1, "List Books");
+        Option option2 = new CheckoutBookOption(2, "Checkout Book");
+        Option option3 = new ReturnBookOption(3, "Return Book");
+        Option option4 = new QuitOption(4, "Quit");
         Menu menu = new Menu(asList(option1, option2, option3, option4));
 
         BibliotecaApp app = new BibliotecaApp(console, menu);

@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.option.Option;
+import com.twu.biblioteca.option.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -19,10 +19,10 @@ public class IntegrationTest {
         console = mock(Console.class);
         inOrder = inOrder(console);
 
-        Option option1 = new Option(1, "List Books");
-        Option option2 = new Option(2, "Checkout Book");
-        Option option3 = new Option(3, "Return Book");
-        Option option4 = new Option(4, "Quit");
+        Option option1 = new ListBooksOption(1, "List Books");
+        Option option2 = new CheckoutBookOption(2, "Checkout Book");
+        Option option3 = new ReturnBookOption(3, "Return Book");
+        Option option4 = new QuitOption(4, "Quit");
         Menu menu = new Menu(asList(option1, option2, option3, option4));
 
         app = new BibliotecaApp(console, menu);

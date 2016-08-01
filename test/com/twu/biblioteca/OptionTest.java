@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.option.Option;
+import com.twu.biblioteca.option.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -14,7 +14,7 @@ public class OptionTest {
         String optionName = "List Books";
         int optionId = 1;
 
-        option = new Option(optionId, optionName);
+        option = new ListBooksOption(optionId, optionName);
 
         assertEquals(optionName, option.getName());
         assertEquals(optionId, option.getId());
@@ -26,7 +26,7 @@ public class OptionTest {
 
         int optionId = 1;
         String optionName = "List Books";
-        option = new Option(optionId, optionName);
+        option = new ListBooksOption(optionId, optionName);
 
         option.execute(app);
 
@@ -39,7 +39,7 @@ public class OptionTest {
 
         int optionId = 2;
         String optionName = "Quit";
-        option = new Option(optionId, optionName);
+        option = new QuitOption(optionId, optionName);
 
         option.execute(app);
 
@@ -52,7 +52,7 @@ public class OptionTest {
 
         int optionId = 2;
         String optionName = "Checkout Book";
-        option = new Option(optionId, optionName);
+        option = new CheckoutBookOption(optionId, optionName);
 
         option.execute(app);
 
@@ -65,7 +65,7 @@ public class OptionTest {
 
         int optionId = 3;
         String optionName = "Return Book";
-        option = new Option(optionId, optionName);
+        option = new ReturnBookOption(optionId, optionName);
 
         option.execute(app);
 
