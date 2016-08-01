@@ -123,4 +123,17 @@ public class OptionTest {
 
         verify(app, times(1)).showUserInfo();
     }
+
+    @Test
+    public void should_call_login_method_when_loginOption_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 7;
+        String optionName = "Login";
+        option = new LoginOption(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).login();
+    }
 }

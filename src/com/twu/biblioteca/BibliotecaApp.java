@@ -277,4 +277,8 @@ public class BibliotecaApp {
         console.println("Email Address: user1@thoughtworks.com");
         console.println("Phone: 13000000000");
     }
+
+    public void login() {
+
+    }
 }
