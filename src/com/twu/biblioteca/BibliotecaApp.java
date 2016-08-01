@@ -184,4 +184,8 @@ public class BibliotecaApp {
             console.println(listItem);
         }
     }
+
+    public void displayMovieListInfo() {
+        console.println("Book List:");
+    }
 }

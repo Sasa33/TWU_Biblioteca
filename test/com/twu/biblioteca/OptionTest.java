@@ -71,4 +71,17 @@ public class OptionTest {
 
         verify(app, times(1)).returnBook();
     }
+
+    @Test
+    public void should_call_listAvailableMovies_method_when_List_Movies_option_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 5;
+        String optionName = "List Movies";
+        option = new ListMovieOption(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).displayMovieListInfo();
+    }
 }
