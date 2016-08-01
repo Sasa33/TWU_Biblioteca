@@ -28,4 +28,8 @@ public class Option {
             app.returnBook();
         }
     }
+
+    public String getOptionInfo() {
+        return this.id + ". " + this.name;
+    }
 }

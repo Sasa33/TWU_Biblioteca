@@ -27,10 +27,8 @@ public class BibliotecaAppTest {
         Option option2 = mock(Option.class);
 
         List<Option> options = asList(option1, option2);
-        when(option1.getName()).thenReturn("List Books");
-        when(option1.getId()).thenReturn(1);
-        when(option2.getName()).thenReturn("Quit");
-        when(option2.getId()).thenReturn(2);
+        when(option1.getOptionInfo()).thenReturn("1. List Books");
+        when(option2.getOptionInfo()).thenReturn("2. Quit");
 
         menu = mock(Menu.class);
         when(menu.getOptions()).thenReturn(options);

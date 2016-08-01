@@ -101,7 +101,7 @@ public class BibliotecaApp {
         String menus = "Menu: ";
 
         for (int i = 0; i < options.size(); i++) {
-            menus += options.get(i).getId() + ". " + options.get(i).getName();
+            menus += options.get(i).getOptionInfo();
 
             if(i < options.size() - 1) {
                 menus += " | ";
