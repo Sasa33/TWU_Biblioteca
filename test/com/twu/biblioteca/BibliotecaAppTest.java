@@ -270,7 +270,16 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_show_user_information_when_showUserInfo_method_is_called() {
+    public void should_login_successfully_and_set_the_user_as_current_user() {
+        String expectedNumber = "000-0001";
+        String expectedPassword = "123456";
+        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+
+        app.login();
+
+        inOrder.verify(console, times(1)).println("Library Number: ");
+        inOrder.verify(console, times(1)).println("Password: ");
+
         app.showUserInfo();
 
         inOrder.verify(console, times(1)).println("Name: user1");

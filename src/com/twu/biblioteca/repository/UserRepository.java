@@ -22,7 +22,7 @@ public class UserRepository {
             return this.repository;
         } else {
             User user1 = new User("user1", "000-0001", "123456", "user1@thoughtworks.com", "13000000000");
-            User user2 = new User("user2", "000-0001", "654321", "user2@thoughtworks.com", "15000000000");
+            User user2 = new User("user2", "000-0002", "654321", "user2@thoughtworks.com", "15000000000");
 
             List<User> users = asList(user1, user2);
 

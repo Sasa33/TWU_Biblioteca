@@ -2,9 +2,11 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.entity.Movie;
+import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.option.*;
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.repository.MovieRepository;
+import com.twu.biblioteca.repository.UserRepository;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,6 +21,7 @@ public class BibliotecaApp {
     private Menu menu;
     private boolean quit = Boolean.FALSE;
     private ItemList<Movie> movieList;
+    private User currentUser;
 
     public BibliotecaApp(Console console) {
         this.console = console;
@@ -273,12 +276,28 @@ public class BibliotecaApp {
     }
 
     public void showUserInfo() {
-        console.println("Name: user1");
-        console.println("Email Address: user1@thoughtworks.com");
-        console.println("Phone: 13000000000");
+        console.println("Name: " + currentUser.getName());
+        console.println("Email Address: " + currentUser.getEmail());
+        console.println("Phone: " + currentUser.getPhone());
     }
 
     public void login() {
+        console.println("Library Number: ");
+        String number = console.getNextString();
 
+        console.println("Password: ");
+        String password = console.getNextString();
+
+        UserRepository userRepository = new UserRepository();
+
+        List<User> users = userRepository.getAllUsers();
+
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (number.equals(user.getNumber()) && password.equals(user.getPassword())) {
+                currentUser = user;
+                break;
+            }
+        }
     }
 }
