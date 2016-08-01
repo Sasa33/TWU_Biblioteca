@@ -110,4 +110,17 @@ public class OptionTest {
 
         verify(app, times(1)).returnMovie();
     }
+
+    @Test
+    public void should_call_showUserInfo_method_when_userInfoOption_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 6;
+        String optionName = "User Info";
+        option = new UserInfoOption(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).showUserInfo();
+    }
 }

@@ -271,4 +271,8 @@ public class BibliotecaApp {
             console.println(listItem);
         }
     }
+
+    public void showUserInfo() {
+
+    }
 }
