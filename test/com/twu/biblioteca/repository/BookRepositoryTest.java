@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.repository;
 
 import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.repository.BookRepository;
