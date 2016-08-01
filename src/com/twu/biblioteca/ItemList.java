@@ -17,7 +17,7 @@ public class ItemList<T> {
         return this.availableItems;
     }
 
-    public boolean checkoutBook(int chosen) {
+    public boolean checkoutItem(int chosen) {
 //        this.checkedOutItems.add(this.availableItems.get(chosen - 1));
 //        this.availableItems.remove(chosen - 1);
 
@@ -36,7 +36,7 @@ public class ItemList<T> {
         return true;
     }
 
-    public boolean checkIfBookExits(int chosen) {
+    public boolean checkIfItemExits(int chosen) {
         return chosen > 0 && chosen <= this.availableItems.size();
     }
 
@@ -44,7 +44,7 @@ public class ItemList<T> {
         return this.checkedOutItems;
     }
 
-    public void returnBook(int index) {
+    public void returnItem(int index) {
 //        this.availableItems.add(this.checkedOutItems.get(index - 1));
 //
 //        this.checkedOutItems.remove(index - 1);

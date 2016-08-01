@@ -138,8 +138,8 @@ public class BibliotecaApp {
         while(true) {
             int selection = whichBookToCheckout();
 
-            if(this.itemList.checkIfBookExits(selection)) {
-                this.itemList.checkoutBook(selection);
+            if(this.itemList.checkIfItemExits(selection)) {
+                this.itemList.checkoutItem(selection);
                 console.println("Thank you! Enjoy the book!");
                 break;
             } else {
@@ -160,7 +160,7 @@ public class BibliotecaApp {
             int selection = whichBookToRetrun();
 
             if (this.itemList.checkIfBookCanBeReturned(selection)) {
-                this.itemList.returnBook(selection);
+                this.itemList.returnItem(selection);
                 console.println("Thank you for returning the book!");
                 break;
             } else {

@@ -60,7 +60,7 @@ public class ItemListTest {
         List<Book> availableBooks = bookList.getAvailableItems();
 
         int chosen = 1;
-        bookList.checkoutBook(chosen);
+        bookList.checkoutItem(chosen);
 
         List<Book> availableBooks2 = bookList.getAvailableItems();
 
@@ -80,7 +80,7 @@ public class ItemListTest {
         List<Book> availableBooks = bookList.getAvailableItems();
 
         int chosen = 1;
-        bookList.checkoutBook(chosen);
+        bookList.checkoutItem(chosen);
 
         List<Book> availableBooks2 = bookList.getAvailableItems();
         List<Book> checkedOutBooks = bookList.getCheckedOutItems();
@@ -103,12 +103,12 @@ public class ItemListTest {
         bookList = new ItemList<Book>(repository.getAllBooks());
 
         int chosen = 1;
-        bookList.checkoutBook(chosen);
+        bookList.checkoutItem(chosen);
 
         List<Book> checkedOutBooks = bookList.getCheckedOutItems();
 
         int index = 1;
-        bookList.returnBook(index);
+        bookList.returnItem(index);
 
         List<Book> availableBooks2 = bookList.getAvailableItems();
         List<Book> checkedOutBooks2 = bookList.getCheckedOutItems();
@@ -147,7 +147,7 @@ public class ItemListTest {
         List<Movie> availableMovies = movieList.getAvailableItems();
 
         int chosen = 1;
-        movieList.checkoutBook(chosen);
+        movieList.checkoutItem(chosen);
 
         List<Movie> availableMovies2 = movieList.getAvailableItems();
         List<Movie> checkedOutMovies = movieList.getCheckedOutItems();
