@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.option;
+
+import com.twu.biblioteca.BibliotecaApp;
 
 public class Option {
     private int id;
