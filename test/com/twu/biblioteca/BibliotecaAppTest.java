@@ -69,7 +69,7 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_show_a_list_of_books_when_listAvailableBooks_method_is_called() {
+    public void should_show_a_list_of_books_when_displayBookListInfo_method_is_called() {
         app.displayBookListInfo();
 
         inOrder.verify(console, times(1)).println("Book List:");
@@ -201,5 +201,14 @@ public class BibliotecaAppTest {
         inOrder.verify(console, times(1)).println("\t2. book2 | author2 | 1999");
 
         inOrder.verify(console, times(1)).println("Thank you for returning the book!");
+    }
+
+    @Test
+    public void should_show_a_list_of_movies_when_displayMovieListInfo_method_is_called() {
+        app.displayMovieListInfo();
+
+        inOrder.verify(console, times(1)).println("Movie List:");
+        inOrder.verify(console, times(1)).println("\t1. Zootopia | 2016 | Byron Howard & Rich Moore | 9.2");
+        inOrder.verify(console, times(1)).println("\t2. The Jungle Book | 2016 | Jon Favreau | 7.9");
     }
 }

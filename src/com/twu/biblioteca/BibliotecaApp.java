@@ -186,6 +186,13 @@ public class BibliotecaApp {
     }
 
     public void displayMovieListInfo() {
-        console.println("Book List:");
+        console.println("Movie List:");
+
+        listAvailableMovies();
+    }
+
+    private void listAvailableMovies() {
+        console.println("\t1. Zootopia | 2016 | Byron Howard & Rich Moore | 9.2");
+        console.println("\t2. The Jungle Book | 2016 | Jon Favreau | 7.9");
     }
 }
