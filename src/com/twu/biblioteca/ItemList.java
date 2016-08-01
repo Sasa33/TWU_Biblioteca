@@ -63,7 +63,7 @@ public class ItemList<T> {
         this.checkedOutItems = remainingCheckedOutItems;
     }
 
-    public boolean checkIfBookCanBeReturned(int chosen) {
+    public boolean checkIfItemCanBeReturned(int chosen) {
         return chosen > 0 && chosen <= this.checkedOutItems.size();
     }
 }

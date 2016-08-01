@@ -180,7 +180,7 @@ public class BibliotecaApp {
         while (true) {
             int selection = whichBookToRetrun();
 
-            if (this.bookList.checkIfBookCanBeReturned(selection)) {
+            if (this.bookList.checkIfItemCanBeReturned(selection)) {
                 this.bookList.returnItem(selection);
                 console.println("Thank you for returning the book!");
                 break;
@@ -246,7 +246,7 @@ public class BibliotecaApp {
         while (true) {
             int selection = whichMovieToRetrun();
 
-            if (this.movieList.checkIfBookCanBeReturned(selection)) {
+            if (this.movieList.checkIfItemCanBeReturned(selection)) {
                 this.movieList.returnItem(selection);
                 console.println("Thank you for returning the movie!");
                 break;
