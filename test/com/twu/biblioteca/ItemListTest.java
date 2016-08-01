@@ -1,7 +1,9 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.MovieRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,6 +18,9 @@ public class ItemListTest {
     private ItemList<Book> bookList;
     private BookRepository repository;
     private List<Book> books;
+    private ItemList<Movie> movieList;
+    private MovieRepository movieRepository;
+    private List<Movie> movies;
 
     @Before
     public void setUp() {
@@ -24,9 +29,13 @@ public class ItemListTest {
 
         books = asList(book1, book2);
 
+        Movie movie1 = mock(Movie.class);
+        Movie movie2 = mock(Movie.class);
 
+        movies = asList(movie1, movie2);
 
         repository = mock(BookRepository.class);
+        movieRepository = mock(MovieRepository.class);
     }
 
     @Test
@@ -115,5 +124,18 @@ public class ItemListTest {
         assertEquals(availableBooks2.get(1), books.get(0));
 
         assertEquals(checkedOutBooks2.isEmpty(), true);
+    }
+
+    @Test
+    public void should_get_all_the_movies_when_getAvailableItems_method_is_called() {
+        when(movieRepository.getAllMovies()).thenReturn(movies);
+
+        movieList = new ItemList<Movie>(movieRepository.getAllMovies());
+
+        List<Movie> availableMovies = movieList.getAvailableItems();
+
+        assertEquals(availableMovies.size(), 2);
+        assertEquals(availableMovies.get(0), movies.get(0));
+        assertEquals(availableMovies.get(1), movies.get(1));
     }
 }
