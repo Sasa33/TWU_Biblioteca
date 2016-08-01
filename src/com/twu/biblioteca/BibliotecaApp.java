@@ -79,10 +79,11 @@ public class BibliotecaApp {
         Option option1 = new ListBooksOption(1, "List Books");
         Option option2 = new CheckoutBookOption(2, "Checkout Book");
         Option option3 = new ReturnBookOption(3, "Return Book");
-        Option option4 = new ReturnBookOption(4, "Checkout Movie");
-        Option option5 = new ReturnBookOption(5, "Return Movie");
-        Option option6 = new QuitOption(4, "Quit");
-        Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6));
+        Option option4 = new ListMovieOption(4, "List Movies");
+        Option option5 = new CheckoutMovieption(5, "Checkout Movie");
+        Option option6 = new ReturnMovieOption(6, "Return Movie");
+        Option option7 = new QuitOption(7, "Quit");
+        Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7));
 
         BibliotecaApp app = new BibliotecaApp(console, menu);
         app.startWithMenu();
