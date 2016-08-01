@@ -221,6 +221,23 @@ public class BibliotecaApp {
     }
 
     public void checkoutMovie() {
+        while(true) {
+            int selection = whichMovieToCheckout();
 
+            if(this.movieList.checkIfItemExits(selection)) {
+                this.movieList.checkoutItem(selection);
+                console.println("Thank you! Enjoy the movie!");
+                break;
+            } else {
+                console.println("That movie is not available. Please choose again!");
+            }
+        }
+    }
+
+    private int whichMovieToCheckout() {
+        console.println("Which movie do you want to checkout:");
+        listAvailableMovies();
+
+        return console.getNextInt();
     }
 }
