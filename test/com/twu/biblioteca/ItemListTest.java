@@ -138,4 +138,28 @@ public class ItemListTest {
         assertEquals(availableMovies.get(0), movies.get(0));
         assertEquals(availableMovies.get(1), movies.get(1));
     }
+
+    @Test
+    public void should_put_a_movie_into_the_checkedOutMovie_list_when_a_movie_is_checked_out() {
+        when(movieRepository.getAllMovies()).thenReturn(movies);
+
+        movieList = new ItemList<Movie>(movieRepository.getAllMovies());
+        List<Movie> availableMovies = movieList.getAvailableItems();
+
+        int chosen = 1;
+        movieList.checkoutBook(chosen);
+
+        List<Movie> availableMovies2 = movieList.getAvailableItems();
+        List<Movie> checkedOutMovies = movieList.getCheckedOutItems();
+
+        assertEquals(availableMovies.size(), 2);
+        assertEquals(availableMovies.get(0), movies.get(0));
+        assertEquals(availableMovies.get(1), movies.get(1));
+
+        assertEquals(availableMovies2.size(), 1);
+        assertEquals(availableMovies2.get(0), movies.get(1));
+
+        assertEquals(checkedOutMovies.size(), 1);
+        assertEquals(checkedOutMovies.get(0), movies.get(0));
+    }
 }
