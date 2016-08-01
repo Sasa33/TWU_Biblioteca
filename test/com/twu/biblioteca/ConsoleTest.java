@@ -49,4 +49,13 @@ public class ConsoleTest {
 
         assertEquals(1, console.getNextInt());
     }
+
+    @Test
+    public void should_getNextString_correctly() throws IOException {
+        String expected = "test input";
+
+        when(reader.readLine()).thenReturn(expected);
+
+        assertEquals(expected, console.getNextString());
+    }
 }

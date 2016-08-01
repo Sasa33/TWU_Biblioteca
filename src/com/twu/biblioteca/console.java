@@ -29,4 +29,13 @@ public class Console {
     public void println(String message) {
         printStream.println(message);
     }
+
+    public String getNextString() {
+        try {
+            return (reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
