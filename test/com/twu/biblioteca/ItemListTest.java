@@ -162,4 +162,15 @@ public class ItemListTest {
         assertEquals(checkedOutMovies.size(), 1);
         assertEquals(checkedOutMovies.get(0), movies.get(0));
     }
+
+    @Test
+    public void should_return_false_if_there_is_no_item_can_be_returned() {
+        when(repository.getAllBooks()).thenReturn(books);
+
+        bookList = new ItemList<Book>(repository.getAllBooks());
+
+        boolean isAnyBookCanBeReturned = bookList.isAnyItemCanBeReturned();
+
+        assertEquals(false, isAnyBookCanBeReturned);
+    }
 }

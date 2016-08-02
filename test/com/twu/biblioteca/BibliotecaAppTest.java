@@ -277,8 +277,8 @@ public class BibliotecaAppTest {
 
         app.login();
 
-        inOrder.verify(console, times(1)).println("Library Number: ");
-        inOrder.verify(console, times(1)).println("Password: ");
+        inOrder.verify(console, times(1)).print("Library Number: ");
+        inOrder.verify(console, times(1)).print("Password: ");
 
         inOrder.verify(console, times(1)).println("Login successful!");
 

@@ -66,4 +66,8 @@ public class ItemList<T> {
     public boolean checkIfItemCanBeReturned(int chosen) {
         return chosen > 0 && chosen <= this.checkedOutItems.size();
     }
+
+    public boolean isAnyItemCanBeReturned() {
+        return !this.checkedOutItems.isEmpty();
+    }
 }
