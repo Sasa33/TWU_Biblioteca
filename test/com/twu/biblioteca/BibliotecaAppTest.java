@@ -167,7 +167,7 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        ItemList bookList = mock(ItemList.class);
+        ItemManager bookList = mock(ItemManager.class);
         when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
 
         app = new BibliotecaApp(console, menu, bookList);
@@ -185,7 +185,7 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        ItemList bookList = mock(ItemList.class);
+        ItemManager bookList = mock(ItemManager.class);
         when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(1);
         when(bookList.checkIfItemCanBeReturned(1)).thenReturn(true);
@@ -219,7 +219,7 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        ItemList bookList = mock(ItemList.class);
+        ItemManager bookList = mock(ItemManager.class);
         when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(3, 1);
         when(bookList.checkIfItemCanBeReturned(1)).thenReturn(false, true);
@@ -304,13 +304,13 @@ public class BibliotecaAppTest {
         Movie movie2 = new Movie("movie2", "year2", "author2", "rating2");
         MovieRepository repository = new MovieRepository(asList(movie1, movie2));
 
-        ItemList movieList = mock(ItemList.class);
+        ItemManager movieList = mock(ItemManager.class);
         when(movieList.getCheckedOutItems()).thenReturn(repository.getAllMovies());
         when(console.getNextInt()).thenReturn(4, 1);
         when(movieList.checkIfItemCanBeReturned(1)).thenReturn(false, true);
         when(movieList.isAnyItemCanBeReturned()).thenReturn(true);
 
-        ItemList bookList = mock(ItemList.class);
+        ItemManager bookList = mock(ItemManager.class);
 
         app = new BibliotecaApp(console, menu, bookList, movieList);
 

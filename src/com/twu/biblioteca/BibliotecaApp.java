@@ -17,10 +17,10 @@ import static java.util.Arrays.asList;
 
 public class BibliotecaApp {
     private Console console;
-    private ItemList<Book> bookList;
+    private ItemManager<Book> bookItemManager;
     private Menu menu;
     private boolean quit = Boolean.FALSE;
-    private ItemList<Movie> movieList;
+    private ItemManager<Movie> movieItemManager;
     private User currentUser;
 
     public BibliotecaApp(Console console) {
@@ -31,7 +31,7 @@ public class BibliotecaApp {
 
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        this.bookList = new ItemList<Book>(repository.getAllBooks());
+        this.bookItemManager = new ItemManager<Book>(repository.getAllBooks());
 
 
         Option option1 = new ListBooksOption(1, "List Books");
@@ -46,32 +46,32 @@ public class BibliotecaApp {
 
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        this.bookList = new ItemList<Book>(repository.getAllBooks());
+        this.bookItemManager = new ItemManager<Book>(repository.getAllBooks());
 
         Movie movie1 = new Movie("Zootopia", "2016", "Byron Howard & Rich Moore", "9.2");
         Movie movie2 = new Movie("The Jungle Book", "2016", "Jon Favreau", "7.9");
         MovieRepository movieRepository = new MovieRepository(asList(movie1, movie2));
 
-        this.movieList = new ItemList<Movie>(movieRepository.getAllMovies());
+        this.movieItemManager = new ItemManager<Movie>(movieRepository.getAllMovies());
 
         this.menu = menu;
     }
 
-    public BibliotecaApp(Console console, Menu menu, ItemList<Book> itemList) {
+    public BibliotecaApp(Console console, Menu menu, ItemManager<Book> itemManager) {
         this.console = console;
 
         this.menu = menu;
 
-        this.bookList = itemList;
+        this.bookItemManager = itemManager;
     }
 
-    public BibliotecaApp(Console console, Menu menu, ItemList<Book> itemList, ItemList<Movie> movieList) {
+    public BibliotecaApp(Console console, Menu menu, ItemManager<Book> itemManager, ItemManager<Movie> movieItemManager) {
         this.console = console;
 
         this.menu = menu;
 
-        this.bookList = itemList;
-        this.movieList = movieList;
+        this.bookItemManager = itemManager;
+        this.movieItemManager = movieItemManager;
     }
 
     public void setMenu(Menu menu) {
@@ -154,7 +154,7 @@ public class BibliotecaApp {
     }
 
     private void listAvailableBooks() {
-        List<Book> availableBooks = bookList.getAvailableItems();
+        List<Book> availableBooks = bookItemManager.getAvailableItems();
 
         for (int i = 0; i < availableBooks.size(); i++) {
             String listItem = "\t" + ( i + 1 ) + ". " + availableBooks.get(i).getDetails();
@@ -171,11 +171,11 @@ public class BibliotecaApp {
     public void checkoutBook() {
         if (currentUser != null) {
             while(true) {
-                if (bookList.isAnyItemCanBeCheckedout()) {
+                if (bookItemManager.isAnyItemCanBeCheckedout()) {
                     int selection = whichBookToCheckout();
 
-                    if(this.bookList.checkIfItemExits(selection)) {
-                        this.bookList.checkoutItem(selection);
+                    if(this.bookItemManager.checkIfItemExits(selection)) {
+                        this.bookItemManager.checkoutItem(selection);
                         console.println("Thank you! Enjoy the book!");
                         break;
                     } else {
@@ -204,11 +204,11 @@ public class BibliotecaApp {
     public void returnBook() {
         if (currentUser != null) {
             while (true) {
-                if (bookList.isAnyItemCanBeReturned()) {
+                if (bookItemManager.isAnyItemCanBeReturned()) {
                     int selection = whichBookToRetrun();
 
-                    if (this.bookList.checkIfItemCanBeReturned(selection)) {
-                        this.bookList.returnItem(selection);
+                    if (this.bookItemManager.checkIfItemCanBeReturned(selection)) {
+                        this.bookItemManager.returnItem(selection);
                         console.println("Thank you for returning the book!");
                         break;
                     } else {
@@ -235,7 +235,7 @@ public class BibliotecaApp {
     }
 
     public void listCheckedOutBooks() {
-        List<Book> checkedOutBooks = bookList.getCheckedOutItems();
+        List<Book> checkedOutBooks = bookItemManager.getCheckedOutItems();
 
         for (int i = 0; i < checkedOutBooks.size(); i++) {
             String listItem = "\t" + ( i + 1 ) + ". " + checkedOutBooks.get(i).getDetails();
@@ -250,7 +250,7 @@ public class BibliotecaApp {
     }
 
     private void listAvailableMovies() {
-        List<Movie> availableMovies = movieList.getAvailableItems();
+        List<Movie> availableMovies = movieItemManager.getAvailableItems();
 
         for (int i = 0; i < availableMovies.size(); i++) {
             String listItem = "\t" + ( i + 1 ) + ". " + availableMovies.get(i).getDetails();
@@ -261,11 +261,11 @@ public class BibliotecaApp {
     public void checkoutMovie() {
         if (currentUser != null) {
             while(true) {
-                if (movieList.isAnyItemCanBeCheckedout()) {
+                if (movieItemManager.isAnyItemCanBeCheckedout()) {
                     int selection = whichMovieToCheckout();
 
-                    if(this.movieList.checkIfItemExits(selection)) {
-                        this.movieList.checkoutItem(selection);
+                    if(this.movieItemManager.checkIfItemExits(selection)) {
+                        this.movieItemManager.checkoutItem(selection);
                         console.println("Thank you! Enjoy the movie!");
                         break;
                     } else {
@@ -294,11 +294,11 @@ public class BibliotecaApp {
     public void returnMovie() {
         if (currentUser != null) {
             while (true) {
-                if (movieList.isAnyItemCanBeReturned()) {
+                if (movieItemManager.isAnyItemCanBeReturned()) {
                     int selection = whichMovieToRetrun();
 
-                    if (this.movieList.checkIfItemCanBeReturned(selection)) {
-                        this.movieList.returnItem(selection);
+                    if (this.movieItemManager.checkIfItemCanBeReturned(selection)) {
+                        this.movieItemManager.returnItem(selection);
                         console.println("Thank you for returning the movie!");
                         break;
                     } else {
@@ -325,7 +325,7 @@ public class BibliotecaApp {
     }
 
     private void listCheckedOutMovies() {
-        List<Movie> checkedOutMovies = movieList.getCheckedOutItems();
+        List<Movie> checkedOutMovies = movieItemManager.getCheckedOutItems();
 
         for (int i = 0; i < checkedOutMovies.size(); i++) {
             String listItem = "\t" + ( i + 1 ) + ". " + checkedOutMovies.get(i).getDetails();

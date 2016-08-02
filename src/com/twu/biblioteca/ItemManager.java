@@ -3,11 +3,11 @@ package com.twu.biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemList<T> {
+public class ItemManager<T> {
     private List<T> availableItems;
     private List<T> checkedOutItems;
 
-    public ItemList(List<T> items) {
+    public ItemManager(List<T> items) {
         this.availableItems = items;
         this.checkedOutItems = new ArrayList<T>();
     }

@@ -14,11 +14,11 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ItemListTest {
-    private ItemList<Book> bookList;
+public class ItemManagerTest {
+    private ItemManager<Book> bookItemManager;
     private BookRepository repository;
     private List<Book> books;
-    private ItemList<Movie> movieList;
+    private ItemManager<Movie> movieItemManager;
     private MovieRepository movieRepository;
     private List<Movie> movies;
 
@@ -42,9 +42,9 @@ public class ItemListTest {
     public void should_get_all_the_books_when_book_list_option_is_chosen() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new ItemList<Book>(repository.getAllBooks());
+        bookItemManager = new ItemManager<Book>(repository.getAllBooks());
 
-        List<Book> availableBooks = bookList.getAvailableItems();
+        List<Book> availableBooks = bookItemManager.getAvailableItems();
 
         assertEquals(availableBooks.size(), 2);
         assertEquals(availableBooks.get(0), books.get(0));
@@ -55,14 +55,14 @@ public class ItemListTest {
     public void should_checkout_a_book_successfully_when_checkoutBook_method_is_called() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new ItemList<Book>(repository.getAllBooks());
+        bookItemManager = new ItemManager<Book>(repository.getAllBooks());
 
-        List<Book> availableBooks = bookList.getAvailableItems();
+        List<Book> availableBooks = bookItemManager.getAvailableItems();
 
         int chosen = 1;
-        bookList.checkoutItem(chosen);
+        bookItemManager.checkoutItem(chosen);
 
-        List<Book> availableBooks2 = bookList.getAvailableItems();
+        List<Book> availableBooks2 = bookItemManager.getAvailableItems();
 
         assertEquals(availableBooks.size(), 2);
         assertEquals(availableBooks.get(0), books.get(0));
@@ -76,14 +76,14 @@ public class ItemListTest {
     public void should_put_a_book_into_the_checkedOutBooks_list_when_a_book_is_checked_out() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new ItemList<Book>(repository.getAllBooks());
-        List<Book> availableBooks = bookList.getAvailableItems();
+        bookItemManager = new ItemManager<Book>(repository.getAllBooks());
+        List<Book> availableBooks = bookItemManager.getAvailableItems();
 
         int chosen = 1;
-        bookList.checkoutItem(chosen);
+        bookItemManager.checkoutItem(chosen);
 
-        List<Book> availableBooks2 = bookList.getAvailableItems();
-        List<Book> checkedOutBooks = bookList.getCheckedOutItems();
+        List<Book> availableBooks2 = bookItemManager.getAvailableItems();
+        List<Book> checkedOutBooks = bookItemManager.getCheckedOutItems();
 
         assertEquals(availableBooks.size(), 2);
         assertEquals(availableBooks.get(0), books.get(0));
@@ -100,18 +100,18 @@ public class ItemListTest {
     public void should_put_a_book_back_to_availableBooks_after_a_book_is_returned() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new ItemList<Book>(repository.getAllBooks());
+        bookItemManager = new ItemManager<Book>(repository.getAllBooks());
 
         int chosen = 1;
-        bookList.checkoutItem(chosen);
+        bookItemManager.checkoutItem(chosen);
 
-        List<Book> checkedOutBooks = bookList.getCheckedOutItems();
+        List<Book> checkedOutBooks = bookItemManager.getCheckedOutItems();
 
         int index = 1;
-        bookList.returnItem(index);
+        bookItemManager.returnItem(index);
 
-        List<Book> availableBooks2 = bookList.getAvailableItems();
-        List<Book> checkedOutBooks2 = bookList.getCheckedOutItems();
+        List<Book> availableBooks2 = bookItemManager.getAvailableItems();
+        List<Book> checkedOutBooks2 = bookItemManager.getCheckedOutItems();
 
 
         // after check out the first book
@@ -130,9 +130,9 @@ public class ItemListTest {
     public void should_get_all_the_movies_when_getAvailableItems_method_is_called() {
         when(movieRepository.getAllMovies()).thenReturn(movies);
 
-        movieList = new ItemList<Movie>(movieRepository.getAllMovies());
+        movieItemManager = new ItemManager<Movie>(movieRepository.getAllMovies());
 
-        List<Movie> availableMovies = movieList.getAvailableItems();
+        List<Movie> availableMovies = movieItemManager.getAvailableItems();
 
         assertEquals(availableMovies.size(), 2);
         assertEquals(availableMovies.get(0), movies.get(0));
@@ -143,14 +143,14 @@ public class ItemListTest {
     public void should_put_a_movie_into_the_checkedOutMovie_list_when_a_movie_is_checked_out() {
         when(movieRepository.getAllMovies()).thenReturn(movies);
 
-        movieList = new ItemList<Movie>(movieRepository.getAllMovies());
-        List<Movie> availableMovies = movieList.getAvailableItems();
+        movieItemManager = new ItemManager<Movie>(movieRepository.getAllMovies());
+        List<Movie> availableMovies = movieItemManager.getAvailableItems();
 
         int chosen = 1;
-        movieList.checkoutItem(chosen);
+        movieItemManager.checkoutItem(chosen);
 
-        List<Movie> availableMovies2 = movieList.getAvailableItems();
-        List<Movie> checkedOutMovies = movieList.getCheckedOutItems();
+        List<Movie> availableMovies2 = movieItemManager.getAvailableItems();
+        List<Movie> checkedOutMovies = movieItemManager.getCheckedOutItems();
 
         assertEquals(availableMovies.size(), 2);
         assertEquals(availableMovies.get(0), movies.get(0));
@@ -167,9 +167,9 @@ public class ItemListTest {
     public void should_return_false_if_there_is_no_item_can_be_returned() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new ItemList<Book>(repository.getAllBooks());
+        bookItemManager = new ItemManager<Book>(repository.getAllBooks());
 
-        boolean isAnyBookCanBeReturned = bookList.isAnyItemCanBeReturned();
+        boolean isAnyBookCanBeReturned = bookItemManager.isAnyItemCanBeReturned();
 
         assertEquals(false, isAnyBookCanBeReturned);
     }
@@ -178,16 +178,16 @@ public class ItemListTest {
     public void should_return_false_if_there_is_no_item_can_be_checkedout() {
         when(repository.getAllBooks()).thenReturn(books);
 
-        bookList = new ItemList<Book>(repository.getAllBooks());
+        bookItemManager = new ItemManager<Book>(repository.getAllBooks());
         int chosen = 1;
-        bookList.checkoutItem(chosen);
-        bookList.checkoutItem(chosen); // checkout two books
+        bookItemManager.checkoutItem(chosen);
+        bookItemManager.checkoutItem(chosen); // checkout two books
 
-        List<Book> availableBooks = bookList.getAvailableItems();
+        List<Book> availableBooks = bookItemManager.getAvailableItems();
 
         assertEquals(availableBooks.size(), 0);
 
-        boolean isAnyBookCanBeCheckedout = bookList.isAnyItemCanBeCheckedout();
+        boolean isAnyBookCanBeCheckedout = bookItemManager.isAnyItemCanBeCheckedout();
 
         assertEquals(false, isAnyBookCanBeCheckedout);
     }
