@@ -2,12 +2,15 @@ package com.twu.biblioteca.repository;
 
 import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.repository.BookRepository;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class BookRepositoryTest {
     private BookRepository repository;
@@ -21,10 +24,30 @@ public class BookRepositoryTest {
 
         List<Book> books = repository.getAllBooks();
 
-
         assertEquals(books.size(), 2);
         assertEquals(books.get(0).getTitle(), "Head First Java");
         assertEquals(books.get(1).getTitle(), "Refactoring");
     }
 
+    @Test
+    public void should_get_books_according_to_isCheckedOut_or_not() {
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        when(book1.getTitle()).thenReturn("book1");
+        when(book2.getTitle()).thenReturn("book2");
+
+        when(book1.isCheckedOut()).thenReturn(true);
+        when(book2.isCheckedOut()).thenReturn(false);
+
+        repository = new BookRepository(asList(book1, book2));
+
+        List<Book> availableBooks = repository.getAvailableBooks();
+        List<Book> checkedOutBooks = repository.getCheckedOutBooks();
+
+        assertEquals(1, availableBooks.size());
+        assertEquals("book1", availableBooks.get(0).getTitle());
+
+        assertEquals(1, checkedOutBooks.size());
+        assertEquals("book2", checkedOutBooks.get(0).getTitle());
+    }
 }

@@ -4,6 +4,7 @@ public class Book {
     private String title;
     private String author;
     private String publishYear;
+    private boolean checkedOut;
 
     public Book(String title, String author, String year) {
         this.title = title;
@@ -37,5 +38,9 @@ public class Book {
 
     public String getDetails() {
         return this.getTitle() + " | " + this.getAuthor() + " | " + this.getPublishYear();
+    }
+
+    public boolean isCheckedOut() {
+        return checkedOut;
     }
 }
