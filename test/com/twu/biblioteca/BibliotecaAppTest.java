@@ -30,7 +30,7 @@ public class BibliotecaAppTest {
         Option option2 = mock(Option.class);
 
         List<Option> options = asList(option1, option2);
-        when(option1.getOptionInfo()).thenReturn("1. List Books");
+        when(option1.getOptionInfo()).thenReturn("1. Login");
         when(option2.getOptionInfo()).thenReturn("2. Quit");
 
         menu = mock(Menu.class);
@@ -66,7 +66,7 @@ public class BibliotecaAppTest {
 
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
-        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Quit");
+        inOrder.verify(console, times(1)).println("Menu: 1. Login | 2. Quit");
         inOrder.verify(console, times(1)).println("=====================================================================");
     }
 
@@ -279,6 +279,8 @@ public class BibliotecaAppTest {
 
         inOrder.verify(console, times(1)).println("Library Number: ");
         inOrder.verify(console, times(1)).println("Password: ");
+
+        inOrder.verify(console, times(1)).println("Login successful!");
 
         app.showUserInfo();
 

@@ -304,8 +304,8 @@ public class BibliotecaApp {
                 }
             }
 
-
             if (login) {
+                console.println("Login successful!");
                 break;
             } else {
                 console.println("No such user or bad password, please login again!");
