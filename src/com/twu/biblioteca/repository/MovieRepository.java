@@ -33,4 +33,17 @@ public class MovieRepository {
     public List<Movie> getCheckedOutMovies() {
         return checkedOutMovies;
     }
+
+    public List<Movie> findBooksByOwnerNumber(String userNumber) {
+        List<Movie> result = new ArrayList<Movie>();
+
+        for (Movie movie : this.movies) {
+            String owner = movie.getOwner();
+            if (owner.equals(userNumber)) {
+                result.add(movie);
+            }
+        }
+
+        return result;
+    }
 }

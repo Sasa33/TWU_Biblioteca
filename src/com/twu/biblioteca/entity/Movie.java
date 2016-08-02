@@ -6,6 +6,7 @@ public class Movie {
     private String director;
     private String rating;
     private boolean checkedOut;
+    private String owner;
 
     public Movie(String name, String year, String director, String rating) {
         this.name = name;
@@ -36,5 +37,9 @@ public class Movie {
 
     public boolean isCheckedOut() {
         return checkedOut;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }

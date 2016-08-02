@@ -52,4 +52,28 @@ public class MovieRepositoryTest {
         assertEquals(1, checkedOutMovies.size());
         assertEquals("movie1", checkedOutMovies.get(0).getName());
     }
+
+    @Test
+    public void should_find_books_by_owned_user_number() {
+        Movie movie1 = mock(Movie.class);
+        Movie movie2 = mock(Movie.class);
+        Movie movie3 = mock(Movie.class);
+        when(movie1.getName()).thenReturn("movie1");
+        when(movie2.getName()).thenReturn("movie2");
+        when(movie3.getName()).thenReturn("movie3");
+
+        String user1Number = "000-0001";
+        String user2Number = "000-0002";
+
+        when(movie1.getOwner()).thenReturn(user1Number);
+        when(movie2.getOwner()).thenReturn(user2Number);
+        when(movie3.getOwner()).thenReturn("");
+
+        repository = new MovieRepository(asList(movie1, movie2, movie3));
+
+        List<Movie> books = repository.findBooksByOwnerNumber(user1Number);
+
+        assertEquals(1, books.size());
+        assertEquals("movie1", books.get(0).getName());
+    }
 }
