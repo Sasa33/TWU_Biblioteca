@@ -30,7 +30,12 @@ public class IntegrationTest {
 
     @Test
     public void should_test_the_whole_functionality_of_this_app() {
-        when(console.getNextInt()).thenReturn(1, 2, 1, 3, 2, 1, 1, 4);
+        when(console.getNextInt()).thenReturn(1, 2, 1, 3, 2, 1, 1, 8);
+
+        String expectedNumber = "000-0001";
+        String expectedPassword = "123456";
+        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+
 
         app.startWithMenu();
 
@@ -49,6 +54,12 @@ public class IntegrationTest {
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. Quit");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
+        // login before checkout
+        inOrder.verify(console, times(1)).println("Please login first...");
+        inOrder.verify(console, times(1)).print("Library Number: ");
+        inOrder.verify(console, times(1)).print("Password: ");
+
+        inOrder.verify(console, times(1)).println("Login successful!");
 
         // check out an book
         inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
@@ -60,7 +71,8 @@ public class IntegrationTest {
 
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
-        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. Quit");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
 
@@ -78,7 +90,8 @@ public class IntegrationTest {
 
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
-        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. Quit");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
 

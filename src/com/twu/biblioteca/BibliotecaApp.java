@@ -84,8 +84,14 @@ public class BibliotecaApp {
 //        app.start();
 
         Option option1 = new LoginOption(1, "Login");
-        Option option2 = new QuitOption(2, "Quit");
-        Menu menu = new Menu(asList(option1, option2));
+        Option option2 = new ListBooksOption(2, "List Books");
+        Option option3 = new CheckoutBookOption(3, "Checkout Book");
+        Option option4 = new ReturnBookOption(4, "Return Book");
+        Option option5 = new ListMovieOption(5, "List Movies");
+        Option option6 = new CheckoutMovieption(6, "Checkout Movie");
+        Option option7 = new ReturnMovieOption(7, "Return Movie");
+        Option option8 = new QuitOption(8, "Quit");
+        Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7, option8));
 
         BibliotecaApp app = new BibliotecaApp(console, menu);
         app.startWithMenu();
@@ -163,20 +169,27 @@ public class BibliotecaApp {
     }
 
     public void checkoutBook() {
-        while(true) {
-            if (bookList.isAnyItemCanBeCheckedout()) {
-                int selection = whichBookToCheckout();
+        if (currentUser != null) {
+            while(true) {
+                if (bookList.isAnyItemCanBeCheckedout()) {
+                    int selection = whichBookToCheckout();
 
-                if(this.bookList.checkIfItemExits(selection)) {
-                    this.bookList.checkoutItem(selection);
-                    console.println("Thank you! Enjoy the book!");
-                    break;
+                    if(this.bookList.checkIfItemExits(selection)) {
+                        this.bookList.checkoutItem(selection);
+                        console.println("Thank you! Enjoy the book!");
+                        break;
+                    } else {
+                        console.println("That book is not available. Please choose again!");
+                    }
                 } else {
-                    console.println("That book is not available. Please choose again!");
+                    console.println("Currently, there is no book that can be checked out.");
+                    break;
                 }
-            } else {
-                console.println("Currently, there is no book that can be checked out.");
-                break;
+            }
+        } else {
+            console.println("Please login first...");
+            if (login()) {
+                checkoutBook();
             }
         }
     }
@@ -189,20 +202,27 @@ public class BibliotecaApp {
     }
 
     public void returnBook() {
-        while (true) {
-            if (bookList.isAnyItemCanBeReturned()) {
-                int selection = whichBookToRetrun();
+        if (currentUser != null) {
+            while (true) {
+                if (bookList.isAnyItemCanBeReturned()) {
+                    int selection = whichBookToRetrun();
 
-                if (this.bookList.checkIfItemCanBeReturned(selection)) {
-                    this.bookList.returnItem(selection);
-                    console.println("Thank you for returning the book!");
-                    break;
+                    if (this.bookList.checkIfItemCanBeReturned(selection)) {
+                        this.bookList.returnItem(selection);
+                        console.println("Thank you for returning the book!");
+                        break;
+                    } else {
+                        console.println("That is not a valid book to return. Please choose again!");
+                    }
                 } else {
-                    console.println("That is not a valid book to return. Please choose again!");
+                    console.println("Currently, there is no book that can be returned.");
+                    break;
                 }
-            } else {
-                console.println("Currently, there is no book that can be returned.");
-                break;
+            }
+        } else {
+            console.println("Please login first...");
+            if (login()) {
+                returnBook();
             }
         }
     }
@@ -239,20 +259,27 @@ public class BibliotecaApp {
     }
 
     public void checkoutMovie() {
-        while(true) {
-            if (movieList.isAnyItemCanBeCheckedout()) {
-                int selection = whichMovieToCheckout();
+        if (currentUser != null) {
+            while(true) {
+                if (movieList.isAnyItemCanBeCheckedout()) {
+                    int selection = whichMovieToCheckout();
 
-                if(this.movieList.checkIfItemExits(selection)) {
-                    this.movieList.checkoutItem(selection);
-                    console.println("Thank you! Enjoy the movie!");
-                    break;
+                    if(this.movieList.checkIfItemExits(selection)) {
+                        this.movieList.checkoutItem(selection);
+                        console.println("Thank you! Enjoy the movie!");
+                        break;
+                    } else {
+                        console.println("That movie is not available. Please choose again!");
+                    }
                 } else {
-                    console.println("That movie is not available. Please choose again!");
+                    console.println("Currently, there is no book that can be checked out.");
+                    break;
                 }
-            } else {
-                console.println("Currently, there is no book that can be checked out.");
-                break;
+            }
+        } else {
+            console.println("Please login first...");
+            if (login()) {
+                checkoutMovie();
             }
         }
     }
@@ -265,20 +292,27 @@ public class BibliotecaApp {
     }
 
     public void returnMovie() {
-        while (true) {
-            if (movieList.isAnyItemCanBeReturned()) {
-                int selection = whichMovieToRetrun();
+        if (currentUser != null) {
+            while (true) {
+                if (movieList.isAnyItemCanBeReturned()) {
+                    int selection = whichMovieToRetrun();
 
-                if (this.movieList.checkIfItemCanBeReturned(selection)) {
-                    this.movieList.returnItem(selection);
-                    console.println("Thank you for returning the movie!");
-                    break;
+                    if (this.movieList.checkIfItemCanBeReturned(selection)) {
+                        this.movieList.returnItem(selection);
+                        console.println("Thank you for returning the movie!");
+                        break;
+                    } else {
+                        console.println("That is not a valid movie to return. Please choose again!");
+                    }
                 } else {
-                    console.println("That is not a valid movie to return. Please choose again!");
+                    console.println("Currently, there is no book that can be checked out.");
+                    break;
                 }
-            } else {
-                console.println("Currently, there is no book that can be checked out.");
-                break;
+            }
+        } else {
+            console.println("Please login first...");
+            if (login()) {
+                returnMovie();
             }
         }
     }
@@ -307,7 +341,7 @@ public class BibliotecaApp {
         }
     }
 
-    public void login() {
+    public boolean login() {
         while (true) {
             console.print("Library Number: ");
             String number = console.getNextString();
@@ -348,5 +382,6 @@ public class BibliotecaApp {
                 console.println("No such user or bad password, please login again!");
             }
         }
+        return true;
     }
 }
