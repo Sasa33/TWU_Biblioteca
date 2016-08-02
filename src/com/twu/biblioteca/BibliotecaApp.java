@@ -276,27 +276,39 @@ public class BibliotecaApp {
     }
 
     public void showUserInfo() {
-        console.println("Name: " + currentUser.getName());
-        console.println("Email Address: " + currentUser.getEmail());
-        console.println("Phone: " + currentUser.getPhone());
+        if (currentUser != null) {
+            console.println("Name: " + currentUser.getName());
+            console.println("Email Address: " + currentUser.getEmail());
+            console.println("Phone: " + currentUser.getPhone());
+        }
     }
 
     public void login() {
-        console.println("Library Number: ");
-        String number = console.getNextString();
+        while (true) {
+            console.println("Library Number: ");
+            String number = console.getNextString();
 
-        console.println("Password: ");
-        String password = console.getNextString();
+            console.println("Password: ");
+            String password = console.getNextString();
 
-        UserRepository userRepository = new UserRepository();
+            UserRepository userRepository = new UserRepository();
 
-        List<User> users = userRepository.getAllUsers();
+            List<User> users = userRepository.getAllUsers();
 
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            if (number.equals(user.getNumber()) && password.equals(user.getPassword())) {
-                currentUser = user;
+            boolean login = false;
+            for (User user : users) {
+                if (number.equals(user.getNumber()) && password.equals(user.getPassword())) {
+                    currentUser = user;
+                    login = true;
+                    break;
+                }
+            }
+
+
+            if (login) {
                 break;
+            } else {
+                console.println("No such user or bad password, please login again!");
             }
         }
     }

@@ -286,4 +286,29 @@ public class BibliotecaAppTest {
         inOrder.verify(console, times(1)).println("Email Address: user1@thoughtworks.com");
         inOrder.verify(console, times(1)).println("Phone: 13000000000");
     }
+
+    @Test
+    public void should_show_login_failed_message() {
+        String expectedNumber = "000-0001";
+        String wrongpassword = "wrongpassword";
+        String correctPassword = "123456";
+        when(console.getNextString()).thenReturn(expectedNumber, wrongpassword, expectedNumber, correctPassword);
+
+        app.login();
+
+        inOrder.verify(console, times(1)).println("Library Number: ");
+        inOrder.verify(console, times(1)).println("Password: ");
+
+        inOrder.verify(console, times(1)).println("No such user or bad password, please login again!");
+
+        inOrder.verify(console, times(1)).println("Library Number: ");
+        inOrder.verify(console, times(1)).println("Password: ");
+
+
+        app.showUserInfo();
+
+        inOrder.verify(console, times(1)).println("Name: user1");
+        inOrder.verify(console, times(1)).println("Email Address: user1@thoughtworks.com");
+        inOrder.verify(console, times(1)).println("Phone: 13000000000");
+    }
 }
