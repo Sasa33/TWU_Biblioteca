@@ -136,4 +136,17 @@ public class OptionTest {
 
         verify(app, times(1)).login();
     }
+
+    @Test
+    public void should_call_logout_method_when_logioutOption_is_chosen() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+
+        int optionId = 8;
+        String optionName = "Logout";
+        option = new LogoutOption(optionId, optionName);
+
+        option.execute(app);
+
+        verify(app, times(1)).logout();
+    }
 }
