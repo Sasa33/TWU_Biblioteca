@@ -165,6 +165,7 @@ public class BibliotecaAppTest {
         when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(1);
         when(bookList.checkIfItemCanBeReturned(1)).thenReturn(true);
+        when(bookList.isAnyItemCanBeReturned()).thenReturn(true);
 
         app = new BibliotecaApp(console, menu, bookList);
 
@@ -187,6 +188,7 @@ public class BibliotecaAppTest {
         when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(3, 1);
         when(bookList.checkIfItemCanBeReturned(1)).thenReturn(false, true);
+        when(bookList.isAnyItemCanBeReturned()).thenReturn(true);
 
         app = new BibliotecaApp(console, menu, bookList);
 
@@ -249,6 +251,7 @@ public class BibliotecaAppTest {
         when(movieList.getCheckedOutItems()).thenReturn(repository.getAllMovies());
         when(console.getNextInt()).thenReturn(4, 1);
         when(movieList.checkIfItemCanBeReturned(1)).thenReturn(false, true);
+        when(movieList.isAnyItemCanBeReturned()).thenReturn(true);
 
         ItemList bookList = mock(ItemList.class);
 

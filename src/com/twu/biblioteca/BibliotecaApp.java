@@ -164,14 +164,19 @@ public class BibliotecaApp {
 
     public void checkoutBook() {
         while(true) {
-            int selection = whichBookToCheckout();
+            if (bookList.isAnyItemCanBeCheckedout()) {
+                int selection = whichBookToCheckout();
 
-            if(this.bookList.checkIfItemExits(selection)) {
-                this.bookList.checkoutItem(selection);
-                console.println("Thank you! Enjoy the book!");
-                break;
+                if(this.bookList.checkIfItemExits(selection)) {
+                    this.bookList.checkoutItem(selection);
+                    console.println("Thank you! Enjoy the book!");
+                    break;
+                } else {
+                    console.println("That book is not available. Please choose again!");
+                }
             } else {
-                console.println("That book is not available. Please choose again!");
+                console.println("Currently, there is no book that can be checked out.");
+                break;
             }
         }
     }
@@ -185,14 +190,19 @@ public class BibliotecaApp {
 
     public void returnBook() {
         while (true) {
-            int selection = whichBookToRetrun();
+            if (bookList.isAnyItemCanBeReturned()) {
+                int selection = whichBookToRetrun();
 
-            if (this.bookList.checkIfItemCanBeReturned(selection)) {
-                this.bookList.returnItem(selection);
-                console.println("Thank you for returning the book!");
-                break;
+                if (this.bookList.checkIfItemCanBeReturned(selection)) {
+                    this.bookList.returnItem(selection);
+                    console.println("Thank you for returning the book!");
+                    break;
+                } else {
+                    console.println("That is not a valid book to return. Please choose again!");
+                }
             } else {
-                console.println("That is not a valid book to return. Please choose again!");
+                console.println("Currently, there is no book that can be returned.");
+                break;
             }
         }
     }
@@ -230,14 +240,19 @@ public class BibliotecaApp {
 
     public void checkoutMovie() {
         while(true) {
-            int selection = whichMovieToCheckout();
+            if (movieList.isAnyItemCanBeCheckedout()) {
+                int selection = whichMovieToCheckout();
 
-            if(this.movieList.checkIfItemExits(selection)) {
-                this.movieList.checkoutItem(selection);
-                console.println("Thank you! Enjoy the movie!");
-                break;
+                if(this.movieList.checkIfItemExits(selection)) {
+                    this.movieList.checkoutItem(selection);
+                    console.println("Thank you! Enjoy the movie!");
+                    break;
+                } else {
+                    console.println("That movie is not available. Please choose again!");
+                }
             } else {
-                console.println("That movie is not available. Please choose again!");
+                console.println("Currently, there is no book that can be checked out.");
+                break;
             }
         }
     }
@@ -251,14 +266,19 @@ public class BibliotecaApp {
 
     public void returnMovie() {
         while (true) {
-            int selection = whichMovieToRetrun();
+            if (movieList.isAnyItemCanBeReturned()) {
+                int selection = whichMovieToRetrun();
 
-            if (this.movieList.checkIfItemCanBeReturned(selection)) {
-                this.movieList.returnItem(selection);
-                console.println("Thank you for returning the movie!");
-                break;
+                if (this.movieList.checkIfItemCanBeReturned(selection)) {
+                    this.movieList.returnItem(selection);
+                    console.println("Thank you for returning the movie!");
+                    break;
+                } else {
+                    console.println("That is not a valid movie to return. Please choose again!");
+                }
             } else {
-                console.println("That is not a valid movie to return. Please choose again!");
+                console.println("Currently, there is no book that can be checked out.");
+                break;
             }
         }
     }
