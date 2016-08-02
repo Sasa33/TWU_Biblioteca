@@ -74,6 +74,10 @@ public class BibliotecaApp {
         this.movieList = movieList;
     }
 
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
     public static void main(String[] args) {
         Console console = new Console(new PrintStream(System.out), new BufferedReader(new InputStreamReader(System.in)));
 //        BibliotecaApp app = new BibliotecaApp(console);
@@ -128,7 +132,12 @@ public class BibliotecaApp {
         for (int i = 0; i < options.size(); i++) {
             menus += options.get(i).getOptionInfo();
 
-            if(i < options.size() - 1) {
+            if ((i+1) % 4 == 0 && i < options.size() - 1) {
+                String newLine = System.getProperty("line.separator");
+                menus += newLine;
+                menus += "      ";
+//                menus += "\n      ";
+            } else if(i < options.size() - 1) {
                 menus += " | ";
             }
         }
@@ -306,6 +315,19 @@ public class BibliotecaApp {
 
             if (login) {
                 console.println("Login successful!");
+
+                Option option1 = new ListBooksOption(1, "List Books");
+                Option option2 = new CheckoutBookOption(2, "Checkout Book");
+                Option option3 = new ReturnBookOption(3, "Return Book");
+                Option option4 = new UserInfoOption(4, "User Info");
+                Option option5 = new ListMovieOption(5, "List Movies");
+                Option option6 = new CheckoutMovieption(6, "Checkout Movie");
+                Option option7 = new ReturnMovieOption(7, "Return Movie");
+                Option option8 = new QuitOption(8, "Quit");
+                Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7, option8));
+
+                this.setMenu(menu);
+
                 break;
             } else {
                 console.println("No such user or bad password, please login again!");

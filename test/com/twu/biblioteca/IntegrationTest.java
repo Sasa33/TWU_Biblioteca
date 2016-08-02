@@ -90,4 +90,47 @@ public class IntegrationTest {
         // exit the app
         inOrder.verify(console, times(1)).println("Thank you for coming to the Bangalore Public Library! See you next time.");
     }
+
+    @Test
+    public void integration_test_for_login() {
+        Option option1 = new LoginOption(1, "Login");
+        Option option2 = new QuitOption(2, "Quit");
+        Menu menu = new Menu(asList(option1, option2));
+
+        app = new BibliotecaApp(console, menu);
+
+        when(console.getNextInt()).thenReturn(1, 4, 8);
+        String expectedNumber = "000-0001";
+        String expectedPassword = "123456";
+        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+
+        app.startWithMenu();
+
+        inOrder.verify(console, times(1)).println("Welcome to the Bangalore Public Library!");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. Login | 2. Quit");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        inOrder.verify(console, times(1)).println("Login successful!");
+
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                                                  "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        inOrder.verify(console, times(1)).println("Name: user1");
+        inOrder.verify(console, times(1)).println("Email Address: user1@thoughtworks.com");
+        inOrder.verify(console, times(1)).println("Phone: 13000000000");
+
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                                                  "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        // exit the app
+        inOrder.verify(console, times(1)).println("Thank you for coming to the Bangalore Public Library! See you next time.");
+    }
 }
