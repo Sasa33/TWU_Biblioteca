@@ -173,4 +173,22 @@ public class ItemListTest {
 
         assertEquals(false, isAnyBookCanBeReturned);
     }
+
+    @Test
+    public void should_return_false_if_there_is_no_item_can_be_checkedout() {
+        when(repository.getAllBooks()).thenReturn(books);
+
+        bookList = new ItemList<Book>(repository.getAllBooks());
+        int chosen = 1;
+        bookList.checkoutItem(chosen);
+        bookList.checkoutItem(chosen); // checkout two books
+
+        List<Book> availableBooks = bookList.getAvailableItems();
+
+        assertEquals(availableBooks.size(), 0);
+
+        boolean isAnyBookCanBeCheckedout = bookList.isAnyItemCanBeCheckedout();
+
+        assertEquals(false, isAnyBookCanBeCheckedout);
+    }
 }

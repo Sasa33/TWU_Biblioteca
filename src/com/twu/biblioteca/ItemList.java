@@ -70,4 +70,8 @@ public class ItemList<T> {
     public boolean isAnyItemCanBeReturned() {
         return !this.checkedOutItems.isEmpty();
     }
+
+    public boolean isAnyItemCanBeCheckedout() {
+        return !this.availableItems.isEmpty();
+    }
 }
