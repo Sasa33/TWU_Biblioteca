@@ -384,4 +384,13 @@ public class BibliotecaAppTest {
         inOrder.verify(console, times(1)).println("Email Address: user1@thoughtworks.com");
         inOrder.verify(console, times(1)).println("Phone: 13000000000");
     }
+
+    @Test
+    public void should_show_logout_message() {
+        app.logout();
+
+        inOrder.verify(console, times(1)).println("You are successfully logged out.");
+
+        app.showUserInfo();
+    }
 }
