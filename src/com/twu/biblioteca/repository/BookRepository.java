@@ -33,4 +33,17 @@ public class BookRepository {
     public List<Book> getCheckedOutBooks() {
         return checkedOutBooks;
     }
+
+    public List<Book> findBooksByOwnerNumber(String userNumber) {
+        List<Book> result = new ArrayList<Book>();
+
+        for (Book book : this.books) {
+            String owner = book.getOwner();
+            if (owner.equals(userNumber)) {
+                result.add(book);
+            }
+        }
+
+        return result;
+    }
 }

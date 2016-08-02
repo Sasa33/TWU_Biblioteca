@@ -5,6 +5,7 @@ public class Book {
     private String author;
     private String publishYear;
     private boolean checkedOut;
+    private String owner = "";
 
     public Book(String title, String author, String year) {
         this.title = title;
@@ -42,5 +43,9 @@ public class Book {
 
     public boolean isCheckedOut() {
         return checkedOut;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }

@@ -50,4 +50,28 @@ public class BookRepositoryTest {
         assertEquals(1, checkedOutBooks.size());
         assertEquals("book2", checkedOutBooks.get(0).getTitle());
     }
+
+    @Test
+    public void should_find_books_by_owned_user_number() {
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        Book book3 = mock(Book.class);
+        when(book1.getTitle()).thenReturn("book1");
+        when(book2.getTitle()).thenReturn("book2");
+        when(book3.getTitle()).thenReturn("book2");
+
+        String user1Number = "000-0001";
+        String user2Number = "000-0002";
+
+        when(book1.getOwner()).thenReturn(user1Number);
+        when(book2.getOwner()).thenReturn(user2Number);
+        when(book3.getOwner()).thenReturn("");
+
+        repository = new BookRepository(asList(book1, book2, book3));
+
+        List<Book> books = repository.findBooksByOwnerNumber(user1Number);
+
+        assertEquals(1, books.size());
+        assertEquals("book1", books.get(0).getTitle());
+    }
 }
