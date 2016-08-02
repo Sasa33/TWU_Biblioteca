@@ -83,14 +83,9 @@ public class BibliotecaApp {
 //        BibliotecaApp app = new BibliotecaApp(console);
 //        app.start();
 
-        Option option1 = new ListBooksOption(1, "List Books");
-        Option option2 = new CheckoutBookOption(2, "Checkout Book");
-        Option option3 = new ReturnBookOption(3, "Return Book");
-        Option option4 = new ListMovieOption(4, "List Movies");
-        Option option5 = new CheckoutMovieption(5, "Checkout Movie");
-        Option option6 = new ReturnMovieOption(6, "Return Movie");
-        Option option7 = new QuitOption(7, "Quit");
-        Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7));
+        Option option1 = new LoginOption(1, "Login");
+        Option option2 = new QuitOption(2, "Quit");
+        Menu menu = new Menu(asList(option1, option2));
 
         BibliotecaApp app = new BibliotecaApp(console, menu);
         app.startWithMenu();
@@ -294,10 +289,10 @@ public class BibliotecaApp {
 
     public void login() {
         while (true) {
-            console.println("Library Number: ");
+            console.print("Library Number: ");
             String number = console.getNextString();
 
-            console.println("Password: ");
+            console.print("Password: ");
             String password = console.getNextString();
 
             UserRepository userRepository = new UserRepository();

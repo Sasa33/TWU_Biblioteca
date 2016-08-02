@@ -112,6 +112,9 @@ public class IntegrationTest {
         inOrder.verify(console, times(1)).println("Menu: 1. Login | 2. Quit");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
+        inOrder.verify(console, times(1)).print("Library Number: ");
+        inOrder.verify(console, times(1)).print("Password: ");
+
         inOrder.verify(console, times(1)).println("Login successful!");
 
         inOrder.verify(console, times(1)).println("=====================================================================");
