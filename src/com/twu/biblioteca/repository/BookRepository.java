@@ -13,9 +13,9 @@ public class BookRepository {
     public BookRepository(List<Book> books) {
         for (Book book : books) {
             if (book.isCheckedOut()) {
-                availableBooks.add(book);
-            } else {
                 checkedOutBooks.add(book);
+            } else {
+                availableBooks.add(book);
             }
         }
 

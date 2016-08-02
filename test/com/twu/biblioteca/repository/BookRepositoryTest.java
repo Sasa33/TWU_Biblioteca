@@ -45,10 +45,10 @@ public class BookRepositoryTest {
         List<Book> checkedOutBooks = repository.getCheckedOutBooks();
 
         assertEquals(1, availableBooks.size());
-        assertEquals("book1", availableBooks.get(0).getTitle());
+        assertEquals("book2", availableBooks.get(0).getTitle());
 
         assertEquals(1, checkedOutBooks.size());
-        assertEquals("book2", checkedOutBooks.get(0).getTitle());
+        assertEquals("book1", checkedOutBooks.get(0).getTitle());
     }
 
     @Test
