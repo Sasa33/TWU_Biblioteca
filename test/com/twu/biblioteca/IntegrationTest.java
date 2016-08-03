@@ -72,7 +72,8 @@ public class IntegrationTest {
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
-                                                  "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                        "      9. Logout");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
 
@@ -91,7 +92,8 @@ public class IntegrationTest {
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
-                                                  "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                        "      9. Logout");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
 
@@ -133,7 +135,8 @@ public class IntegrationTest {
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
-                                                  "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                        "      9. Logout");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
         inOrder.verify(console, times(1)).println("Name: user1");
@@ -143,7 +146,8 @@ public class IntegrationTest {
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
-                                                  "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                        "      9. Logout");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
         // exit the app

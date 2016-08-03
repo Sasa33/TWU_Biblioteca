@@ -373,7 +373,8 @@ public class BibliotecaApp {
                 Option option6 = new CheckoutMovieption(6, "Checkout Movie");
                 Option option7 = new ReturnMovieOption(7, "Return Movie");
                 Option option8 = new QuitOption(8, "Quit");
-                Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7, option8));
+                Option option9 = new LogoutOption(9, "Logout");
+                Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7, option8, option9));
 
                 this.setMenu(menu);
 

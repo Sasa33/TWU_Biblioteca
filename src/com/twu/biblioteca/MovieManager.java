@@ -36,7 +36,7 @@ public class MovieManager {
     }
 
     public boolean checkIfMovieExits(int chosen) {
-        return chosen > 0 && chosen <= this.availableMovies.size();
+        return chosen > 0 && chosen <= this.getAvailableMovies().size();
     }
 
     public List<Movie> getCheckedOutMovies() {
@@ -55,14 +55,14 @@ public class MovieManager {
     }
 
     public boolean checkIfMovieCanBeReturned(int chosen) {
-        return chosen > 0 && chosen <= this.checkedOutMovies.size();
+        return chosen > 0 && chosen <= this.getCheckedOutMovies().size();
     }
 
     public boolean isAnyMovieCanBeReturned() {
-        return !this.checkedOutMovies.isEmpty();
+        return !this.getCheckedOutMovies().isEmpty();
     }
 
     public boolean isAnyMovieCanBeCheckedout() {
-        return !this.availableMovies.isEmpty();
+        return !this.getAvailableMovies().isEmpty();
     }
 }
