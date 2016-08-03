@@ -11,14 +11,6 @@ public class BookRepository {
     private List<Book> checkedOutBooks = new ArrayList<Book>();
 
     public BookRepository(List<Book> books) {
-        for (Book book : books) {
-            if (book.isCheckedOut()) {
-                checkedOutBooks.add(book);
-            } else {
-                availableBooks.add(book);
-            }
-        }
-
         this.books = books;
     }
 
@@ -27,10 +19,28 @@ public class BookRepository {
     }
 
     public List<Book> getAvailableBooks() {
+        availableBooks.clear();
+        checkedOutBooks.clear();
+        for (Book book : books) {
+            if (book.isCheckedOut()) {
+                checkedOutBooks.add(book);
+            } else {
+                availableBooks.add(book);
+            }
+        }
         return availableBooks;
     }
 
     public List<Book> getCheckedOutBooks() {
+        availableBooks.clear();
+        checkedOutBooks.clear();
+        for (Book book : books) {
+            if (book.isCheckedOut()) {
+                checkedOutBooks.add(book);
+            } else {
+                availableBooks.add(book);
+            }
+        }
         return checkedOutBooks;
     }
 

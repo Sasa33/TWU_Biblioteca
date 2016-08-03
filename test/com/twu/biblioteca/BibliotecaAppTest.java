@@ -167,8 +167,8 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        ItemManager bookList = mock(ItemManager.class);
-        when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
+        BookManager bookList = mock(BookManager.class);
+        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
 
         app = new BibliotecaApp(console, menu, bookList);
 
@@ -185,8 +185,8 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        ItemManager bookList = mock(ItemManager.class);
-        when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
+        BookManager bookList = mock(BookManager.class);
+        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(1);
         when(bookList.checkIfItemCanBeReturned(1)).thenReturn(true);
         when(bookList.isAnyItemCanBeReturned()).thenReturn(true);
@@ -219,8 +219,8 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        ItemManager bookList = mock(ItemManager.class);
-        when(bookList.getCheckedOutItems()).thenReturn(repository.getAllBooks());
+        BookManager bookList = mock(BookManager.class);
+        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(3, 1);
         when(bookList.checkIfItemCanBeReturned(1)).thenReturn(false, true);
         when(bookList.isAnyItemCanBeReturned()).thenReturn(true);
@@ -299,20 +299,20 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_show_return_message_after_returning_a_book_successfully_or_not() {
+    public void should_show_return_message_after_returning_a_movie_successfully_or_not() {
         Movie movie1 = new Movie("movie1", "year1", "author1", "rating1");
         Movie movie2 = new Movie("movie2", "year2", "author2", "rating2");
         MovieRepository repository = new MovieRepository(asList(movie1, movie2));
 
-        ItemManager movieList = mock(ItemManager.class);
-        when(movieList.getCheckedOutItems()).thenReturn(repository.getAllMovies());
+        MovieManager movieManager = mock(MovieManager.class);
+        when(movieManager.getCheckedOutMovies()).thenReturn(repository.getAllMovies());
         when(console.getNextInt()).thenReturn(4, 1);
-        when(movieList.checkIfItemCanBeReturned(1)).thenReturn(false, true);
-        when(movieList.isAnyItemCanBeReturned()).thenReturn(true);
+        when(movieManager.checkIfItemCanBeReturned(1)).thenReturn(false, true);
+        when(movieManager.isAnyItemCanBeReturned()).thenReturn(true);
 
-        ItemManager bookList = mock(ItemManager.class);
+        BookManager bookManager = mock(BookManager.class);
 
-        app = new BibliotecaApp(console, menu, bookList, movieList);
+        app = new BibliotecaApp(console, menu, bookManager, movieManager);
 
         String expectedNumber = "000-0001";
         String expectedPassword = "123456";

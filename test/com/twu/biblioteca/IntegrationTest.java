@@ -72,7 +72,7 @@ public class IntegrationTest {
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
-                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+                                                  "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
 
@@ -91,14 +91,14 @@ public class IntegrationTest {
         inOrder.verify(console, times(1)).println("=====================================================================");
         inOrder.verify(console, times(1)).println("Please select an option from menu below.");
         inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
-                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+                                                  "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
         inOrder.verify(console, times(1)).println("=====================================================================");
 
 
         // show book list again
         inOrder.verify(console, times(1)).println("Book List:");
-        inOrder.verify(console, times(1)).println("\t1. Refactoring | Martin Fowler | 1999");
-        inOrder.verify(console, times(1)).println("\t2. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
 
         // exit the app
         inOrder.verify(console, times(1)).println("Thank you for coming to the Bangalore Public Library! See you next time.");

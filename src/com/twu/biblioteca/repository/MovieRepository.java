@@ -11,14 +11,6 @@ public class MovieRepository {
     private List<Movie> checkedOutMovies  = new ArrayList<Movie>();
 
     public MovieRepository(List<Movie> movies) {
-        for (Movie movie : movies) {
-            if (movie.isCheckedOut()) {
-                checkedOutMovies.add(movie);
-            } else {
-                availableMovies.add(movie);
-            }
-        }
-
         this.movies = movies;
     }
 
@@ -27,10 +19,28 @@ public class MovieRepository {
     }
 
     public List<Movie> getAvailableMovies() {
+        availableMovies.clear();
+        checkedOutMovies.clear();
+        for (Movie movie : movies) {
+            if (movie.isCheckedOut()) {
+                checkedOutMovies.add(movie);
+            } else {
+                availableMovies.add(movie);
+            }
+        }
         return availableMovies;
     }
 
     public List<Movie> getCheckedOutMovies() {
+        availableMovies.clear();
+        checkedOutMovies.clear();
+        for (Movie movie : movies) {
+            if (movie.isCheckedOut()) {
+                checkedOutMovies.add(movie);
+            } else {
+                availableMovies.add(movie);
+            }
+        }
         return checkedOutMovies;
     }
 

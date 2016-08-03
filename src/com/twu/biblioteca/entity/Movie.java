@@ -42,4 +42,12 @@ public class Movie {
     public String getOwner() {
         return owner;
     }
+
+    public void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 }

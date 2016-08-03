@@ -45,6 +45,14 @@ public class Book {
         return checkedOut;
     }
 
+    public void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
     public String getOwner() {
         return owner;
     }
