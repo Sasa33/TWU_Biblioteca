@@ -1,13 +1,11 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.repository.MovieRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -51,7 +49,7 @@ public class MovieManagerTest {
         movieManager = new MovieManager(movieRepository);
 
         int chosen = 1;
-        movieManager.checkoutItem(chosen, user);
+        movieManager.checkoutMovie(chosen, user);
 
         List<Movie> availableMovies = movieManager.getAvailableMovies();
         List<Movie> checkedOutMovies = movieManager.getCheckedOutMovies();
@@ -67,7 +65,7 @@ public class MovieManagerTest {
     public void should_return_false_if_there_is_no_item_can_be_returned() {
         movieManager = new MovieManager(movieRepository);
 
-        boolean isAnyBookCanBeReturned = movieManager.isAnyItemCanBeReturned();
+        boolean isAnyBookCanBeReturned = movieManager.isAnyMovieCanBeReturned();
 
         assertEquals(false, isAnyBookCanBeReturned);
     }
@@ -76,14 +74,14 @@ public class MovieManagerTest {
     public void should_return_false_if_there_is_no_item_can_be_checkedout() {
         movieManager = new MovieManager(movieRepository);
         int chosen = 1;
-        movieManager.checkoutItem(chosen, user);
-        movieManager.checkoutItem(chosen, user); // checkout two books
+        movieManager.checkoutMovie(chosen, user);
+        movieManager.checkoutMovie(chosen, user); // checkout two books
 
         List<Movie> availableMovies = movieManager.getAvailableMovies();
 
         assertEquals(availableMovies.size(), 0);
 
-        boolean isAnyBookCanBeCheckedout = movieManager.isAnyItemCanBeCheckedout();
+        boolean isAnyBookCanBeCheckedout = movieManager.isAnyMovieCanBeCheckedout();
 
         assertEquals(false, isAnyBookCanBeCheckedout);
     }

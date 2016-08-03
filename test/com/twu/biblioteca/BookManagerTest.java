@@ -1,10 +1,8 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.entity.Book;
-import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.repository.BookRepository;
-import com.twu.biblioteca.repository.MovieRepository;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,7 +48,7 @@ public class BookManagerTest {
         bookManager = new BookManager(repository);
 
         int chosen = 1;
-        bookManager.checkoutItem(chosen, user);
+        bookManager.checkoutBook(chosen, user);
 
         List<Book> availableBooks1 = bookManager.getAvailableBooks();
 
@@ -63,7 +61,7 @@ public class BookManagerTest {
         bookManager = new BookManager(repository);
 
         int chosen = 1;
-        bookManager.checkoutItem(chosen, user);
+        bookManager.checkoutBook(chosen, user);
 
         List<Book> availableBooks = bookManager.getAvailableBooks();
         List<Book> checkedOutBooks = bookManager.getCheckedOutBooks();
@@ -80,10 +78,10 @@ public class BookManagerTest {
         bookManager = new BookManager(repository);
 
         int chosen = 1;
-        bookManager.checkoutItem(chosen, user);
+        bookManager.checkoutBook(chosen, user);
 
         int index = 1;
-        bookManager.returnItem(index, user);
+        bookManager.returnBook(index);
 
         List<Book> availableBooks = bookManager.getAvailableBooks();
         List<Book> checkedOutBooks = bookManager.getCheckedOutBooks();
@@ -101,7 +99,7 @@ public class BookManagerTest {
     public void should_return_false_if_there_is_no_item_can_be_returned() {
         bookManager = new BookManager(repository);
 
-        boolean isAnyBookCanBeReturned = bookManager.isAnyItemCanBeReturned();
+        boolean isAnyBookCanBeReturned = bookManager.isAnyBookCanBeReturned();
 
         assertEquals(false, isAnyBookCanBeReturned);
     }
@@ -110,14 +108,14 @@ public class BookManagerTest {
     public void should_return_false_if_there_is_no_item_can_be_checkedout() {
         bookManager = new BookManager(repository);
         int chosen = 1;
-        bookManager.checkoutItem(chosen, user);
-        bookManager.checkoutItem(chosen, user); // checkout two books
+        bookManager.checkoutBook(chosen, user);
+        bookManager.checkoutBook(chosen, user); // checkout two books
 
         List<Book> availableBooks = bookManager.getAvailableBooks();
 
         assertEquals(availableBooks.size(), 0);
 
-        boolean isAnyBookCanBeCheckedout = bookManager.isAnyItemCanBeCheckedout();
+        boolean isAnyBookCanBeCheckedout = bookManager.isAnyBookCanBeCheckedout();
 
         assertEquals(false, isAnyBookCanBeCheckedout);
     }

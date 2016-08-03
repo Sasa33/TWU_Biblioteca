@@ -22,7 +22,7 @@ public class BookManager {
         return repository.getAvailableBooks();
     }
 
-    public boolean checkoutItem(int chosen, User user) {
+    public boolean checkoutBook(int chosen, User user) {
         this.availableBooks = repository.getAvailableBooks();
 
         for (int i = 0; i < this.availableBooks.size(); i++) {
@@ -35,7 +35,7 @@ public class BookManager {
         return true;
     }
 
-    public boolean checkIfItemExits(int chosen) {
+    public boolean checkIfBookExits(int chosen) {
         return chosen > 0 && chosen <= this.getAvailableBooks().size();
     }
 
@@ -43,7 +43,7 @@ public class BookManager {
         return repository.getCheckedOutBooks();
     }
 
-    public void returnItem(int chosen, User user) {
+    public void returnBook(int chosen) {
         this.checkedOutBooks = repository.getCheckedOutBooks();
 
         for (int i = 0; i < this.checkedOutBooks.size(); i++) {
@@ -54,15 +54,15 @@ public class BookManager {
         }
     }
 
-    public boolean checkIfItemCanBeReturned(int chosen) {
+    public boolean checkIfBookCanBeReturned(int chosen) {
         return chosen > 0 && chosen <= this.getCheckedOutBooks().size();
     }
 
-    public boolean isAnyItemCanBeReturned() {
+    public boolean isAnyBookCanBeReturned() {
         return !this.getCheckedOutBooks().isEmpty();
     }
 
-    public boolean isAnyItemCanBeCheckedout() {
+    public boolean isAnyBookCanBeCheckedout() {
         return !this.getAvailableBooks().isEmpty();
     }
 }

@@ -188,8 +188,8 @@ public class BibliotecaAppTest {
         BookManager bookList = mock(BookManager.class);
         when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(1);
-        when(bookList.checkIfItemCanBeReturned(1)).thenReturn(true);
-        when(bookList.isAnyItemCanBeReturned()).thenReturn(true);
+        when(bookList.checkIfBookCanBeReturned(1)).thenReturn(true);
+        when(bookList.isAnyBookCanBeReturned()).thenReturn(true);
 
         app = new BibliotecaApp(console, menu, bookList);
 
@@ -222,8 +222,8 @@ public class BibliotecaAppTest {
         BookManager bookList = mock(BookManager.class);
         when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(3, 1);
-        when(bookList.checkIfItemCanBeReturned(1)).thenReturn(false, true);
-        when(bookList.isAnyItemCanBeReturned()).thenReturn(true);
+        when(bookList.checkIfBookCanBeReturned(1)).thenReturn(false, true);
+        when(bookList.isAnyBookCanBeReturned()).thenReturn(true);
 
         app = new BibliotecaApp(console, menu, bookList);
 
@@ -307,8 +307,8 @@ public class BibliotecaAppTest {
         MovieManager movieManager = mock(MovieManager.class);
         when(movieManager.getCheckedOutMovies()).thenReturn(repository.getAllMovies());
         when(console.getNextInt()).thenReturn(4, 1);
-        when(movieManager.checkIfItemCanBeReturned(1)).thenReturn(false, true);
-        when(movieManager.isAnyItemCanBeReturned()).thenReturn(true);
+        when(movieManager.checkIfMovieCanBeReturned(1)).thenReturn(false, true);
+        when(movieManager.isAnyMovieCanBeReturned()).thenReturn(true);
 
         BookManager bookManager = mock(BookManager.class);
 

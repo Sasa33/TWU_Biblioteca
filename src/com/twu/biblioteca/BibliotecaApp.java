@@ -171,11 +171,11 @@ public class BibliotecaApp {
     public void checkoutBook() {
         if (currentUser != null) {
             while(true) {
-                if (bookManager.isAnyItemCanBeCheckedout()) {
+                if (bookManager.isAnyBookCanBeCheckedout()) {
                     int selection = whichBookToCheckout();
 
-                    if(this.bookManager.checkIfItemExits(selection)) {
-                        this.bookManager.checkoutItem(selection, currentUser);
+                    if(this.bookManager.checkIfBookExits(selection)) {
+                        this.bookManager.checkoutBook(selection, currentUser);
                         console.println("Thank you! Enjoy the book!");
                         break;
                     } else {
@@ -204,11 +204,11 @@ public class BibliotecaApp {
     public void returnBook() {
         if (currentUser != null) {
             while (true) {
-                if (bookManager.isAnyItemCanBeReturned()) {
+                if (bookManager.isAnyBookCanBeReturned()) {
                     int selection = whichBookToRetrun();
 
-                    if (this.bookManager.checkIfItemCanBeReturned(selection)) {
-                        this.bookManager.returnItem(selection, currentUser);
+                    if (this.bookManager.checkIfBookCanBeReturned(selection)) {
+                        this.bookManager.returnBook(selection);
                         console.println("Thank you for returning the book!");
                         break;
                     } else {
@@ -261,11 +261,11 @@ public class BibliotecaApp {
     public void checkoutMovie() {
         if (currentUser != null) {
             while(true) {
-                if (movieManager.isAnyItemCanBeCheckedout()) {
+                if (movieManager.isAnyMovieCanBeCheckedout()) {
                     int selection = whichMovieToCheckout();
 
-                    if(this.movieManager.checkIfItemExits(selection)) {
-                        this.movieManager.checkoutItem(selection, currentUser);
+                    if(this.movieManager.checkIfMovieExits(selection)) {
+                        this.movieManager.checkoutMovie(selection, currentUser);
                         console.println("Thank you! Enjoy the movie!");
                         break;
                     } else {
@@ -294,11 +294,11 @@ public class BibliotecaApp {
     public void returnMovie() {
         if (currentUser != null) {
             while (true) {
-                if (movieManager.isAnyItemCanBeReturned()) {
+                if (movieManager.isAnyMovieCanBeReturned()) {
                     int selection = whichMovieToRetrun();
 
-                    if (this.movieManager.checkIfItemCanBeReturned(selection)) {
-                        this.movieManager.returnItem(selection, currentUser);
+                    if (this.movieManager.checkIfMovieCanBeReturned(selection)) {
+                        this.movieManager.returnMovie(selection);
                         console.println("Thank you for returning the movie!");
                         break;
                     } else {

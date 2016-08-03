@@ -22,7 +22,7 @@ public class MovieManager {
         return repository.getAvailableMovies();
     }
 
-    public boolean checkoutItem(int chosen, User user) {
+    public boolean checkoutMovie(int chosen, User user) {
         this.availableMovies = repository.getAvailableMovies();
 
         for (int i = 0; i < this.availableMovies.size(); i++) {
@@ -35,7 +35,7 @@ public class MovieManager {
         return true;
     }
 
-    public boolean checkIfItemExits(int chosen) {
+    public boolean checkIfMovieExits(int chosen) {
         return chosen > 0 && chosen <= this.availableMovies.size();
     }
 
@@ -43,7 +43,7 @@ public class MovieManager {
         return repository.getCheckedOutMovies();
     }
 
-    public void returnItem(int chosen, User user) {
+    public void returnMovie(int chosen) {
         this.checkedOutMovies = repository.getCheckedOutMovies();
 
         for (int i = 0; i < this.checkedOutMovies.size(); i++) {
@@ -54,15 +54,15 @@ public class MovieManager {
         }
     }
 
-    public boolean checkIfItemCanBeReturned(int chosen) {
+    public boolean checkIfMovieCanBeReturned(int chosen) {
         return chosen > 0 && chosen <= this.checkedOutMovies.size();
     }
 
-    public boolean isAnyItemCanBeReturned() {
+    public boolean isAnyMovieCanBeReturned() {
         return !this.checkedOutMovies.isEmpty();
     }
 
-    public boolean isAnyItemCanBeCheckedout() {
+    public boolean isAnyMovieCanBeCheckedout() {
         return !this.availableMovies.isEmpty();
     }
 }
