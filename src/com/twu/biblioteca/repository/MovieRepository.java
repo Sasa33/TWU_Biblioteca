@@ -7,8 +7,6 @@ import java.util.List;
 
 public class MovieRepository {
     private List<Movie> movies;
-    private List<Movie> availableMovies = new ArrayList<Movie>();
-    private List<Movie> checkedOutMovies  = new ArrayList<Movie>();
 
     public MovieRepository(List<Movie> movies) {
         this.movies = movies;
@@ -19,28 +17,26 @@ public class MovieRepository {
     }
 
     public List<Movie> getAvailableMovies() {
-        availableMovies.clear();
-        checkedOutMovies.clear();
+        List<Movie> availableMovies = new ArrayList<Movie>();
+
         for (Movie movie : movies) {
-            if (movie.isCheckedOut()) {
-                checkedOutMovies.add(movie);
-            } else {
+            if (!movie.isCheckedOut()) {
                 availableMovies.add(movie);
             }
         }
+
         return availableMovies;
     }
 
     public List<Movie> getCheckedOutMovies() {
-        availableMovies.clear();
-        checkedOutMovies.clear();
+        List<Movie> checkedOutMovies  = new ArrayList<Movie>();
+
         for (Movie movie : movies) {
             if (movie.isCheckedOut()) {
                 checkedOutMovies.add(movie);
-            } else {
-                availableMovies.add(movie);
             }
         }
+
         return checkedOutMovies;
     }
 
