@@ -39,9 +39,9 @@ public class MovieManagerTest {
 
         List<Movie> availableMovies = movieManager.getAvailableMovies();
 
-        assertEquals(availableMovies.size(), 2);
-        assertEquals(availableMovies.get(0), movies.get(0));
-        assertEquals(availableMovies.get(1), movies.get(1));
+        assertEquals(2, availableMovies.size());
+        assertEquals(movies.get(0), availableMovies.get(0));
+        assertEquals(movies.get(1), availableMovies.get(1));
     }
 
     @Test
@@ -54,11 +54,11 @@ public class MovieManagerTest {
         List<Movie> availableMovies = movieManager.getAvailableMovies();
         List<Movie> checkedOutMovies = movieManager.getCheckedOutMovies();
 
-        assertEquals(availableMovies.size(), 1);
-        assertEquals(availableMovies.get(0), movies.get(1));
+        assertEquals(1, availableMovies.size());
+        assertEquals(movies.get(1), availableMovies.get(0));
 
-        assertEquals(checkedOutMovies.size(), 1);
-        assertEquals(checkedOutMovies.get(0), movies.get(0));
+        assertEquals(1, checkedOutMovies.size());
+        assertEquals(movies.get(0), checkedOutMovies.get(0));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class MovieManagerTest {
 
         List<Movie> availableMovies = movieManager.getAvailableMovies();
 
-        assertEquals(availableMovies.size(), 0);
+        assertEquals(0, availableMovies.size());
 
         boolean isAnyBookCanBeCheckedout = movieManager.isAnyMovieCanBeCheckedout();
 

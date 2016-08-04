@@ -38,9 +38,9 @@ public class BookManagerTest {
 
         List<Book> availableBooks = bookManager.getAvailableBooks();
 
-        assertEquals(availableBooks.size(), 2);
-        assertEquals(availableBooks.get(0), books.get(0));
-        assertEquals(availableBooks.get(1), books.get(1));
+        assertEquals(2, availableBooks.size());
+        assertEquals(books.get(0), availableBooks.get(0));
+        assertEquals(books.get(1), availableBooks.get(1));
     }
 
     @Test
@@ -52,8 +52,8 @@ public class BookManagerTest {
 
         List<Book> availableBooks1 = bookManager.getAvailableBooks();
 
-        assertEquals(availableBooks1.size(), 1);
-        assertEquals(availableBooks1.get(0), books.get(1));
+        assertEquals(1, availableBooks1.size());
+        assertEquals(books.get(1), availableBooks1.get(0));
     }
 
     @Test
@@ -66,11 +66,11 @@ public class BookManagerTest {
         List<Book> availableBooks = bookManager.getAvailableBooks();
         List<Book> checkedOutBooks = bookManager.getCheckedOutBooks();
 
-        assertEquals(availableBooks.size(), 1);
-        assertEquals(availableBooks.get(0), books.get(1));
+        assertEquals(1, availableBooks.size());
+        assertEquals(books.get(1), availableBooks.get(0));
 
-        assertEquals(checkedOutBooks.size(), 1);
-        assertEquals(checkedOutBooks.get(0), books.get(0));
+        assertEquals(1, checkedOutBooks.size());
+        assertEquals(books.get(0), checkedOutBooks.get(0));
     }
 
     @Test
@@ -88,11 +88,11 @@ public class BookManagerTest {
 
 
         //after return the checked out book
-        assertEquals(availableBooks.size(), 2);
-        assertEquals(availableBooks.get(0), books.get(0));
-        assertEquals(availableBooks.get(1), books.get(1));
+        assertEquals(2, availableBooks.size());
+        assertEquals(books.get(0), availableBooks.get(0));
+        assertEquals(books.get(1), availableBooks.get(1));
 
-        assertEquals(checkedOutBooks.isEmpty(), true);
+        assertEquals(true, checkedOutBooks.isEmpty());
     }
 
     @Test
@@ -113,7 +113,7 @@ public class BookManagerTest {
 
         List<Book> availableBooks = bookManager.getAvailableBooks();
 
-        assertEquals(availableBooks.size(), 0);
+        assertEquals(true, availableBooks.isEmpty());
 
         boolean isAnyBookCanBeCheckedout = bookManager.isAnyBookCanBeCheckedout();
 

@@ -26,9 +26,9 @@ public class MovieRepositoryTest {
         List<Movie> movies = repository.getAllMovies();
 
 
-        assertEquals(movies.size(), 2);
-        assertEquals(movies.get(0).getName(), "Zootopia");
-        assertEquals(movies.get(1).getName(), "The Jungle Book");
+        assertEquals(2, movies.size());
+        assertEquals("Zootopia", movies.get(0).getName());
+        assertEquals("The Jungle Book", movies.get(1).getName());
     }
 
     @Test

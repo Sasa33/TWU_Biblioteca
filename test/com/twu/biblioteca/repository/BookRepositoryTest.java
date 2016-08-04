@@ -24,9 +24,9 @@ public class BookRepositoryTest {
 
         List<Book> books = repository.getAllBooks();
 
-        assertEquals(books.size(), 2);
-        assertEquals(books.get(0).getTitle(), "Head First Java");
-        assertEquals(books.get(1).getTitle(), "Refactoring");
+        assertEquals(2, books.size());
+        assertEquals("Head First Java", books.get(0).getTitle());
+        assertEquals("Refactoring", books.get(1).getTitle());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class BookRepositoryTest {
         Book book3 = mock(Book.class);
         when(book1.getTitle()).thenReturn("book1");
         when(book2.getTitle()).thenReturn("book2");
-        when(book3.getTitle()).thenReturn("book2");
+        when(book3.getTitle()).thenReturn("book3");
 
         String user1Number = "000-0001";
         String user2Number = "000-0002";
