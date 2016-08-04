@@ -4,17 +4,14 @@ import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.repository.MovieRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieManager {
     private MovieRepository repository;
-    private List<Movie> availableMovies;
-    private List<Movie> checkedOutMovies;
 
     public MovieManager(MovieRepository repository) {
         this.repository = repository;
-        this.availableMovies = repository.getAvailableMovies();
-        this.checkedOutMovies = repository.getCheckedOutMovies();
     }
 
 
@@ -23,12 +20,12 @@ public class MovieManager {
     }
 
     public boolean checkoutMovie(int chosen, User user) {
-        this.availableMovies = repository.getAvailableMovies();
+        List<Movie> availableMovies = this.getAvailableMovies();
 
-        for (int i = 0; i < this.availableMovies.size(); i++) {
+        for (int i = 0; i < availableMovies.size(); i++) {
             if (i == chosen - 1) {
-                this.availableMovies.get(i).setCheckedOut(true);
-                this.availableMovies.get(i).setOwner(user.getNumber());
+                availableMovies.get(i).setCheckedOut(true);
+                availableMovies.get(i).setOwner(user.getNumber());
             }
         }
 
@@ -44,12 +41,12 @@ public class MovieManager {
     }
 
     public void returnMovie(int chosen) {
-        this.checkedOutMovies = repository.getCheckedOutMovies();
+        List<Movie> checkedOutMovies = repository.getCheckedOutMovies();
 
-        for (int i = 0; i < this.checkedOutMovies.size(); i++) {
+        for (int i = 0; i < checkedOutMovies.size(); i++) {
             if (i == chosen - 1) {
-                this.checkedOutMovies.get(i).setCheckedOut(false);
-                this.checkedOutMovies.get(i).setOwner("");
+                checkedOutMovies.get(i).setCheckedOut(false);
+                checkedOutMovies.get(i).setOwner("");
             }
         }
     }

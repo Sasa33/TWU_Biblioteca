@@ -8,13 +8,9 @@ import java.util.List;
 
 public class BookManager {
     private BookRepository repository;
-    private List<Book> availableBooks;
-    private List<Book> checkedOutBooks;
 
     public BookManager(BookRepository repository) {
         this.repository = repository;
-        this.availableBooks = repository.getAvailableBooks();
-        this.checkedOutBooks = repository.getCheckedOutBooks();
     }
 
 
@@ -23,12 +19,12 @@ public class BookManager {
     }
 
     public boolean checkoutBook(int chosen, User user) {
-        this.availableBooks = repository.getAvailableBooks();
+        List<Book> availableBooks = this.getAvailableBooks();
 
-        for (int i = 0; i < this.availableBooks.size(); i++) {
+        for (int i = 0; i < availableBooks.size(); i++) {
             if (i == chosen - 1) {
-                this.availableBooks.get(i).setCheckedOut(true);
-                this.availableBooks.get(i).setOwner(user.getNumber());
+                availableBooks.get(i).setCheckedOut(true);
+                availableBooks.get(i).setOwner(user.getNumber());
             }
         }
 
@@ -44,12 +40,12 @@ public class BookManager {
     }
 
     public void returnBook(int chosen) {
-        this.checkedOutBooks = repository.getCheckedOutBooks();
+        List<Book> checkedOutBooks = repository.getCheckedOutBooks();
 
-        for (int i = 0; i < this.checkedOutBooks.size(); i++) {
+        for (int i = 0; i < checkedOutBooks.size(); i++) {
             if (i == chosen - 1) {
-                this.checkedOutBooks.get(i).setCheckedOut(false);
-                this.checkedOutBooks.get(i).setOwner("");
+                checkedOutBooks.get(i).setCheckedOut(false);
+                checkedOutBooks.get(i).setOwner("");
             }
         }
     }
