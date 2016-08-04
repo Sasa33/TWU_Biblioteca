@@ -28,15 +28,14 @@ public class MovieManagerTest {
 
         movieRepository = new MovieRepository(movies);
 
+        movieManager = new MovieManager(movieRepository);
+
         user = mock(User.class);
         when(user.getNumber()).thenReturn("000-0001");
     }
 
     @Test
     public void should_get_all_the_movies_when_getAvailableItems_method_is_called() {
-
-        movieManager = new MovieManager(movieRepository);
-
         List<Movie> availableMovies = movieManager.getAvailableMovies();
 
         assertEquals(2, availableMovies.size());
@@ -46,8 +45,6 @@ public class MovieManagerTest {
 
     @Test
     public void should_put_a_movie_into_the_checkedOutMovie_list_when_a_movie_is_checked_out() {
-        movieManager = new MovieManager(movieRepository);
-
         int chosen = 1;
         movieManager.checkoutMovie(chosen, user);
 
@@ -63,8 +60,6 @@ public class MovieManagerTest {
 
     @Test
     public void should_return_false_if_there_is_no_item_can_be_returned() {
-        movieManager = new MovieManager(movieRepository);
-
         boolean isAnyBookCanBeReturned = movieManager.isAnyMovieCanBeReturned();
 
         assertEquals(false, isAnyBookCanBeReturned);
@@ -72,7 +67,6 @@ public class MovieManagerTest {
 
     @Test
     public void should_return_false_if_there_is_no_item_can_be_checkedout() {
-        movieManager = new MovieManager(movieRepository);
         int chosen = 1;
         movieManager.checkoutMovie(chosen, user);
         movieManager.checkoutMovie(chosen, user); // checkout two books

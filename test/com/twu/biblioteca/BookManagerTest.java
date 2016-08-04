@@ -28,14 +28,14 @@ public class BookManagerTest {
 
         repository = new BookRepository(books);
 
+        bookManager = new BookManager(repository);
+
         user = mock(User.class);
         when(user.getNumber()).thenReturn("000-0001");
     }
 
     @Test
     public void should_get_all_the_books_when_book_list_option_is_chosen() {
-        bookManager = new BookManager(repository);
-
         List<Book> availableBooks = bookManager.getAvailableBooks();
 
         assertEquals(2, availableBooks.size());
@@ -45,8 +45,6 @@ public class BookManagerTest {
 
     @Test
     public void should_checkout_a_book_successfully_when_checkoutBook_method_is_called() {
-        bookManager = new BookManager(repository);
-
         int chosen = 1;
         bookManager.checkoutBook(chosen, user);
 
@@ -58,8 +56,6 @@ public class BookManagerTest {
 
     @Test
     public void should_put_a_book_into_the_checkedOutBooks_list_when_a_book_is_checked_out() {
-        bookManager = new BookManager(repository);
-
         int chosen = 1;
         bookManager.checkoutBook(chosen, user);
 
@@ -75,8 +71,6 @@ public class BookManagerTest {
 
     @Test
     public void should_put_a_book_back_to_availableBooks_after_a_book_is_returned() {
-        bookManager = new BookManager(repository);
-
         int chosen = 1;
         bookManager.checkoutBook(chosen, user);
 
@@ -97,8 +91,6 @@ public class BookManagerTest {
 
     @Test
     public void should_return_false_if_there_is_no_item_can_be_returned() {
-        bookManager = new BookManager(repository);
-
         boolean isAnyBookCanBeReturned = bookManager.isAnyBookCanBeReturned();
 
         assertEquals(false, isAnyBookCanBeReturned);
@@ -106,7 +98,6 @@ public class BookManagerTest {
 
     @Test
     public void should_return_false_if_there_is_no_item_can_be_checkedout() {
-        bookManager = new BookManager(repository);
         int chosen = 1;
         bookManager.checkoutBook(chosen, user);
         bookManager.checkoutBook(chosen, user); // checkout two books
