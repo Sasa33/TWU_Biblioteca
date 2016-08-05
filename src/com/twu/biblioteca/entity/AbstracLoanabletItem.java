@@ -1,8 +1,8 @@
 package com.twu.biblioteca.entity;
 
 public class AbstracLoanabletItem implements Loanable{
-    protected boolean checkedOut;
-    protected String owner;
+    private boolean checkedOut;
+    private String owner;
 
     public void setCheckedOut(boolean checkedOut) {
         this.checkedOut = checkedOut;
