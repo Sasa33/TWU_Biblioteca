@@ -2,54 +2,26 @@ package com.twu.biblioteca.repository;
 
 import com.twu.biblioteca.entity.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MovieRepository {
-    private List<Movie> movies;
-
+public class MovieRepository extends LoanableItemRepositoryImpl<Movie>{
     public MovieRepository(List<Movie> movies) {
-        this.movies = movies;
+        super(movies);
     }
 
     public List<Movie> getAllMovies() {
-        return this.movies;
+        return getAllItems();
     }
 
     public List<Movie> getAvailableMovies() {
-        List<Movie> availableMovies = new ArrayList<Movie>();
-
-        for (Movie movie : movies) {
-            if (!movie.isCheckedOut()) {
-                availableMovies.add(movie);
-            }
-        }
-
-        return availableMovies;
+        return getAvailableItems();
     }
 
     public List<Movie> getCheckedOutMovies() {
-        List<Movie> checkedOutMovies  = new ArrayList<Movie>();
-
-        for (Movie movie : movies) {
-            if (movie.isCheckedOut()) {
-                checkedOutMovies.add(movie);
-            }
-        }
-
-        return checkedOutMovies;
+        return getCheckedOutItems();
     }
 
     public List<Movie> findBooksByOwnerNumber(String userNumber) {
-        List<Movie> result = new ArrayList<Movie>();
-
-        for (Movie movie : this.movies) {
-            String owner = movie.getOwner();
-            if (owner.equals(userNumber)) {
-                result.add(movie);
-            }
-        }
-
-        return result;
+        return findItemsByOwnerNumber(userNumber);
     }
 }

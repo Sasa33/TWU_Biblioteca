@@ -2,54 +2,26 @@ package com.twu.biblioteca.repository;
 
 import com.twu.biblioteca.entity.Book;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BookRepository {
-    private List<Book> books;
-
+public class BookRepository extends LoanableItemRepositoryImpl<Book>{
     public BookRepository(List<Book> books) {
-        this.books = books;
+        super(books);
     }
 
     public List<Book> getAllBooks() {
-        return this.books;
+        return getAllItems();
     }
 
     public List<Book> getAvailableBooks() {
-        List<Book> availableBooks = new ArrayList<Book>();
-
-        for (Book book : books) {
-            if (!book.isCheckedOut()) {
-                availableBooks.add(book);
-            }
-        }
-
-        return availableBooks;
+        return getAvailableItems();
     }
 
     public List<Book> getCheckedOutBooks() {
-        List<Book> checkedOutBooks = new ArrayList<Book>();
-
-        for (Book book : books) {
-            if (book.isCheckedOut()) {
-                checkedOutBooks.add(book);
-            }
-        }
-
-        return checkedOutBooks;
+        return getCheckedOutItems();
     }
 
     public List<Book> findBooksByOwnerNumber(String userNumber) {
-        List<Book> result = new ArrayList<Book>();
-
-        for (Book book : this.books) {
-            String owner = book.getOwner();
-            if (owner.equals(userNumber)) {
-                result.add(book);
-            }
-        }
-
-        return result;
+        return findItemsByOwnerNumber(userNumber);
     }
 }
