@@ -1,11 +1,9 @@
 package com.twu.biblioteca.entity;
 
-public class Book {
+public class Book extends AbstracLoanabletItem{
     private String title;
     private String author;
     private String publishYear;
-    private boolean checkedOut;
-    private String owner = "";
 
     public Book(String title, String author, String year) {
         this.title = title;
@@ -39,21 +37,5 @@ public class Book {
 
     public String getDetails() {
         return this.getTitle() + " | " + this.getAuthor() + " | " + this.getPublishYear();
-    }
-
-    public boolean isCheckedOut() {
-        return checkedOut;
-    }
-
-    public void setCheckedOut(boolean checkedOut) {
-        this.checkedOut = checkedOut;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getOwner() {
-        return owner;
     }
 }

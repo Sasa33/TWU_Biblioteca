@@ -1,12 +1,10 @@
 package com.twu.biblioteca.entity;
 
-public class Movie {
+public class Movie extends AbstracLoanabletItem{
     private String name;
     private String year;
     private String director;
     private String rating;
-    private boolean checkedOut;
-    private String owner;
 
     public Movie(String name, String year, String director, String rating) {
         this.name = name;
@@ -33,21 +31,5 @@ public class Movie {
 
     public String getDetails() {
         return this.getName() + " | " + this.getYear() + " | " + this.getDirector() + " | " + this.getRating();
-    }
-
-    public boolean isCheckedOut() {
-        return checkedOut;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setCheckedOut(boolean checkedOut) {
-        this.checkedOut = checkedOut;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 }
