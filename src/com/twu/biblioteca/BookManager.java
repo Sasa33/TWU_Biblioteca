@@ -6,59 +6,41 @@ import com.twu.biblioteca.repository.BookRepository;
 
 import java.util.List;
 
-public class BookManager {
-    private BookRepository repository;
-
+public class BookManager extends LoanableItemManagerImpl<Book> {
     public BookManager(BookRepository repository) {
-        this.repository = repository;
+        super(repository);
     }
 
 
     public List<Book> getAvailableBooks() {
-        return repository.getAvailableBooks();
-    }
-
-    public boolean checkoutBook(int chosen, User user) {
-        List<Book> availableBooks = this.getAvailableBooks();
-
-        for (int i = 0; i < availableBooks.size(); i++) {
-            if (i == chosen - 1) {
-                availableBooks.get(i).setCheckedOut(true);
-                availableBooks.get(i).setOwner(user.getNumber());
-            }
-        }
-
-        return true;
+        return getAvailableItems();
     }
 
     public boolean checkIfBookExits(int chosen) {
-        return chosen > 0 && chosen <= this.getAvailableBooks().size();
+        return checkIfItemExits(chosen);
+    }
+
+    public boolean checkoutBook(int chosen, User user) {
+        return checkoutItem(chosen,user);
     }
 
     public List<Book> getCheckedOutBooks() {
-        return repository.getCheckedOutBooks();
-    }
-
-    public void returnBook(int chosen) {
-        List<Book> checkedOutBooks = repository.getCheckedOutBooks();
-
-        for (int i = 0; i < checkedOutBooks.size(); i++) {
-            if (i == chosen - 1) {
-                checkedOutBooks.get(i).setCheckedOut(false);
-                checkedOutBooks.get(i).setOwner("");
-            }
-        }
+        return getCheckedOutItems();
     }
 
     public boolean checkIfBookCanBeReturned(int chosen) {
-        return chosen > 0 && chosen <= this.getCheckedOutBooks().size();
+        return checkIfItemCanBeReturned(chosen);
+    }
+
+    public void returnBook(int chosen) {
+        returnItem(chosen);
     }
 
     public boolean isAnyBookCanBeReturned() {
-        return !this.getCheckedOutBooks().isEmpty();
+        return isAnyItemCanBeReturned();
     }
 
     public boolean isAnyBookCanBeCheckedout() {
-        return !this.getAvailableBooks().isEmpty();
+        return isAnyItemCanBeCheckedout();
     }
 }
