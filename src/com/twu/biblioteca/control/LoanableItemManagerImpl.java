@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.control;
 
 import com.twu.biblioteca.entity.Loanable;
 import com.twu.biblioteca.entity.User;
@@ -7,7 +7,7 @@ import com.twu.biblioteca.repository.LoanableItemRepository;
 import java.util.List;
 
 public class LoanableItemManagerImpl<T extends Loanable> implements LoanableItemManager<T> {
-    protected LoanableItemRepository<T> itemRepository;
+    private LoanableItemRepository<T> itemRepository;
 
     public LoanableItemManagerImpl(LoanableItemRepository<T> itemRepository) {
         this.itemRepository = itemRepository;

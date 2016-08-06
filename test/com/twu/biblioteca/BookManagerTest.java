@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.control.BookManager;
 import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.repository.BookRepository;

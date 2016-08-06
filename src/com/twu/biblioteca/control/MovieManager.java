@@ -1,4 +1,4 @@
-package com.twu.biblioteca;
+package com.twu.biblioteca.control;
 
 import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.entity.User;
@@ -6,7 +6,7 @@ import com.twu.biblioteca.repository.MovieRepository;
 
 import java.util.List;
 
-public class MovieManager extends LoanableItemManagerImpl<Movie>{
+public class MovieManager extends LoanableItemManagerImpl<Movie> {
     public MovieManager(MovieRepository repository) {
         super(repository);
     }
