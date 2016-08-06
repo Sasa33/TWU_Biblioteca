@@ -19,18 +19,6 @@ public abstract class Option {
         this.name = optionName;
     }
 
-//    public void execute(BibliotecaApp app) {
-//        if(this.name.equals("List Books")) {
-//            app.displayBookListInfo();
-//        } else if(this.name.equals("Quit")) {
-//            app.exit();
-//        } else if(this.name.equals("Checkout Book")) {
-//            app.checkoutBook();
-//        } else if(this.name.equals("Return Book")) {
-//            app.returnBook();
-//        }
-//    }
-
     public abstract void execute(BibliotecaApp app);
 
     public String getOptionInfo() {
