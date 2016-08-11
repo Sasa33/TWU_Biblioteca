@@ -1,13 +1,23 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.option.*;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class OptionTest {
     private Option option;
+    private Console console;
+    private InOrder inOrder;
+
+    @Before
+    public void setUp() {
+        console = mock(Console.class);
+        inOrder = inOrder(console);
+    }
 
     @Test
     public void should_initialize_an_option_with_id_and_name_successfully() {
@@ -36,6 +46,7 @@ public class OptionTest {
     @Test
     public void should_call_exit_method_when_quit_is_chosen() {
         BibliotecaApp app = mock(BibliotecaApp.class);
+        when(app.getConsole()).thenReturn(console);
 
         int optionId = 2;
         String optionName = "Quit";
@@ -43,7 +54,7 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).exit();
+        inOrder.verify(console, times(1)).println("Thank you for coming to the Bangalore Public Library! See you next time.");
     }
 
     @Test

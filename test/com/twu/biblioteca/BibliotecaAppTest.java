@@ -82,13 +82,6 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_show_quit_message_when_exit_method_is_called() {
-        app.exit();
-
-        inOrder.verify(console, times(1)).println("Thank you for coming to the Bangalore Public Library! See you next time.");
-    }
-
-    @Test
     public void should_show_checkout_message_and_list_of_available_books_when_checkoutBook_method_is_called() {
         app.whichBookToCheckout();
 

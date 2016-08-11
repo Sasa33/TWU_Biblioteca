@@ -155,12 +155,6 @@ public class BibliotecaApp {
         bookManager.listAvailableBooks(console);
     }
 
-    public void exit() {
-        console.println("Thank you for coming to the Bangalore Public Library! See you next time.");
-
-        this.quit = true;
-    }
-
     public void checkoutBook() {
         if (currentUser != null) {
             while(true) {
@@ -368,5 +362,17 @@ public class BibliotecaApp {
         Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7, option8));
 
         this.setMenu(menu);
+    }
+
+    public Console getConsole() {
+        return console;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setQuit(boolean quit) {
+        this.quit = quit;
     }
 }

@@ -9,6 +9,8 @@ public class QuitOption extends Option {
 
     @Override
     public void execute(BibliotecaApp app) {
-        app.exit();
+        app.getConsole().println("Thank you for coming to the Bangalore Public Library! See you next time.");
+
+        app.setQuit(true);
     }
 }
