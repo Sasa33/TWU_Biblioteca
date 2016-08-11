@@ -294,11 +294,7 @@ public class BibliotecaApp {
     }
 
     public void showUserInfo() {
-        if (currentUser != null) {
-            console.println("Name: " + currentUser.getName());
-            console.println("Email Address: " + currentUser.getEmail());
-            console.println("Phone: " + currentUser.getPhone());
-        }
+
     }
 
     public boolean login() {

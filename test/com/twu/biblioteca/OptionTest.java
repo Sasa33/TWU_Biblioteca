@@ -132,7 +132,6 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).showUserInfo();
     }
 
     @Test

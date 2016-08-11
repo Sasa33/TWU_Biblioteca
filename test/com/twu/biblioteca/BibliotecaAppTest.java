@@ -4,6 +4,7 @@ import com.twu.biblioteca.control.BookManager;
 import com.twu.biblioteca.control.MovieManager;
 import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.entity.Movie;
+import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.option.Option;
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.repository.MovieRepository;
@@ -14,6 +15,7 @@ import org.mockito.InOrder;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class BibliotecaAppTest {
@@ -341,6 +343,10 @@ public class BibliotecaAppTest {
         String expectedPassword = "123456";
         when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
 
+        User expectedUser = mock(User.class);
+        when(expectedUser.getNumber()).thenReturn(expectedNumber);
+        when(expectedUser.getPassword()).thenReturn(expectedPassword);
+
         app.login();
 
         inOrder.verify(console, times(1)).print("Library Number: ");
@@ -348,11 +354,7 @@ public class BibliotecaAppTest {
 
         inOrder.verify(console, times(1)).println("Login successful!");
 
-        app.showUserInfo();
-
-        inOrder.verify(console, times(1)).println("Name: user1");
-        inOrder.verify(console, times(1)).println("Email Address: user1@thoughtworks.com");
-        inOrder.verify(console, times(1)).println("Phone: 13000000000");
+        assertEquals(expectedUser.getNumber(), app.getCurrentUser().getNumber());
     }
 
     @Test
@@ -372,12 +374,7 @@ public class BibliotecaAppTest {
         inOrder.verify(console, times(1)).print("Library Number: ");
         inOrder.verify(console, times(1)).print("Password: ");
 
-
-        app.showUserInfo();
-
-        inOrder.verify(console, times(1)).println("Name: user1");
-        inOrder.verify(console, times(1)).println("Email Address: user1@thoughtworks.com");
-        inOrder.verify(console, times(1)).println("Phone: 13000000000");
+        inOrder.verify(console, times(1)).println("Login successful!");
     }
 
     @Test
