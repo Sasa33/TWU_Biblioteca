@@ -1,5 +1,6 @@
 package com.twu.biblioteca.control;
 
+import com.twu.biblioteca.Console;
 import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.repository.MovieRepository;
@@ -41,5 +42,23 @@ public class MovieManager extends LoanableItemManagerImpl<Movie> {
 
     public boolean isAnyMovieCanBeCheckedout() {
         return isAnyItemCanBeCheckedout();
+    }
+
+    public void listAvailableMovies(Console console) {
+        List<Movie> availableMovies = this.getAvailableMovies();
+
+        for (int i = 0; i < availableMovies.size(); i++) {
+            String listItem = "\t" + ( i + 1 ) + ". " + availableMovies.get(i).getDetails();
+            console.println(listItem);
+        }
+    }
+
+    public void listCheckedOutMovies(Console console) {
+        List<Movie> checkedOutMovies = this.getCheckedOutMovies();
+
+        for (int i = 0; i < checkedOutMovies.size(); i++) {
+            String listItem = "\t" + ( i + 1 ) + ". " + checkedOutMovies.get(i).getDetails();
+            console.println(listItem);
+        }
     }
 }

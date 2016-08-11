@@ -152,16 +152,7 @@ public class BibliotecaApp {
     public void displayBookListInfo() {
         console.println("Book List:");
 
-        listAvailableBooks();
-    }
-
-    private void listAvailableBooks() {
-        List<Book> availableBooks = bookManager.getAvailableBooks();
-
-        for (int i = 0; i < availableBooks.size(); i++) {
-            String listItem = "\t" + ( i + 1 ) + ". " + availableBooks.get(i).getDetails();
-            console.println(listItem);
-        }
+        bookManager.listAvailableBooks(console);
     }
 
     public void exit() {
@@ -198,7 +189,7 @@ public class BibliotecaApp {
 
     public int whichBookToCheckout() {
         console.println("Which book do you want to checkout:");
-        listAvailableBooks();
+        bookManager.listAvailableBooks(console);
 
         return console.getNextInt();
     }
@@ -231,33 +222,15 @@ public class BibliotecaApp {
 
     public int whichBookToRetrun() {
         console.println("Which book do you want to return:");
-        listCheckedOutBooks();
+        bookManager.listCheckedOutBooks(console);
 
         return console.getNextInt();
-    }
-
-    public void listCheckedOutBooks() {
-        List<Book> checkedOutBooks = bookManager.getCheckedOutBooks();
-
-        for (int i = 0; i < checkedOutBooks.size(); i++) {
-            String listItem = "\t" + ( i + 1 ) + ". " + checkedOutBooks.get(i).getDetails();
-            console.println(listItem);
-        }
     }
 
     public void displayMovieListInfo() {
         console.println("Movie List:");
 
-        listAvailableMovies();
-    }
-
-    private void listAvailableMovies() {
-        List<Movie> availableMovies = movieManager.getAvailableMovies();
-
-        for (int i = 0; i < availableMovies.size(); i++) {
-            String listItem = "\t" + ( i + 1 ) + ". " + availableMovies.get(i).getDetails();
-            console.println(listItem);
-        }
+        movieManager.listAvailableMovies(console);
     }
 
     public void checkoutMovie() {
@@ -288,7 +261,7 @@ public class BibliotecaApp {
 
     private int whichMovieToCheckout() {
         console.println("Which movie do you want to checkout:");
-        listAvailableMovies();
+        movieManager.listAvailableMovies(console);
 
         return console.getNextInt();
     }
@@ -321,18 +294,9 @@ public class BibliotecaApp {
 
     private int whichMovieToRetrun() {
         console.println("Which movie do you want to return:");
-        listCheckedOutMovies();
+        movieManager.listCheckedOutMovies(console);
 
         return console.getNextInt();
-    }
-
-    private void listCheckedOutMovies() {
-        List<Movie> checkedOutMovies = movieManager.getCheckedOutMovies();
-
-        for (int i = 0; i < checkedOutMovies.size(); i++) {
-            String listItem = "\t" + ( i + 1 ) + ". " + checkedOutMovies.get(i).getDetails();
-            console.println(listItem);
-        }
     }
 
     public void showUserInfo() {

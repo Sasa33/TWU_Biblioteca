@@ -31,9 +31,9 @@ public class LoanableItemRepositoryImpl<T extends Loanable> implements LoanableI
     public List<T> getCheckedOutItems() {
         List<T> checkedOutItems  = new ArrayList<T>();
 
-        for (T movie : LoanableItems) {
-            if (movie.isCheckedOut()) {
-                checkedOutItems.add(movie);
+        for (T item : LoanableItems) {
+            if (item.isCheckedOut()) {
+                checkedOutItems.add(item);
             }
         }
 
