@@ -30,4 +30,31 @@ public class Menu {
         }
         return 0;
     }
+
+    public void displayMenu(Console console) {
+        console.println("=====================================================================");
+        console.println("Please select an option from menu below.");
+
+        List<Option> options = this.getOptions();
+
+        StringBuilder sb = new StringBuilder();
+        String title = "Menu: ";
+        String indent = "      ";
+        String divider = " | ";
+        sb.append(title);
+
+        for (int i = 0; i < options.size(); i++) {
+            sb.append(options.get(i).getOptionInfo());
+
+            if ((i+1) % 4 == 0 && i < options.size() - 1) {
+                String newLine = System.getProperty("line.separator");
+                sb.append(newLine);
+                sb.append(indent);
+            } else if(i < options.size() - 1) {
+                sb.append(divider);
+            }
+        }
+        console.println(sb.toString());
+        console.println("=====================================================================");
+    }
 }

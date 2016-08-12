@@ -104,7 +104,7 @@ public class BibliotecaApp {
         console.println("Welcome to the Bangalore Public Library!");
 
         while (!quit) {
-            displayMenu();
+            this.menu.displayMenu(console);
             int input = console.getNextInt();
             Option chosenOption = menu.getChosenOption(input);
             if(chosenOption != null) {
@@ -117,31 +117,6 @@ public class BibliotecaApp {
 
     private void displayInvalidOptionMessage() {
         console.println("Select a valid option!");
-    }
-
-    public void displayMenu() {
-        console.println("=====================================================================");
-        console.println("Please select an option from menu below.");
-
-        List<Option> options = this.menu.getOptions();
-
-        String menus = "Menu: ";
-
-        for (int i = 0; i < options.size(); i++) {
-            menus += options.get(i).getOptionInfo();
-
-            if ((i+1) % 4 == 0 && i < options.size() - 1) {
-                String newLine = System.getProperty("line.separator");
-                menus += newLine;
-                menus += "      ";
-//                menus += "\n      ";
-            } else if(i < options.size() - 1) {
-                menus += " | ";
-            }
-        }
-
-        console.println(menus);
-        console.println("=====================================================================");
     }
 
     public void checkoutBook() {
