@@ -24,6 +24,7 @@ public class BibliotecaApp {
     private boolean quit = Boolean.FALSE;
     private MovieManager movieManager;
     private User currentUser;
+    private UserRepository userRepository;
 
     public BibliotecaApp(Console console) {
         this.console = console;
@@ -57,6 +58,8 @@ public class BibliotecaApp {
         this.movieManager = new MovieManager(movieRepository);
 
         this.menu = menu;
+
+        userRepository = new UserRepository();
     }
 
     public BibliotecaApp(Console console, Menu menu, BookManager bookManager) {
@@ -82,8 +85,6 @@ public class BibliotecaApp {
 
     public static void main(String[] args) {
         Console console = new Console(new PrintStream(System.out), new BufferedReader(new InputStreamReader(System.in)));
-//        BibliotecaApp app = new BibliotecaApp(console);
-//        app.start();
 
         Option option1 = new LoginOption(1, "Login");
         Option option2 = new ListBooksOption(2, "List Books");
@@ -163,9 +164,6 @@ public class BibliotecaApp {
             }
         } else {
             console.println("Please login first...");
-            if (login()) {
-                checkoutBook();
-            }
         }
     }
 
@@ -196,9 +194,6 @@ public class BibliotecaApp {
             }
         } else {
             console.println("Please login first...");
-            if (login()) {
-                returnBook();
-            }
         }
     }
 
@@ -229,9 +224,6 @@ public class BibliotecaApp {
             }
         } else {
             console.println("Please login first...");
-            if (login()) {
-                checkoutMovie();
-            }
         }
     }
 
@@ -262,9 +254,6 @@ public class BibliotecaApp {
             }
         } else {
             console.println("Please login first...");
-            if (login()) {
-                returnMovie();
-            }
         }
     }
 
@@ -273,55 +262,6 @@ public class BibliotecaApp {
         movieManager.listCheckedOutMovies(console);
 
         return console.getNextInt();
-    }
-
-    public void showUserInfo() {
-
-    }
-
-    public boolean login() {
-        while (true) {
-            console.print("Library Number: ");
-            String number = console.getNextString();
-
-            console.print("Password: ");
-            String password = console.getNextString();
-
-            UserRepository userRepository = new UserRepository();
-
-            List<User> users = userRepository.getAllUsers();
-
-            boolean login = false;
-            for (User user : users) {
-                if (number.equals(user.getNumber()) && password.equals(user.getPassword())) {
-                    currentUser = user;
-                    login = true;
-                    break;
-                }
-            }
-
-            if (login) {
-                console.println("Login successful!");
-
-                Option option1 = new ListBooksOption(1, "List Books");
-                Option option2 = new CheckoutBookOption(2, "Checkout Book");
-                Option option3 = new ReturnBookOption(3, "Return Book");
-                Option option4 = new UserInfoOption(4, "User Info");
-                Option option5 = new ListMovieOption(5, "List Movies");
-                Option option6 = new CheckoutMovieption(6, "Checkout Movie");
-                Option option7 = new ReturnMovieOption(7, "Return Movie");
-                Option option8 = new QuitOption(8, "Quit");
-                Option option9 = new LogoutOption(9, "Logout");
-                Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7, option8, option9));
-
-                this.setMenu(menu);
-
-                break;
-            } else {
-                console.println("No such user or bad password, please login again!");
-            }
-        }
-        return true;
     }
 
     public Console getConsole() {
@@ -338,6 +278,10 @@ public class BibliotecaApp {
 
     public MovieManager getMovieManager() {
         return movieManager;
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
     }
 
     public void setQuit(boolean quit) {

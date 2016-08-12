@@ -23,12 +23,15 @@ public class BibliotecaAppTest {
     private Console console;
     private InOrder inOrder;
     private Menu menu;
+    private User user;
 
 
     @Before
     public void setUpStreams() {
         console = mock(Console.class);
         inOrder = inOrder(console);
+
+        user = mock(User.class);
 
         Option option1 = mock(Option.class);
         Option option2 = mock(Option.class);
@@ -65,21 +68,9 @@ public class BibliotecaAppTest {
     @Test
     public void should_show_checkout_successful_message_after_checkouting_a_book_successfully() {
         when(console.getNextInt()).thenReturn(1, 1);
-
-        String expectedNumber = "000-0001";
-        String expectedPassword = "123456";
-        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
-
+        app.setCurrentUser(user);
 
         app.checkoutBook();
-
-        inOrder.verify(console, times(1)).println("Please login first...");
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("Login successful!");
-
 
         inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
         inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
@@ -92,18 +83,9 @@ public class BibliotecaAppTest {
     public void should_show_checkout_failed_message_after_checkouting_an_invalid_book() {
         when(console.getNextInt()).thenReturn(3, 1);
 
-        String expectedNumber = "000-0001";
-        String expectedPassword = "123456";
-        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+        app.setCurrentUser(user);
 
         app.checkoutBook();
-
-        inOrder.verify(console, times(1)).println("Please login first...");
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("Login successful!");
 
         inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
         inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
@@ -150,18 +132,10 @@ public class BibliotecaAppTest {
 
         app = new BibliotecaApp(console, menu, bookList);
 
-        String expectedNumber = "000-0001";
-        String expectedPassword = "123456";
-        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+        app.setCurrentUser(user);
 
         app.returnBook();
 
-        inOrder.verify(console, times(1)).println("Please login first...");
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("Login successful!");
 
 //        inOrder.verify(console, times(1)).println("Which book do you want to return:");
 //        inOrder.verify(console, times(1)).println("\t1. book1 | author1 | 2003");
@@ -176,26 +150,17 @@ public class BibliotecaAppTest {
         Book book2 = new Book("book2", "author2", "1999");
         BookRepository repository = new BookRepository(asList(book1, book2));
 
-        BookManager bookList = mock(BookManager.class);
-        when(bookList.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
+        BookManager bookManager = mock(BookManager.class);
+        when(bookManager.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
         when(console.getNextInt()).thenReturn(3, 1);
-        when(bookList.checkIfBookCanBeReturned(1)).thenReturn(false, true);
-        when(bookList.isAnyBookCanBeReturned()).thenReturn(true);
+        when(bookManager.checkIfBookCanBeReturned(1)).thenReturn(false, true);
+        when(bookManager.isAnyBookCanBeReturned()).thenReturn(true);
 
-        app = new BibliotecaApp(console, menu, bookList);
+        app = new BibliotecaApp(console, menu, bookManager);
 
-        String expectedNumber = "000-0001";
-        String expectedPassword = "123456";
-        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+        app.setCurrentUser(user);
 
         app.returnBook();
-
-        inOrder.verify(console, times(1)).println("Please login first...");
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("Login successful!");
 
 //        inOrder.verify(console, times(1)).println("Which book do you want to return:");
 //        inOrder.verify(console, times(1)).println("\t1. book1 | author1 | 2003");
@@ -214,18 +179,9 @@ public class BibliotecaAppTest {
     public void should_show_checkout_movie_message_after_checkouting_successfully_or_not() {
         when(console.getNextInt()).thenReturn(4, 2);
 
-        String expectedNumber = "000-0001";
-        String expectedPassword = "123456";
-        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+        app.setCurrentUser(user);
 
         app.checkoutMovie();
-
-        inOrder.verify(console, times(1)).println("Please login first...");
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("Login successful!");
 
         inOrder.verify(console, times(1)).println("Which movie do you want to checkout:");
         inOrder.verify(console, times(1)).println("\t1. Zootopia | 2016 | Byron Howard & Rich Moore | 9.2");
@@ -256,18 +212,9 @@ public class BibliotecaAppTest {
 
         app = new BibliotecaApp(console, menu, bookManager, movieManager);
 
-        String expectedNumber = "000-0001";
-        String expectedPassword = "123456";
-        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+        app.setCurrentUser(user);
 
         app.returnMovie();
-
-        inOrder.verify(console, times(1)).println("Please login first...");
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("Login successful!");
 
 //        inOrder.verify(console, times(1)).println("Which movie do you want to return:");
 //        inOrder.verify(console, times(1)).println("\t1. movie1 | year1 | author1 | rating1");
@@ -280,45 +227,5 @@ public class BibliotecaAppTest {
 //        inOrder.verify(console, times(1)).println("\t2. movie2 | year2 | author2 | rating2");
 
         inOrder.verify(console, times(1)).println("Thank you for returning the movie!");
-    }
-
-    @Test
-    public void should_login_successfully_and_set_the_user_as_current_user() {
-        String expectedNumber = "000-0001";
-        String expectedPassword = "123456";
-        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
-
-        User expectedUser = mock(User.class);
-        when(expectedUser.getNumber()).thenReturn(expectedNumber);
-        when(expectedUser.getPassword()).thenReturn(expectedPassword);
-
-        app.login();
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("Login successful!");
-
-        assertEquals(expectedUser.getNumber(), app.getCurrentUser().getNumber());
-    }
-
-    @Test
-    public void should_show_login_failed_message() {
-        String expectedNumber = "000-0001";
-        String wrongpassword = "wrongpassword";
-        String correctPassword = "123456";
-        when(console.getNextString()).thenReturn(expectedNumber, wrongpassword, expectedNumber, correctPassword);
-
-        app.login();
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("No such user or bad password, please login again!");
-
-        inOrder.verify(console, times(1)).print("Library Number: ");
-        inOrder.verify(console, times(1)).print("Password: ");
-
-        inOrder.verify(console, times(1)).println("Login successful!");
     }
 }

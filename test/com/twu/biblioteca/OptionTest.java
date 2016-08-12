@@ -2,7 +2,9 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.control.BookManager;
 import com.twu.biblioteca.control.MovieManager;
+import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.option.*;
+import com.twu.biblioteca.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -14,11 +16,13 @@ public class OptionTest {
     private Option option;
     private Console console;
     private InOrder inOrder;
+    private UserRepository userRepository;
 
     @Before
     public void setUp() {
         console = mock(Console.class);
         inOrder = inOrder(console);
+        userRepository = new UserRepository();
     }
 
     @Test
@@ -143,8 +147,14 @@ public class OptionTest {
     }
 
     @Test
-    public void should_call_login_method_when_loginOption_is_chosen() {
+    public void should_show_login_successful_message_when_login_successfully() {
         BibliotecaApp app = mock(BibliotecaApp.class);
+        String expectedNumber = "000-0001";
+        String expectedPassword = "123456";
+        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+
+        when(app.getConsole()).thenReturn(console);
+        when(app.getUserRepository()).thenReturn(userRepository);
 
         int optionId = 7;
         String optionName = "Login";
@@ -152,7 +162,38 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).login();
+        inOrder.verify(console, times(1)).print("Library Number: ");
+        inOrder.verify(console, times(1)).print("Password: ");
+
+        inOrder.verify(console, times(1)).println("Login successful!");
+    }
+
+    @Test
+    public void should_show_login_failed_message_when_login_failed() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+        String expectedNumber = "000-0001";
+        String wrongpassword = "wrongpassword";
+        String correctPassword = "123456";
+        when(console.getNextString()).thenReturn(expectedNumber, wrongpassword, expectedNumber, correctPassword);
+
+        when(app.getConsole()).thenReturn(console);
+        when(app.getUserRepository()).thenReturn(userRepository);
+
+        int optionId = 7;
+        String optionName = "Login";
+        option = new LoginOption(optionId, optionName);
+
+        option.execute(app);
+
+        inOrder.verify(console, times(1)).print("Library Number: ");
+        inOrder.verify(console, times(1)).print("Password: ");
+
+        inOrder.verify(console, times(1)).println("No such user or bad password, please login again!");
+
+        inOrder.verify(console, times(1)).print("Library Number: ");
+        inOrder.verify(console, times(1)).print("Password: ");
+
+        inOrder.verify(console, times(1)).println("Login successful!");
     }
 
     @Test
