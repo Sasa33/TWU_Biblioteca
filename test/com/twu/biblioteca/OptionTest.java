@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.control.BookManager;
 import com.twu.biblioteca.option.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +34,9 @@ public class OptionTest {
     @Test
     public void should_call_listAvailableBooks_method_when_List_Books_option_is_chosen() {
         BibliotecaApp app = mock(BibliotecaApp.class);
+        BookManager bookManager = mock(BookManager.class);
+        when(app.getBookManager()).thenReturn(bookManager);
+        when(app.getConsole()).thenReturn(console);
 
         int optionId = 1;
         String optionName = "List Books";
@@ -40,7 +44,7 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).displayBookListInfo();
+        verify(bookManager, times(1)).listAvailableBooks(console);
     }
 
     @Test

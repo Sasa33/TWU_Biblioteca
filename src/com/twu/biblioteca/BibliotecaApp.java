@@ -99,12 +99,6 @@ public class BibliotecaApp {
         app.startWithMenu();
     }
 
-    public void start() {
-        console.println("Welcome to the Bangalore Public Library!");
-
-        displayBookListInfo();
-    }
-
     public void startWithMenu() {
         console.println("Welcome to the Bangalore Public Library!");
 
@@ -147,12 +141,6 @@ public class BibliotecaApp {
 
         console.println(menus);
         console.println("=====================================================================");
-    }
-
-    public void displayBookListInfo() {
-        console.println("Book List:");
-
-        bookManager.listAvailableBooks(console);
     }
 
     public void checkoutBook() {
@@ -366,6 +354,14 @@ public class BibliotecaApp {
 
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    public BookManager getBookManager() {
+        return bookManager;
+    }
+
+    public MovieManager getMovieManager() {
+        return movieManager;
     }
 
     public void setQuit(boolean quit) {

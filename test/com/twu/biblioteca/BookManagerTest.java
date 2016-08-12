@@ -6,19 +6,21 @@ import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.repository.BookRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class BookManagerTest {
     private BookManager bookManager;
     private BookRepository repository;
     private List<Book> books;
     private User user;
+    private Console console;
+    private InOrder inOrder;
 
     @Before
     public void setUp() {
@@ -33,6 +35,9 @@ public class BookManagerTest {
 
         user = mock(User.class);
         when(user.getNumber()).thenReturn("000-0001");
+
+        console = mock(Console.class);
+        inOrder = inOrder(console);
     }
 
     @Test
@@ -110,5 +115,13 @@ public class BookManagerTest {
         boolean isAnyBookCanBeCheckedout = bookManager.isAnyBookCanBeCheckedout();
 
         assertEquals(false, isAnyBookCanBeCheckedout);
+    }
+
+    @Test
+    public void should_list_the_available_books_correctly() {
+        bookManager.listAvailableBooks(console);
+
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
     }
 }

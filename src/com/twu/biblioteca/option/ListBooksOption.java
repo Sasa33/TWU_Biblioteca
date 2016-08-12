@@ -1,6 +1,7 @@
 package com.twu.biblioteca.option;
 
 import com.twu.biblioteca.BibliotecaApp;
+import com.twu.biblioteca.Console;
 
 public class ListBooksOption extends Option {
     public ListBooksOption(int id, String optionName) {
@@ -9,6 +10,10 @@ public class ListBooksOption extends Option {
 
     @Override
     public void execute(BibliotecaApp app) {
-        app.displayBookListInfo();
+        Console console = app.getConsole();
+
+        console.println("Book List:");
+
+        app.getBookManager().listAvailableBooks(console);
     }
 }

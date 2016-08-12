@@ -6,19 +6,21 @@ import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.repository.MovieRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MovieManagerTest {
     private MovieManager movieManager;
     private MovieRepository movieRepository;
     private List<Movie> movies;
     private User user;
+    private Console console;
+    private InOrder inOrder;
 
     @Before
     public void setUp() {
@@ -33,6 +35,9 @@ public class MovieManagerTest {
 
         user = mock(User.class);
         when(user.getNumber()).thenReturn("000-0001");
+
+        console = mock(Console.class);
+        inOrder = inOrder(console);
     }
 
     @Test
@@ -79,5 +84,13 @@ public class MovieManagerTest {
         boolean isAnyBookCanBeCheckedout = movieManager.isAnyMovieCanBeCheckedout();
 
         assertEquals(false, isAnyBookCanBeCheckedout);
+    }
+
+    @Test
+    public void should_list_the_available_books_correctly() {
+        movieManager.listAvailableMovies(console);
+
+        inOrder.verify(console, times(1)).println("\t1. Zootopia | 2016 | Byron Howard & Rich Moore | 9.2");
+        inOrder.verify(console, times(1)).println("\t2. The Jungle Book | 2016 | Jon Favreau | 7.9");
     }
 }
