@@ -87,7 +87,7 @@ public class MovieManagerTest {
     }
 
     @Test
-    public void should_list_the_available_books_correctly() {
+    public void should_list_the_available_movies_correctly() {
         movieManager.listAvailableMovies(console);
 
         inOrder.verify(console, times(1)).println("\t1. Zootopia | 2016 | Byron Howard & Rich Moore | 9.2");

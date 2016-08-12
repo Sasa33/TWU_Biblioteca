@@ -209,12 +209,6 @@ public class BibliotecaApp {
         return console.getNextInt();
     }
 
-    public void displayMovieListInfo() {
-        console.println("Movie List:");
-
-        movieManager.listAvailableMovies(console);
-    }
-
     public void checkoutMovie() {
         if (currentUser != null) {
             while(true) {

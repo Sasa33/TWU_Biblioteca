@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.control.BookManager;
+import com.twu.biblioteca.control.MovieManager;
 import com.twu.biblioteca.option.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -90,6 +91,9 @@ public class OptionTest {
     @Test
     public void should_call_listAvailableMovies_method_when_List_Movies_option_is_chosen() {
         BibliotecaApp app = mock(BibliotecaApp.class);
+        MovieManager movieManager = mock(MovieManager.class);
+        when(app.getMovieManager()).thenReturn(movieManager);
+        when(app.getConsole()).thenReturn(console);
 
         int optionId = 5;
         String optionName = "List Movies";
@@ -97,7 +101,7 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).displayMovieListInfo();
+        verify(app.getMovieManager(), times(1)).listAvailableMovies(console);
     }
 
     @Test
