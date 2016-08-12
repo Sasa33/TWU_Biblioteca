@@ -321,11 +321,4 @@ public class BibliotecaAppTest {
 
         inOrder.verify(console, times(1)).println("Login successful!");
     }
-
-    @Test
-    public void should_show_logout_message() {
-        app.logout();
-
-        inOrder.verify(console, times(1)).println("You are successfully logged out.");
-    }
 }

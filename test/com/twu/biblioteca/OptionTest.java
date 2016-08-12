@@ -156,8 +156,9 @@ public class OptionTest {
     }
 
     @Test
-    public void should_call_logout_method_when_logioutOption_is_chosen() {
+    public void should_show_logout_message_when_logioutOption_is_executed() {
         BibliotecaApp app = mock(BibliotecaApp.class);
+        when(app.getConsole()).thenReturn(console);
 
         int optionId = 8;
         String optionName = "Logout";
@@ -165,6 +166,6 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).logout();
+        inOrder.verify(console, times(1)).println("You are successfully logged out.");
     }
 }
