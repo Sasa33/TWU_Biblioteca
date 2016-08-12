@@ -26,35 +26,18 @@ public class BibliotecaApp {
     private User currentUser;
     private UserRepository userRepository;
 
-    public BibliotecaApp(Console console) {
-        this.console = console;
-
-        Book book1 = new Book("Head First Java", "Kathy Sierra & Bert Bates", "2003");
-        Book book2 = new Book("Refactoring", "Martin Fowler", "1999");
-
-        BookRepository repository = new BookRepository(asList(book1, book2));
-
-        this.bookManager = new BookManager(repository);
-
-
-        Option option1 = new ListBooksOption(1, "List Books");
-        this.menu = new Menu(asList(option1));
-    }
 
     public BibliotecaApp(Console console, Menu menu) {
         this.console = console;
 
         Book book1 = new Book("Head First Java", "Kathy Sierra & Bert Bates", "2003");
         Book book2 = new Book("Refactoring", "Martin Fowler", "1999");
-
         BookRepository repository = new BookRepository(asList(book1, book2));
-
         this.bookManager = new BookManager(repository);
 
         Movie movie1 = new Movie("Zootopia", "2016", "Byron Howard & Rich Moore", "9.2");
         Movie movie2 = new Movie("The Jungle Book", "2016", "Jon Favreau", "7.9");
         MovieRepository movieRepository = new MovieRepository(asList(movie1, movie2));
-
         this.movieManager = new MovieManager(movieRepository);
 
         this.menu = menu;
@@ -64,17 +47,13 @@ public class BibliotecaApp {
 
     public BibliotecaApp(Console console, Menu menu, BookManager bookManager) {
         this.console = console;
-
         this.menu = menu;
-
         this.bookManager = bookManager;
     }
 
     public BibliotecaApp(Console console, Menu menu, BookManager bookManager, MovieManager movieManager) {
         this.console = console;
-
         this.menu = menu;
-
         this.bookManager = bookManager;
         this.movieManager = movieManager;
     }
@@ -97,6 +76,7 @@ public class BibliotecaApp {
         Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7, option8));
 
         BibliotecaApp app = new BibliotecaApp(console, menu);
+        
         app.startWithMenu();
     }
 
