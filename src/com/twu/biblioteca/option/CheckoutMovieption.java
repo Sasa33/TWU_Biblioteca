@@ -16,7 +16,6 @@ public class CheckoutMovieption extends Option {
         MovieManager movieManager = app.getMovieManager();
         Console console = app.getConsole();
 
-
         if (currentUser != null) {
             while(true) {
                 if (movieManager.isAnyMovieCanBeCheckedout()) {

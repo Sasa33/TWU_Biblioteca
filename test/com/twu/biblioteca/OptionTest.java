@@ -240,8 +240,22 @@ public class OptionTest {
     }
 
     @Test
-    public void should_call_returnMovie_method_when_return_movie_option_is_chosen() {
+    public void should_show_return_message_after_returning_a_movie_successfully_or_not() {
+        Movie movie1 = new Movie("movie1", "year1", "author1", "rating1");
+        Movie movie2 = new Movie("movie2", "year2", "author2", "rating2");
+        MovieRepository repository = new MovieRepository(asList(movie1, movie2));
+
+        MovieManager movieManager = mock(MovieManager.class);
+        when(movieManager.getCheckedOutMovies()).thenReturn(repository.getAllMovies());
+        when(console.getNextInt()).thenReturn(4, 1);
+        when(movieManager.checkIfMovieCanBeReturned(4)).thenReturn(false);
+        when(movieManager.checkIfMovieCanBeReturned(1)).thenReturn(true);
+        when(movieManager.isAnyMovieCanBeReturned()).thenReturn(true);
+
         BibliotecaApp app = mock(BibliotecaApp.class);
+        when(app.getConsole()).thenReturn(console);
+        when(app.getCurrentUser()).thenReturn(user);
+        when(app.getMovieManager()).thenReturn(movieManager);
 
         int optionId = 5;
         String optionName = "Return Movie";
@@ -249,7 +263,9 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).returnMovie();
+        inOrder.verify(console, times(1)).println("That is not a valid movie to return. Please choose again!");
+
+        inOrder.verify(console, times(1)).println("Thank you for returning the movie!");
     }
 
     @Test
