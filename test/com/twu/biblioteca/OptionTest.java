@@ -130,8 +130,22 @@ public class OptionTest {
     }
 
     @Test
-    public void should_call_returnBook_method_when_return_book_option_is_called() {
+    public void should_show_return_successful_message_after_returning_a_book_successfully() {
         BibliotecaApp app = mock(BibliotecaApp.class);
+        when(app.getConsole()).thenReturn(console);
+        when(app.getCurrentUser()).thenReturn(user);
+
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        BookRepository repository = new BookRepository(asList(book1, book2));
+
+        BookManager bookManager = mock(BookManager.class);
+        when(bookManager.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
+        when(bookManager.checkIfBookCanBeReturned(1)).thenReturn(true);
+        when(bookManager.isAnyBookCanBeReturned()).thenReturn(true);
+        when(app.getBookManager()).thenReturn(bookManager);
+
+        when(console.getNextInt()).thenReturn(1);
 
         int optionId = 3;
         String optionName = "Return Book";
@@ -139,7 +153,38 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).returnBook();
+        inOrder.verify(console, times(1)).println("Thank you for returning the book!");
+    }
+
+    @Test
+    public void should_show_return_failed_message_after_returning_an_invalid_book() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+        when(app.getConsole()).thenReturn(console);
+        when(app.getCurrentUser()).thenReturn(user);
+        when(app.getBookManager()).thenReturn(bookManager);
+
+        Book book1 = mock(Book.class);
+        Book book2 = mock(Book.class);
+        BookRepository repository = new BookRepository(asList(book1, book2));
+
+        BookManager bookManager = mock(BookManager.class);
+        when(bookManager.getCheckedOutBooks()).thenReturn(repository.getAllBooks());
+        when(bookManager.checkIfBookCanBeReturned(3)).thenReturn(false);
+        when(bookManager.checkIfBookCanBeReturned(1)).thenReturn(true);
+        when(bookManager.isAnyBookCanBeReturned()).thenReturn(true);
+        when(app.getBookManager()).thenReturn(bookManager);
+
+        when(console.getNextInt()).thenReturn(3, 1);
+
+        int optionId = 3;
+        String optionName = "Return Book";
+        option = new ReturnBookOption(optionId, optionName);
+
+        option.execute(app);
+
+        inOrder.verify(console, times(1)).println("That is not a valid book to return. Please choose again!");
+
+        inOrder.verify(console, times(1)).println("Thank you for returning the book!");
     }
 
     @Test

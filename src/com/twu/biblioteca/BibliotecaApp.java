@@ -99,36 +99,6 @@ public class BibliotecaApp {
         console.println("Select a valid option!");
     }
 
-    public void returnBook() {
-        if (currentUser != null) {
-            while (true) {
-                if (bookManager.isAnyBookCanBeReturned()) {
-                    int selection = whichBookToRetrun();
-
-                    if (this.bookManager.checkIfBookCanBeReturned(selection)) {
-                        this.bookManager.returnBook(selection);
-                        console.println("Thank you for returning the book!");
-                        break;
-                    } else {
-                        console.println("That is not a valid book to return. Please choose again!");
-                    }
-                } else {
-                    console.println("Currently, there is no book that can be returned.");
-                    break;
-                }
-            }
-        } else {
-            console.println("Please login first...");
-        }
-    }
-
-    public int whichBookToRetrun() {
-        console.println("Which book do you want to return:");
-        bookManager.listCheckedOutBooks(console);
-
-        return console.getNextInt();
-    }
-
     public void checkoutMovie() {
         if (currentUser != null) {
             while(true) {
