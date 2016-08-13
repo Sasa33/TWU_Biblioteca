@@ -99,36 +99,6 @@ public class BibliotecaApp {
         console.println("Select a valid option!");
     }
 
-    public void checkoutBook() {
-        if (currentUser != null) {
-            while(true) {
-                if (bookManager.isAnyBookCanBeCheckedout()) {
-                    int selection = whichBookToCheckout();
-
-                    if(this.bookManager.checkIfBookExits(selection)) {
-                        this.bookManager.checkoutBook(selection, currentUser);
-                        console.println("Thank you! Enjoy the book!");
-                        break;
-                    } else {
-                        console.println("That book is not available. Please choose again!");
-                    }
-                } else {
-                    console.println("Currently, there is no book that can be checked out.");
-                    break;
-                }
-            }
-        } else {
-            console.println("Please login first...");
-        }
-    }
-
-    public int whichBookToCheckout() {
-        console.println("Which book do you want to checkout:");
-        bookManager.listAvailableBooks(console);
-
-        return console.getNextInt();
-    }
-
     public void returnBook() {
         if (currentUser != null) {
             while (true) {

@@ -47,50 +47,6 @@ public class BibliotecaAppTest {
     }
 
     @Test
-    public void should_show_checkout_message_and_list_of_available_books_when_checkoutBook_method_is_called() {
-        app.whichBookToCheckout();
-
-        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
-        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
-        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
-    }
-
-    @Test
-    public void should_show_checkout_successful_message_after_checkouting_a_book_successfully() {
-        when(console.getNextInt()).thenReturn(1, 1);
-        app.setCurrentUser(user);
-
-        app.checkoutBook();
-
-        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
-        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
-        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
-
-        inOrder.verify(console, times(1)).println("Thank you! Enjoy the book!");
-    }
-
-    @Test
-    public void should_show_checkout_failed_message_after_checkouting_an_invalid_book() {
-        when(console.getNextInt()).thenReturn(3, 1);
-
-        app.setCurrentUser(user);
-
-        app.checkoutBook();
-
-        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
-        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
-        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
-
-        inOrder.verify(console, times(1)).println("That book is not available. Please choose again!");
-
-        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
-        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
-        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
-
-        inOrder.verify(console, times(1)).println("Thank you! Enjoy the book!");
-    }
-
-    @Test
     public void should_show_return_book_message_and_a_list_of_books_that_can_be_returned() {
         Book book1 = new Book("book1", "author1", "2003");
         Book book2 = new Book("book2", "author2", "1999");

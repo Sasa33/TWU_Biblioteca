@@ -2,13 +2,16 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.control.BookManager;
 import com.twu.biblioteca.control.MovieManager;
+import com.twu.biblioteca.entity.Book;
 import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.option.*;
+import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -17,12 +20,22 @@ public class OptionTest {
     private Console console;
     private InOrder inOrder;
     private UserRepository userRepository;
+    private User user;
+    private BookManager bookManager;
 
     @Before
     public void setUp() {
         console = mock(Console.class);
         inOrder = inOrder(console);
         userRepository = new UserRepository();
+        user = mock(User.class);
+//        bookManager = mock(BookManager.class);
+//        when(bookManager.isAnyBookCanBeCheckedout()).thenReturn(true);
+
+        Book book1 = new Book("Head First Java", "Kathy Sierra & Bert Bates", "2003");
+        Book book2 = new Book("Refactoring", "Martin Fowler", "1999");
+        BookRepository repository = new BookRepository(asList(book1, book2));
+        bookManager = new BookManager(repository);
     }
 
     @Test
@@ -67,8 +80,13 @@ public class OptionTest {
     }
 
     @Test
-    public void should_call_checkout_book_method_when_checkout_option_is_chosen() {
+    public void should_show_checkout_successful_message_after_checkouting_a_book_successfully() {
         BibliotecaApp app = mock(BibliotecaApp.class);
+        when(app.getConsole()).thenReturn(console);
+        when(app.getCurrentUser()).thenReturn(user);
+        when(app.getBookManager()).thenReturn(bookManager);
+
+        when(console.getNextInt()).thenReturn(1);
 
         int optionId = 2;
         String optionName = "Checkout Book";
@@ -76,7 +94,39 @@ public class OptionTest {
 
         option.execute(app);
 
-        verify(app, times(1)).checkoutBook();
+        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+
+        inOrder.verify(console, times(1)).println("Thank you! Enjoy the book!");
+    }
+
+    @Test
+    public void should_show_checkout_failed_message_after_checkouting_an_invalid_book() {
+        BibliotecaApp app = mock(BibliotecaApp.class);
+        when(app.getConsole()).thenReturn(console);
+        when(app.getCurrentUser()).thenReturn(user);
+        when(app.getBookManager()).thenReturn(bookManager);
+
+        when(console.getNextInt()).thenReturn(3, 1);
+
+        int optionId = 2;
+        String optionName = "Checkout Book";
+        option = new CheckoutBookOption(optionId, optionName);
+
+        option.execute(app);
+
+        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+
+        inOrder.verify(console, times(1)).println("That book is not available. Please choose again!");
+
+        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+
+        inOrder.verify(console, times(1)).println("Thank you! Enjoy the book!");
     }
 
     @Test
@@ -209,4 +259,6 @@ public class OptionTest {
 
         inOrder.verify(console, times(1)).println("You are successfully logged out.");
     }
+
+
 }
