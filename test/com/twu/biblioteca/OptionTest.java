@@ -3,9 +3,11 @@ package com.twu.biblioteca;
 import com.twu.biblioteca.control.BookManager;
 import com.twu.biblioteca.control.MovieManager;
 import com.twu.biblioteca.entity.Book;
+import com.twu.biblioteca.entity.Movie;
 import com.twu.biblioteca.entity.User;
 import com.twu.biblioteca.option.*;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.MovieRepository;
 import com.twu.biblioteca.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +24,7 @@ public class OptionTest {
     private UserRepository userRepository;
     private User user;
     private BookManager bookManager;
+    private MovieManager movieManager;
 
     @Before
     public void setUp() {
@@ -34,8 +37,13 @@ public class OptionTest {
 
         Book book1 = new Book("Head First Java", "Kathy Sierra & Bert Bates", "2003");
         Book book2 = new Book("Refactoring", "Martin Fowler", "1999");
-        BookRepository repository = new BookRepository(asList(book1, book2));
-        bookManager = new BookManager(repository);
+        BookRepository bookRepository = new BookRepository(asList(book1, book2));
+        bookManager = new BookManager(bookRepository);
+
+        Movie movie1 = new Movie("Zootopia", "2016", "Byron Howard & Rich Moore", "9.2");
+        Movie movie2 = new Movie("The Jungle Book", "2016", "Jon Favreau", "7.9");
+        MovieRepository movieRepository = new MovieRepository(asList(movie1, movie2));
+        movieManager = new MovieManager(movieRepository);
     }
 
     @Test
@@ -204,16 +212,31 @@ public class OptionTest {
     }
 
     @Test
-    public void should_call_checkoutMovie_method_when_checkout_movie_option_is_chosen() {
+    public void should_show_checkout_movie_message_after_checkouting_successfully_or_not() {
         BibliotecaApp app = mock(BibliotecaApp.class);
+        when(app.getConsole()).thenReturn(console);
+        when(app.getCurrentUser()).thenReturn(user);
+        when(app.getMovieManager()).thenReturn(movieManager);
 
         int optionId = 4;
         String optionName = "Checkout Movie";
         option = new CheckoutMovieption(optionId, optionName);
 
+        when(console.getNextInt()).thenReturn(4, 2);
+
         option.execute(app);
 
-        verify(app, times(1)).checkoutMovie();
+        inOrder.verify(console, times(1)).println("Which movie do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Zootopia | 2016 | Byron Howard & Rich Moore | 9.2");
+        inOrder.verify(console, times(1)).println("\t2. The Jungle Book | 2016 | Jon Favreau | 7.9");
+
+        inOrder.verify(console, times(1)).println("That movie is not available. Please choose again!");
+
+        inOrder.verify(console, times(1)).println("Which movie do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Zootopia | 2016 | Byron Howard & Rich Moore | 9.2");
+        inOrder.verify(console, times(1)).println("\t2. The Jungle Book | 2016 | Jon Favreau | 7.9");
+
+        inOrder.verify(console, times(1)).println("Thank you! Enjoy the movie!");
     }
 
     @Test

@@ -99,36 +99,6 @@ public class BibliotecaApp {
         console.println("Select a valid option!");
     }
 
-    public void checkoutMovie() {
-        if (currentUser != null) {
-            while(true) {
-                if (movieManager.isAnyMovieCanBeCheckedout()) {
-                    int selection = whichMovieToCheckout();
-
-                    if(this.movieManager.checkIfMovieExits(selection)) {
-                        this.movieManager.checkoutMovie(selection, currentUser);
-                        console.println("Thank you! Enjoy the movie!");
-                        break;
-                    } else {
-                        console.println("That movie is not available. Please choose again!");
-                    }
-                } else {
-                    console.println("Currently, there is no book that can be checked out.");
-                    break;
-                }
-            }
-        } else {
-            console.println("Please login first...");
-        }
-    }
-
-    private int whichMovieToCheckout() {
-        console.println("Which movie do you want to checkout:");
-        movieManager.listAvailableMovies(console);
-
-        return console.getNextInt();
-    }
-
     public void returnMovie() {
         if (currentUser != null) {
             while (true) {
