@@ -1,49 +1,177 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.control.BookManager;
-import com.twu.biblioteca.control.MovieManager;
-import com.twu.biblioteca.entity.Book;
-import com.twu.biblioteca.entity.Movie;
-import com.twu.biblioteca.entity.User;
-import com.twu.biblioteca.option.Option;
-import com.twu.biblioteca.repository.BookRepository;
-import com.twu.biblioteca.repository.MovieRepository;
+import com.twu.biblioteca.option.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
-import java.util.List;
-
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 public class BibliotecaAppTest {
     private BibliotecaApp app;
     private Console console;
     private InOrder inOrder;
-    private Menu menu;
-    private User user;
-
 
     @Before
     public void setUpStreams() {
         console = mock(Console.class);
         inOrder = inOrder(console);
 
-        user = mock(User.class);
-
-        Option option1 = mock(Option.class);
-        Option option2 = mock(Option.class);
-
-        List<Option> options = asList(option1, option2);
-        when(option1.getOptionInfo()).thenReturn("1. Login");
-        when(option2.getOptionInfo()).thenReturn("2. Quit");
-
-        menu = mock(Menu.class);
-        when(menu.getOptions()).thenReturn(options);
+        Option option1 = new LoginOption(1, "Login");
+        Option option2 = new ListBooksOption(2, "List Books");
+        Option option3 = new CheckoutBookOption(3, "Checkout Book");
+        Option option4 = new ReturnBookOption(4, "Return Book");
+        Option option5 = new ListMovieOption(5, "List Movies");
+        Option option6 = new CheckoutMovieption(6, "Checkout Movie");
+        Option option7 = new ReturnMovieOption(7, "Return Movie");
+        Option option8 = new QuitOption(8, "Quit");
+        Menu menu = new Menu(asList(option1, option2, option3, option4, option5, option6, option7, option8));
 
         app = new BibliotecaApp(console, menu);
     }
 
+    @Test
+    public void should_test_the_whole_functionality_of_this_app() {
+        when(console.getNextInt()).thenReturn(2, 3, 1, 2, 1, 3, 2, 1, 1, 8);
+
+        String expectedNumber = "000-0001";
+        String expectedPassword = "123456";
+        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+
+
+        app.startWithMenu();
+
+        inOrder.verify(console, times(1)).println("Welcome to the Bangalore Public Library!");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. Login | 2. List Books | 3. Checkout Book | 4. Return Book\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        // show book list:
+        inOrder.verify(console, times(1)).println("Book List:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. Login | 2. List Books | 3. Checkout Book | 4. Return Book\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        // login before checkout
+        inOrder.verify(console, times(1)).println("Please login first...");
+
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. Login | 2. List Books | 3. Checkout Book | 4. Return Book\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+
+        inOrder.verify(console, times(1)).print("Library Number: ");
+        inOrder.verify(console, times(1)).print("Password: ");
+
+        inOrder.verify(console, times(1)).println("Login successful!");
+
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                "      9. Logout");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        // check out an book
+        inOrder.verify(console, times(1)).println("Which book do you want to checkout:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+
+        // checkout successfully
+        inOrder.verify(console, times(1)).println("Thank you! Enjoy the book!");
+
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                "      9. Logout");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+
+        // return a book
+        inOrder.verify(console, times(1)).println("Which book do you want to return:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+
+        // return an invalid book
+        inOrder.verify(console, times(1)).println("That is not a valid book to return. Please choose again!");
+        inOrder.verify(console, times(1)).println("Which book do you want to return:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+
+        // return a valid book
+        inOrder.verify(console, times(1)).println("Thank you for returning the book!");
+
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                "      9. Logout");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+
+        // show book list again
+        inOrder.verify(console, times(1)).println("Book List:");
+        inOrder.verify(console, times(1)).println("\t1. Head First Java | Kathy Sierra & Bert Bates | 2003");
+        inOrder.verify(console, times(1)).println("\t2. Refactoring | Martin Fowler | 1999");
+
+        // exit the app
+        inOrder.verify(console, times(1)).println("Thank you for coming to the Bangalore Public Library! See you next time.");
+    }
+
+    @Test
+    public void integration_test_for_login() {
+        Option option1 = new LoginOption(1, "Login");
+        Option option2 = new QuitOption(2, "Quit");
+        Menu menu = new Menu(asList(option1, option2));
+
+        app = new BibliotecaApp(console, menu);
+
+        when(console.getNextInt()).thenReturn(1, 4, 8);
+        String expectedNumber = "000-0001";
+        String expectedPassword = "123456";
+        when(console.getNextString()).thenReturn(expectedNumber, expectedPassword);
+
+        app.startWithMenu();
+
+        inOrder.verify(console, times(1)).println("Welcome to the Bangalore Public Library!");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. Login | 2. Quit");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        inOrder.verify(console, times(1)).print("Library Number: ");
+        inOrder.verify(console, times(1)).print("Password: ");
+
+        inOrder.verify(console, times(1)).println("Login successful!");
+
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                "      9. Logout");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        inOrder.verify(console, times(1)).println("Name: user1");
+        inOrder.verify(console, times(1)).println("Email Address: user1@thoughtworks.com");
+        inOrder.verify(console, times(1)).println("Phone: 13000000000");
+
+        inOrder.verify(console, times(1)).println("=====================================================================");
+        inOrder.verify(console, times(1)).println("Please select an option from menu below.");
+        inOrder.verify(console, times(1)).println("Menu: 1. List Books | 2. Checkout Book | 3. Return Book | 4. User Info\n" +
+                "      5. List Movies | 6. Checkout Movie | 7. Return Movie | 8. Quit\n" +
+                "      9. Logout");
+        inOrder.verify(console, times(1)).println("=====================================================================");
+
+        // exit the app
+        inOrder.verify(console, times(1)).println("Thank you for coming to the Bangalore Public Library! See you next time.");
+    }
 }
